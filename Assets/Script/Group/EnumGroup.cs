@@ -8,3 +8,10 @@ public enum EStatType
 {
 
 }
+
+public enum EItemType
+{
+    Attack,
+    Defense,
+    Heal
+}
