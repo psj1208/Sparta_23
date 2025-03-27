@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ResourceController : MonoBehaviour
 {
-    public StatHandler StatHandler;
+    [HideInInspector] public StatHandler StatHandler;
 
     public float CurrentHealth {  get; private set; }
     public float MaxHealth => StatHandler.GetStat(EStatType.Health);
@@ -22,7 +22,7 @@ public class ResourceController : MonoBehaviour
         else if(CurrentHealth < 0)
         {
             CurrentHealth = 0;
-            // TODO : Death
+            // TODO : Death 
         }
 
         OnChangeHealth?.Invoke(CurrentHealth, amount);

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public ResourceController ResourceController;
+    [HideInInspector] public ResourceController ResourceController;
 }
