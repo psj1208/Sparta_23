@@ -6,5 +6,7 @@ using System.Threading.Tasks;
 
 public enum EStatType
 {
-
+    Health, 
+    Attack,
+    Defense,
 }
