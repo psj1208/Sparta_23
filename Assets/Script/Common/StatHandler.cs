@@ -6,7 +6,7 @@ public class StatHandler : MonoBehaviour
 {
     [SerializeField] private Stat stat;
 
-    public void ModifyValue(StatType type, float value, bool isPermanent, int turnTime)
+    public void ModifyValue(EStatType type, float value, bool isPermanent, int turnTime)
     {
 
     }
