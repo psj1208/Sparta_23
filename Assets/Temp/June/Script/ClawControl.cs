@@ -27,7 +27,7 @@ public class ClawControl : MonoBehaviour
     [SerializeField] float leftEnd;
     [SerializeField] float rightEnd;
     [SerializeField] float MoveSpeed;
-    [SerializeField] float ReturnDuration;
+    [SerializeField] float ReturnSpeed;
 
     float leftPosX;
     float rightPosX;
@@ -124,7 +124,27 @@ public class ClawControl : MonoBehaviour
 
     private void GoInitialPos()
     {
-        transform.DOMoveX(InitialPos.x, ReturnDuration);
+        transform.DOMoveX(InitialPos.x, ReturnSpeed).SetSpeedBased(true)
+            .OnComplete(()=>
+            {
+                delayedCall = DOVirtual.DelayedCall(waitingTime, OpenAndClose);
+            });
+    }
+
+    private void OpenAndClose()
+    {
+        leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -openRot), rotDuration);
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -openRot), rotDuration)
+            .OnComplete(()=>
+            {
+                delayedCall = DOVirtual.DelayedCall(1f, CloseNotContinuos);
+            });
+    }
+
+    private void CloseNotContinuos()
+    {
+        leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -closeRot), rotDuration);
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -closeRot), rotDuration);
     }
 
     private void StopDotween()
