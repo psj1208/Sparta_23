@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 34d5624cb8eb66b4eb269980da8589ee
+guid: 3d37c69db7fd4fe44acd883c16b4995e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,43 +136,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: special
+      name: ItemList
       rect:
         serializedVersion: 2
-        x: 224
-        y: 65
-        width: 32
-        height: 29
+        x: 8
+        y: 8
+        width: 87
+        height: 81
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 14, y: 13, z: 14, w: 13}
+      pivot: {x: 0, y: 0}
+      border: {x: 36, y: 36, z: 36, w: 36}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2f4bc735808d0a4e98c3bb0c2118a33
-      internalID: 821125340
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: itemList
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 35
-        width: 71
-        height: 92
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 12, y: 11, z: 12, w: 32}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 471af49b05d7e194d8be32afaab0d52a
-      internalID: 209276607
+      spriteID: 813ee3d5be4d7824aaa203cecfd9fe10
+      internalID: 223181189
       vertices: []
       indices: 
       edges: []
@@ -188,10 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ItemList: -1055751261
-      itemList: 209276607
-      special: 821125340
-    nameFileIdTable: {}
+      ItemList: 223181189
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

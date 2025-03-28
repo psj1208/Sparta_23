@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class UIMain : UIBase
 {
+    
 
     public override void Opened(params object[] param)
     {
