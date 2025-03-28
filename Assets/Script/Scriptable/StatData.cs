@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Stat : ScriptableObject
+public class Stat
 {
     public EStatType StatType;
     public float Value;

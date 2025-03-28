@@ -11,12 +11,17 @@ public class PlayerAttackState : BaseState
     public override void Enter()
     {
         base.Enter();
-        // TODO : 플레이어 애니메이션을 Attack으로 변경
-        Debug.Log("어택");
+        StateMachine.StartAnimation((StateMachine as PlayerStateMachine).AttackAnimHash);
     }
     public override void Update()
     {
         base.Update();
-        // TODO : 공격 캡슐 남아있는 동안 지속 
+        // TODO : 공격 캡슐 남아있는 동안 공격
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        StateMachine.StopAnimation((StateMachine as PlayerStateMachine).AttackAnimHash);
     }
 }

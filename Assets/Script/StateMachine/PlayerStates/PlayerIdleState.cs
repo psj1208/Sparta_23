@@ -12,7 +12,8 @@ public class PlayerIdleState : BaseState
     public override void Enter()
     {
         base.Enter();
-        // TODO : 애니메이션을 Idle로 변경
-        
+        StateMachine.StopAnimation((StateMachine as PlayerStateMachine).DamageAnimHash);
+        StateMachine.StopAnimation((StateMachine as PlayerStateMachine).AttackAnimHash);
+        StateMachine.StartAnimation((StateMachine as PlayerStateMachine).IdleAnimHash);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStateMachine : BaseStateMachine
 {
-    Player player;
+    public Player Player;
 
     #region State
     public PlayerIdleState IdleState {  get; set; }
@@ -12,32 +12,35 @@ public class PlayerStateMachine : BaseStateMachine
     #endregion
 
     #region AnimationData
+    private string idleParameterName = "IsIdle";
     private string attackParameterName = "IsAttack";
     private string damageParameterName = "IsDamage";
     private string dieParameterName = "IsDie";
+    public int IdleAnimHash { get; private set; }
     public int AttackAnimHash { get; private set; }
     public int DamageAnimHash { get; private set; }
     public int DieAnimHash { get; private set; }
     #endregion
     public PlayerStateMachine(Player player)
     {
-        this.player = player;
+        this.Player = player;
 
         IdleState = new PlayerIdleState(this);
         AttackState = new PlayerAttackState(this);
 
+        IdleAnimHash = Animator.StringToHash(idleParameterName);
         AttackAnimHash = Animator.StringToHash(attackParameterName);
         DamageAnimHash = Animator.StringToHash(damageParameterName);
         DieAnimHash = Animator.StringToHash(dieParameterName);
     }
 
-    public void StartAnimation(int animationHash)
+    public override void StartAnimation(int animationHash)
     {
-        this.player.Animator.SetBool(animationHash, true);
+        this.Player.Animator.SetBool(animationHash, true);
     }
 
-    public void StopAnimation(int animationHash)
+    public override void StopAnimation(int animationHash)
     {
-        this.player.Animator.SetBool(animationHash, false);
+        this.Player.Animator.SetBool(animationHash, false);
     }
 }

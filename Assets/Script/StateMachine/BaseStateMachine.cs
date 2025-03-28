@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseStateMachine 
+public abstract class BaseStateMachine 
 {
     protected IState CurrentState;
 
@@ -17,4 +17,7 @@ public class BaseStateMachine
     {
         CurrentState?.Update();
     }
+
+    public abstract void StartAnimation(int animationHash);
+    public abstract void StopAnimation(int animationHash);
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,23 +8,35 @@ public class Player : MonoBehaviour
     [HideInInspector] public ResourceController ResourceController;
     public Animator Animator;
 
-    private PlayerStateMachine stateMachine;
+    public PlayerStateMachine PlayerStateMachine;
     private void Awake()
     {
         ResourceController = GetComponent<ResourceController>();
         Animator = GetComponentInChildren<Animator>();
 
-        stateMachine = new PlayerStateMachine(this);
-        stateMachine.ChangeState(stateMachine.IdleState);
+        PlayerStateMachine = new PlayerStateMachine(this);
+        PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
     }
 
     private void Update()
     {
-        stateMachine.Update();
+        PlayerStateMachine.Update();
 
-        if(Input.GetMouseButtonDown(0))
+#if DEBUG
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            stateMachine.ChangeState(stateMachine.AttackState);
+            PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
+            return;
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ResourceController.ChangeHealth(-5);
+        }
+#endif
     }
 }
