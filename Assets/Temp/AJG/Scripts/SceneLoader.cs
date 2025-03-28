@@ -11,7 +11,7 @@ public class SceneLoader : MonoBehaviour
         switch (stageData.stageType)
         {
             case E_StageType.Battle:
-                SceneManager.LoadScene("StageTestScene");
+                SceneManager.LoadScene("MainScene");
                 break;
             case E_StageType.Shop:
                 SceneManager.LoadScene("ShopScene");
@@ -24,7 +24,7 @@ public class SceneLoader : MonoBehaviour
         switch (stageType)
         {
             case E_StageType.Battle:
-                SceneManager.LoadScene("StageTestScene");
+                SceneManager.LoadScene("MainScene");
                 break;
             case E_StageType.Shop:
                 SceneManager.LoadScene("ShopScene");
