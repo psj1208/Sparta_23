@@ -33,6 +33,11 @@ public class ClawSpline : MonoBehaviour
         spline = GetComponent<SplineContainer>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+            Pop();
+    }
     private void LateUpdate()
     {
         if (inputList.Count > 0)
@@ -59,5 +64,12 @@ public class ClawSpline : MonoBehaviour
     {
         for (int i = 0; i < inputList.Count; i++)
             inputList[i].targetSplinePos = 1 - i * distanceBetween;
+    }
+
+    public void Pop()
+    {
+        //아이템 건네주기
+        inputList.RemoveAt(0);
+        CalculateT();
     }
 }
