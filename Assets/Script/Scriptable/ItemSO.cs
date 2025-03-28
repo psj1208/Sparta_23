@@ -32,6 +32,11 @@ public class ItemSO : ScriptableObject, IItem
                 //TODO: 플레이어 회복
                 //player.UpdateHealth(value)
                 break;
+
+            case EItemType.Gold:
+                //TODO: 플레이어 골드 획득
+                //player.UpdateGold(value)
+                break;
         }
     }
 

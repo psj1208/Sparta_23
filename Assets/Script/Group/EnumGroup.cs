@@ -13,5 +13,6 @@ public enum EItemType
 {
     Attack,
     Defense,
-    Heal
+    Heal,
+    Gold
 }
