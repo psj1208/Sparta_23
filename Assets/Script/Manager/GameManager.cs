@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public Player player;
+    public Player Player;
 
     protected override void Awake()
     {
         base.Awake();
-        ResourceManager.Instance.LoadAsset<Player>();
+        Player = Instantiate(ResourceManager.Instance.LoadAsset<Player>());
     }
     // Start is called before the first frame update
     void Start()
