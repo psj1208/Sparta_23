@@ -92,11 +92,11 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent<ItemObject>())
-        {
-            // AttackState로 변경
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.TryGetComponent<ItemObject>())
+    //    {
+    //        // AttackState로 변경
+    //    }
+    //}
 }
