@@ -16,9 +16,13 @@ public class ResourceController : MonoBehaviour
     {
         player = GetComponent<Player>();
         statHandler = GetComponent<StatHandler>();
+    }
 
+    private void Start()
+    {
         CurrentHealth = MaxHealth;
     }
+
     public void ChangeHealth(float amount)
     {
         if (amount < 0) StartCoroutine(DamageAnimation());
