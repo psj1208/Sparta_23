@@ -53,7 +53,7 @@ public class ClawControlTest : MonoBehaviour
         }
     }
 
-    void StartClawSequence()
+    public void StartClawSequence()
     {
         Open();
         Down();
@@ -100,9 +100,29 @@ public class ClawControlTest : MonoBehaviour
 
     void MoveToDropPoint()
     {
-        movementTween = claw.DOMove(dropPoint.position, moveToDropDuration).OnComplete(Open);
+        movementTween = claw.DOMove(dropPoint.position, moveToDropDuration).OnComplete(Finish);
     }
 
+    void Finish()
+    {
+        StopTweens();
+        if (stageItems.Count > 0)
+        {
+            foreach (var item in stageItems)
+            {
+                Rigidbody2D rb = item.GetComponent<Rigidbody2D>();
+                rb.isKinematic = false;
+            }
+        }
+        leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -openRot), rotDuration);
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -openRot), rotDuration)
+            .OnComplete(() =>
+            {
+                delayedCall = DOVirtual.DelayedCall(waitingTime, StageManager.Instance.SelectStages);
+            });
+    }
+
+    
     void StopTweens()
     {
         leftTween?.Kill();
@@ -115,9 +135,6 @@ public class ClawControlTest : MonoBehaviour
     {
         stageItems.Clear();
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attachPosition.position, attachRadius, stageItemLayer);
-        Debug.Log(attachPosition.position);
-        Debug.Log(attachPosition.localPosition);
-        Debug.Log(hitColliders.Length);
         foreach (Collider2D hitCollider in hitColliders)
         {
             StageItem item = hitCollider.GetComponent<StageItem>();

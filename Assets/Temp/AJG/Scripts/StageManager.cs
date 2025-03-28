@@ -8,16 +8,20 @@ using UnityEngine.SceneManagement;
 public class StageManager : Singleton<StageManager>
 {
     public GameObject playerPrefab;
+    public SceneLoader sceneLoader;
     public List<EnemyData> allEnemies;
     public int basicStageDifficulty = 30;
     public Vector2 enemySpwanCenterPosition;
     public Vector2 playerSpawnPosition;
     public float spacing = 2f;
 
+    public Dictionary<E_StageType, float> stagePoints;
+    public List<E_StageType> selectedStages = new List<E_StageType>();
+    private int currentStageIndex = 0;
+
     public int currentStage = 0;
     public int currentStageDifficulty;
     private GameObject playerInstance;
-    
     
     private void OnEnable()
     {
@@ -29,16 +33,29 @@ public class StageManager : Singleton<StageManager>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     
-    
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "StageTestScene") 
         {
-            StartStage();
+            StartBattleStage();
         }
     }
     
-    void StartStage()
+    public void NextStage()
+    {   
+        Debug.Log("currentStageIndex : " + currentStageIndex );
+        if (currentStageIndex >= selectedStages.Count)
+        {
+            sceneLoader.ReturnToStageSelectScene();
+        }
+        else
+        {
+            sceneLoader.LoadStage(selectedStages[currentStageIndex]);
+        }
+        currentStageIndex++;
+    }
+    
+    void StartBattleStage()
     {
         currentStage++;
         SpawnPlayer();
@@ -54,18 +71,36 @@ public class StageManager : Singleton<StageManager>
         playerInstance = Instantiate(playerPrefab, playerSpawnPosition, Quaternion.identity);
     }
     
-    
     public void ClearStage()
     {
-        // 임시로 씬 로드하면서 스테이지 값 추가.
-        SceneManager.LoadScene("StageTestScene");
+        currentStageIndex++;
+        if (currentStageIndex >= selectedStages.Count)
+        {
+            SceneManager.LoadScene("StageSelectScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("StageTestScene");
+        }
     }
 
+    public void SelectStages()
+    {
+        selectedStages.Clear();
+        List<E_StageType> availableStages = stagePoints.Keys.ToList();
+        for (int i = 0; i < 3; i++)
+        {
+            E_StageType randomStage = availableStages[Random.Range(0, availableStages.Count)];
+            selectedStages.Add(randomStage);
+        }
+        currentStageIndex = 0;
+    }
+    
     void SpawnEnemies(Vector2 center, int stageDifficulty)
     {
         int remainingDifficulty = stageDifficulty;
         List<EnemyData> possibleEnemies = new List<EnemyData>(allEnemies);
-        List<GameObject> spawnedEnemies = new List<GameObject>(); // 생성된 적 리스트
+        List<GameObject> spawnedEnemies = new List<GameObject>();
 
         while (remainingDifficulty > 0)
         {

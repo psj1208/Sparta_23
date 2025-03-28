@@ -19,6 +19,20 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    public void LoadStage(E_StageType stageType)
+    {
+        switch (stageType)
+        {
+            case E_StageType.Battle:
+                SceneManager.LoadScene("StageTestScene");
+                break;
+            case E_StageType.Shop:
+                SceneManager.LoadScene("ShopScene");
+                break;
+        }
+    }
+    
+    
     public void ReturnToStageSelectScene()
     {
         SceneManager.LoadScene("StageSelectScene");

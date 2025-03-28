@@ -6,6 +6,7 @@ using UnityEngine;
 public class StageItem : MonoBehaviour
 {
     public StageData data;
+    public float point;
     public SpriteRenderer spriteRenderer;
 
     void Start()
