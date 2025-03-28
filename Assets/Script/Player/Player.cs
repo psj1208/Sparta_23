@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     public PlayerStateMachine PlayerStateMachine;
 
-    private Queue<Skill> SkillQueue;
+    private Queue<IItem> ItemQueue;
 
     private void Awake()
     {
@@ -59,14 +59,14 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// 플레이어가 한 턴에 사용할 공격Skill 들을 추가.
+    /// 플레이어가 한 턴에 사용할 Item 들을 추가.
     /// </summary>
-    /// <param name="selectedSkills">추가할 Skill의 List</param>
-    public void AddSkills(List<Skill> selectedSkills)
+    /// <param name="selectedItems">추가할 Item의 List</param>
+    public void AddItems(List<IItem> selectedItems)
     {
-        foreach(Skill skill in selectedSkills)
+        foreach(IItem item in selectedItems)
         {
-            SkillQueue.Enqueue(skill);
+            ItemQueue.Enqueue(item);
         }
     }
 
@@ -79,14 +79,14 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// SkillQueue에서 한 개의 Skill을 Dequeue하여 실행.
+    /// ItemQueue에서 한 개의 Item을 Dequeue하여 실행.
     /// </summary>
     /// <returns>실행 성공 여부를 반환</returns>
-    public bool ExecuteSkill()
+    public bool ExecuteItem()
     {
-        if(SkillQueue.TryDequeue(out Skill skill))
+        if(ItemQueue.TryDequeue(out IItem item))
         {
-            skill.Use();
+            item.UseItem();
             return true;
         }
         return false;

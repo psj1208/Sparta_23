@@ -28,7 +28,7 @@ public class PlayerAttackState : BaseState
             lastAttackTime = Time.time;
             playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
 
-            if (!playerStateMachine.Player.ExecuteSkill())
+            if (!playerStateMachine.Player.ExecuteItem())
             {
                 playerStateMachine.StopAnimation(playerStateMachine.AttackAnimHash);
                 playerStateMachine.ChangeState(playerStateMachine.IdleState);
