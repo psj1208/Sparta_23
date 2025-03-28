@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+//좌우 이동, esc 종료, 스페이스바 시작, 탭 집기.
 public class ClawControl : MonoBehaviour
 {
     [Header("Transform Pos")]
     [SerializeField] Vector3 InitialPos;
+    Vector3 startPos;
 
     [Header("Claw About")]
+    [SerializeField] bool IsGameStart;
+    [SerializeField] bool CanMove;
     [SerializeField] Transform leftHand;
     [SerializeField] Transform rightHand;
 
@@ -42,29 +46,110 @@ public class ClawControl : MonoBehaviour
     Tween leftTween;
     Tween rightTween;
     Tween delayedCall;
+
+    [Header("Line Render")]
+    [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] Transform LinePoint;
+    [SerializeField] Transform ClawParent;
+
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        lineRenderer = GetComponentInChildren<LineRenderer>();    
+    }
+
     void Start()
     {
+        IsGameStart = false;
+        CanMove = false;
         InitialPos = transform.position;
+        startPos = InitialPos + Vector3.down * 1.5f;
         leftPosX = transform.position.x - leftEnd;
         rightPosX = transform.position.x - rightEnd;
         leftHand.rotation = Quaternion.Euler(0, 0, -closeRot);
         rightHand.rotation = Quaternion.Euler(0, 180, -closeRot);
-        LeftMove();
+        StartGame();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && MoveTween.IsPlaying())
-            Open();
+        LineRender();
     }
 
+    private void LateUpdate()
+    {
+        DebugStartGame();
+        DebugGameEnd();
+        if (!IsGameStart)
+            return;
+        if (Input.GetKeyDown(KeyCode.Tab))
+            Open();
+        if (CanMove)
+            Move();
+    }
+
+    #region
+    public void DebugStartGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            StartGame();
+    }
+    public void DebugGameEnd()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            GameEnd();
+    }
+    #endregion
+    public void LineRender()
+    {
+        if (lineRenderer == null)
+            return;
+        lineRenderer.SetPosition(0, LinePoint.position);
+        lineRenderer.SetPosition(1, ClawParent.position);
+        lineRenderer.positionCount = 2;
+    }
     public void StartGame()
     {
-        LeftMove();
+        if (IsGameStart)
+            return;
+        transform.DOMove(startPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true)
+            .OnComplete(()=>
+            {
+                IsGameStart = true;
+                CanMove = true;
+            });
     }
 
+    public void GameEnd()
+    {
+        if (!IsGameStart)
+            return;
+        IsGameStart = false;
+        CanMove = false;
+        transform.DOMove(startPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true)
+            .OnComplete(()=>
+            {
+                transform.DOMove(InitialPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true);
+            });
+    }
+
+    public void Move()
+    {
+        if(Input.GetKey(KeyCode.LeftArrow))
+        {
+            float x = transform.position.x - Time.deltaTime * MoveSpeed;
+            x = Mathf.Clamp(x, leftPosX, InitialPos.x);
+            transform.position = new Vector3(x, transform.position.y, 0);
+        }
+        else if(Input.GetKey(KeyCode.RightArrow))
+        {
+            float x = transform.position.x + Time.deltaTime * MoveSpeed;
+            x = Mathf.Clamp(x, leftPosX , InitialPos.x);
+            transform.position = new Vector3(x, transform.position.y, 0);
+        }
+    }
     private void LeftMove()
     {
         MoveTween = transform.DOMoveX(leftPosX, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true)
@@ -85,6 +170,7 @@ public class ClawControl : MonoBehaviour
 
     private void Open()
     {
+        CanMove = false;
         MoveTween.Kill();
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -openRot), rotDuration);
         rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -openRot), rotDuration)
@@ -96,7 +182,7 @@ public class ClawControl : MonoBehaviour
 
     private void GoDown()
     {
-        transform.DOMoveY(transform.position.y - downDistance, downDuration)
+        ClawParent.DOMoveY(ClawParent.position.y - downDistance, downDuration)
             .OnComplete(() =>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, Close);
@@ -115,16 +201,16 @@ public class ClawControl : MonoBehaviour
 
     private void GoUP()
     {
-        transform.DOMoveY(transform.position.y + downDistance, downDuration)
+        ClawParent.DOMoveY(ClawParent.position.y + downDistance, downDuration)
             .OnComplete(()=>
             {
-                delayedCall = DOVirtual.DelayedCall(waitingTime, GoInitialPos);
+                delayedCall = DOVirtual.DelayedCall(waitingTime, GoStartPos);
             });
     }
 
-    private void GoInitialPos()
+    private void GoStartPos()
     {
-        transform.DOMoveX(InitialPos.x, ReturnSpeed).SetSpeedBased(true)
+        transform.DOMove(startPos, ReturnSpeed).SetSpeedBased(true)
             .OnComplete(()=>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, OpenAndClose);
@@ -144,7 +230,11 @@ public class ClawControl : MonoBehaviour
     private void CloseNotContinuos()
     {
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -closeRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -closeRot), rotDuration);
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -closeRot), rotDuration)
+            .OnComplete(()=>
+            {
+                CanMove = true;
+            });
     }
 
     private void StopDotween()
@@ -161,10 +251,10 @@ public class ClawControl : MonoBehaviour
         if(Application.isPlaying) return;
         Vector3 box = new Vector3(boxSizeX, boxSizeY, 1);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(leftHand.position + Vector3.down * downDistance + Vector3.left * rightEnd, box);
-        Gizmos.DrawWireCube(leftHand.position, box);
-        Gizmos.DrawWireCube(leftHand.position + Vector3.left * leftEnd, box);
-        Gizmos.DrawWireCube(leftHand.position + Vector3.left * rightEnd, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.down * downDistance + Vector3.left * rightEnd + Vector3.down * 1.5f, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.down * 1.5f, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.left * leftEnd + Vector3.down * 1.5f, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.left * rightEnd + Vector3.down * 1.5f, box);
 #endif
     }
 }
