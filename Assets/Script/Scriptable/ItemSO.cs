@@ -14,28 +14,25 @@ public class ItemSO : ScriptableObject, IItem
     [SerializeField] private GameObject itemPrefab;
 
     public string ItemName => itemName;
-    public void UseItem()//PlayerController player
+    public void UseItem(Player player)//PlayerController player
     {
         switch (itemType)
         {
             case EItemType.Attack:
-                //TODO: 플레이어 공격
-                //player.UpdateStats(value)
+                player.StatHandler.ModifyStat(EStatType.Attack, value, false, 0);
                 break;
 
             case EItemType.Defense:
-                //TODO: 플레이어 방어
-                //player.UpdateStats(value)
+                player.StatHandler.ModifyStat(EStatType.Defense, value, false, 0);
                 break;
 
             case EItemType.Heal:
-                //TODO: 플레이어 회복
-                //player.UpdateHealth(value)
+                player.ResourceController.ChangeHealth(value);
                 break;
 
             case EItemType.Gold:
                 //TODO: 플레이어 골드 획득
-                //player.UpdateGold(value)
+                //player.ResourceController.GetGold(value);
                 break;
         }
     }
