@@ -33,6 +33,11 @@ public class ClawSpline : MonoBehaviour
         spline = GetComponent<SplineContainer>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+            Pop();
+    }
     private void LateUpdate()
     {
         if (inputList.Count > 0)
@@ -40,6 +45,7 @@ public class ClawSpline : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //add하고 난 이후로 리스트 비었는지 검사 후에 리스트가 비었으면 턴 종료.
         inputList.Add(new SplineMove(collision.gameObject));
         CalculateT();
     }
@@ -59,5 +65,13 @@ public class ClawSpline : MonoBehaviour
     {
         for (int i = 0; i < inputList.Count; i++)
             inputList[i].targetSplinePos = 1 - i * distanceBetween;
+    }
+
+    public void Pop()
+    {
+        //아이템 건네주기
+        //1번 위치에 완벽히 도달한지 검사
+        inputList.RemoveAt(0);
+        CalculateT();
     }
 }
