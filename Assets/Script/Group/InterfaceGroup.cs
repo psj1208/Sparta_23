@@ -4,7 +4,11 @@ using UnityEngine;
 
 public interface IItem
 {
-    abstract void Use();
+    string ItemName { get; }
+    void UseItem()
+    {
+
+    }
 }
 
 public interface IState

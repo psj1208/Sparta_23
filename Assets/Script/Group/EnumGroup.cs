@@ -10,3 +10,11 @@ public enum EStatType
     Attack,
     Defense,
 }
+
+public enum EItemType
+{
+    Attack,
+    Defense,
+    Heal,
+    Gold
+}
