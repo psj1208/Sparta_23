@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageData : MonoBehaviour
+public enum E_StageType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    Battle,
+    Shop,
+    
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+[CreateAssetMenu(fileName = "NewStageData", menuName = "Stage/Stage Data")]
+public class StageData : ScriptableObject
+{
+    public E_StageType stageType;
+    public Sprite stageSprite;
+    public string stageName;
 }
