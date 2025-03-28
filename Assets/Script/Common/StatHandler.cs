@@ -25,7 +25,14 @@ public class StatHandler : MonoBehaviour
         return currentStats.ContainsKey(type) ? currentStats[type] : 0;
     }
 
-    public void ModifyValue(EStatType type, float value, bool isPermanent, int turnTime)
+    /// <summary>
+    /// Stat 값을 변경 가능한 함수. 단, 이곳에서 체력은 MaxHealth값입니다. 현재 체력 변경은 ResourceController.cs
+    /// </summary>
+    /// <param name="type">변경할 스탯의 타입</param>
+    /// <param name="value">값</param>
+    /// <param name="isPermanent">영구적인 변화인지, 일시 효과인지</param>
+    /// <param name="turnTime">일시 효과 적용 시간</param>
+    public void ModifyStat(EStatType type, float value, bool isPermanent, int turnTime)
     {
         if (!currentStats.ContainsKey(type)) return;
         currentStats[type] += value;

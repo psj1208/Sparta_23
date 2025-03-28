@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class ResourceController : MonoBehaviour
 {
-    [HideInInspector] public StatHandler StatHandler;
-
     public float CurrentHealth {  get; private set; }
-    public float MaxHealth => StatHandler.GetStat(EStatType.Health);
+    public float MaxHealth => statHandler.GetStat(EStatType.Health);
 
     private Player player;
+    private StatHandler statHandler;
     private Action<float, float> OnChangeHealth;
 
     private void Awake()
     {
-        StatHandler = GetComponent<StatHandler>();
         player = GetComponent<Player>();
+        statHandler = GetComponent<StatHandler>();
+
+        CurrentHealth = MaxHealth;
     }
     public void ChangeHealth(float amount)
     {
@@ -24,7 +25,7 @@ public class ResourceController : MonoBehaviour
         CurrentHealth += amount;
 
 
-        if(CurrentHealth < MaxHealth)
+        if(CurrentHealth > MaxHealth)
         {
             CurrentHealth = MaxHealth;
         }
