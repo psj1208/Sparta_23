@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 307811998969194209}
   - component: {fileID: 3784179179965325302}
   - component: {fileID: 6353077331809420026}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: StageItem_Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
