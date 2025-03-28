@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public ResourceController ResourceController;
     [HideInInspector] public StatHandler StatHandler;
     [HideInInspector] public Animator Animator;
+    [HideInInspector] public PlayerAction PlayerAttackSystem;
+    [HideInInspector] public Queue<Skill> SkillQueue;
 
     public PlayerStateMachine PlayerStateMachine;
 
@@ -54,5 +56,39 @@ public class Player : MonoBehaviour
             return;
         }
 #endif
+    }
+
+    /// <summary>
+    /// 플레이어가 한 턴에 사용할 공격Skill 들을 추가.
+    /// </summary>
+    /// <param name="selectedSkills">추가할 Skill의 List</param>
+    public void AddSkills(List<Skill> selectedSkills)
+    {
+        foreach(Skill skill in selectedSkills)
+        {
+            SkillQueue.Enqueue(skill);
+        }
+    }
+
+    /// <summary>
+    /// AttackState로 전환.
+    /// </summary>
+    public void StartAttack()
+    {
+        PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
+    }
+
+    /// <summary>
+    /// SkillQueue에서 한 개의 Skill을 Dequeue하여 실행.
+    /// </summary>
+    /// <returns>실행 성공 여부를 반환</returns>
+    public bool ExecuteSkill()
+    {
+        if(SkillQueue.TryDequeue(out Skill skill))
+        {
+            skill.Use();
+            return true;
+        }
+        return false;
     }
 }
