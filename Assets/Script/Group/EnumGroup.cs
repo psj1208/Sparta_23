@@ -6,5 +6,15 @@ using System.Threading.Tasks;
 
 public enum EStatType
 {
+    Health, 
+    Attack,
+    Defense,
+}
 
+public enum EItemType
+{
+    Attack,
+    Defense,
+    Heal,
+    Gold
 }

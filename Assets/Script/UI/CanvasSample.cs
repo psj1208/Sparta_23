@@ -12,5 +12,6 @@ public class CanvasSample : CanvasBase<CanvasSample>
         if (parents.Count > 0)
             UIManager.SetParents(parents);
         UIManager.Show<UIMain>();
+        UIManager.Show<UITop>();
     }
 }
