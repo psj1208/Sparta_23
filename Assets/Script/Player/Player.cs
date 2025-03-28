@@ -8,10 +8,10 @@ public class Player : MonoBehaviour
     [HideInInspector] public ResourceController ResourceController;
     [HideInInspector] public StatHandler StatHandler;
     [HideInInspector] public Animator Animator;
-    [HideInInspector] public PlayerAction PlayerAttackSystem;
-    [HideInInspector] public Queue<Skill> SkillQueue;
 
     public PlayerStateMachine PlayerStateMachine;
+
+    private Queue<Skill> SkillQueue;
 
     private void Awake()
     {
