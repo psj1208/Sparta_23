@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerAttackState : BaseState
 {
     private PlayerStateMachine playerStateMachine;
-    private float attackInterval = 0.7f;
-    private float lastAttackTime = 0;
 
     public PlayerAttackState(BaseStateMachine stateMachine) : base(stateMachine)
     {
@@ -16,6 +14,10 @@ public class PlayerAttackState : BaseState
     public override void Enter()
     {
         base.Enter();
+
+        playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
+        playerStateMachine.Player.CurItem?.UseItem();
+        // TODO : 실질적 데미지 적용
     }
 
     public override void Update()

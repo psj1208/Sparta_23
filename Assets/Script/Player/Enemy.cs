@@ -2,7 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    [HideInInspector] public ResourceController ResourceController;
+    //public EnemyStateMachine EnemyStateMachine;
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Animator = GetComponentInChildren<Animator>();
+        ResourceController = GetComponent<ResourceController>();
+        StatHandler = GetComponent<StatHandler>();
+    }
 }
