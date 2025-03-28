@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TurnManager : Singleton<TurnManager>
 {
+    //플레이어 턴인지 적 턴인지 구분하는 변수
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +16,6 @@ public class TurnManager : Singleton<TurnManager>
     {
 
     }
+
+    //턴 바꾸기 메서드.
 }

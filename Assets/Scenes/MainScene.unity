@@ -610,9 +610,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1160049688349012310, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: leftEnd
+      value: 7.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160049688349012310, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: closeRot
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160049688349012310, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: ReturnSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5049508422736679944, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
       propertyPath: m_Name
       value: ClawGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822567625474715411, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Position.y
+      value: -2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822567625474715411, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].TangentIn.z
+      value: -0.07071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822567625474715411, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].TangentOut.z
+      value: 0.07071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822567625474715411, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.w
+      value: 0.54623365
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822567625474715411, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.x
+      value: 0.70375836
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822567625474715411, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.y
+      value: -0.06873265
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822567625474715411, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
+      propertyPath: m_Splines.Array.data[0].m_Knots.Array.data[2].Rotation.value.z
+      value: -0.44903097
       objectReference: {fileID: 0}
     - target: {fileID: 6939509645710948373, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
       propertyPath: m_LocalPosition.x
