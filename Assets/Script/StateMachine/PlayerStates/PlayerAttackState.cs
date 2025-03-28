@@ -21,19 +21,6 @@ public class PlayerAttackState : BaseState
     public override void Update()
     {
         base.Update();
-
-        // attackInterval 초를 간격으로 공격 실행
-        if(Time.time - lastAttackTime < attackInterval)
-        {
-            lastAttackTime = Time.time;
-            playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
-
-            if (!playerStateMachine.Player.ExecuteSkill())
-            {
-                playerStateMachine.StopAnimation(playerStateMachine.AttackAnimHash);
-                playerStateMachine.ChangeState(playerStateMachine.IdleState);
-            }
-        }
     }
 
     public override void Exit()
