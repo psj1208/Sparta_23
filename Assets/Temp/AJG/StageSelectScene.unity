@@ -2017,7 +2017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 1
-  playerPrefab: {fileID: 1723285298339716629, guid: d7c3d6ceb48b2cf4eabe89af6c7f3fd7, type: 3}
+  playerPrefab: {fileID: 577353715682019486, guid: be09351d5c48bdc488e5a149b90c7b6c, type: 3}
   sceneLoader: {fileID: 2102111315}
   allEnemies:
   - {fileID: 11400000, guid: 93af9fb8ac6ea644bbcbee24f32334d9, type: 2}
