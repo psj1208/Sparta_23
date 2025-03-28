@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e242642d2a5a1ae4f9d1db03e112c3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDontDestroy: 1
+  parents: []
 --- !u!4 &127305771
 Transform:
   m_ObjectHideFlags: 0
