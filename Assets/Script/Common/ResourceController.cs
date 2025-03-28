@@ -41,7 +41,7 @@ public class ResourceController : MonoBehaviour
             player.PlayerStateMachine.StartAnimation(player.PlayerStateMachine.DieAnimHash);
         }
 
-        OnChangeHealth?.Invoke(CurrentHealth, amount);
+        OnChangeHealth?.Invoke(CurrentHealth, MaxHealth);
     }
 
     public void AddChangeHealthEvent(Action<float, float> onChange)
