@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Container : MonoBehaviour
 {
-    [SerializeField] float TimeBetweenPop;
+    [SerializeField][Range(0, 1)] float TimeBetweenPop;
     [SerializeField] List<GameObject> objs;
     Collider2D col;
 
