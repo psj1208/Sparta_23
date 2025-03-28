@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Temp/Rian/UXML/NewItemSOEditorStyle.uss?fileID=7433441132597879392&amp;guid=86e3acdfa5a5f2c478821e5783087ea9&amp;type=3#NewItemSOEditorStyle" />
+    <ui:VisualElement name="Pane1" style="flex-grow: 1;">
+        <ui:VisualElement name="Vars" class="section" style="flex-grow: 1; background-color: rgb(41, 12, 70);">
+            <ui:Label tabindex="-1" text="Item Info" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 24px; -unity-text-outline-width: 0.5px; letter-spacing: 5px;" />
+            <uie:PropertyField binding-path="itemName" style="-unity-font-style: bold; font-size: 15px;" />
+            <uie:PropertyField binding-path="sprite" style="-unity-font-style: bold;" />
+            <uie:PropertyField binding-path="itemPrefab" style="font-size: 15px; -unity-font-style: bold;" />
+            <ui:EnumField label="Item Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" binding-path="itemType" name="EnumField" include-obsolete-values="false" style="margin-left: 3px; -unity-text-align: upper-left; font-size: 15px; -unity-font-style: bold; left: auto; align-items: flex-start; align-self: auto; height: 32px; width: 327px; flex-direction: row; top: auto; justify-content: flex-start; padding-left: 0;">
+                <uie:PropertyField binding-path="value" style="font-size: 15px; -unity-font-style: bold; height: 24px; width: 76px; -unity-text-align: upper-right; right: auto; position: relative; align-items: stretch; align-self: flex-start;" />
+            </ui:EnumField>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Pane2" style="flex-grow: 1;" />
+    <ui:VisualElement name="Pane3" style="flex-grow: 1;" />
+</ui:UXML>

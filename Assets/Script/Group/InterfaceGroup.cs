@@ -1,8 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface IItem
 {
-    abstract void Use();
+    string ItemName { get; }
+    void UseItem()
+    {
+
+    }
+}
+
+public interface IState
+{
+    public void Enter();
+    public void Exit();
+    public void Update();
 }

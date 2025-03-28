@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class UIMain : UIBase
 {
+    
 
     public override void Opened(params object[] param)
     {
@@ -23,9 +24,9 @@ public class UIMain : UIBase
     {
         UnityAction action = () =>
         {
-            UIManager.Hide<PopupAlert>();
+            UIManager.Hide<PausePopup>();
         };
-        UIManager.Show<PopupAlert>("탕탕이", "특강 끝", action);
+        UIManager.Show<PausePopup>(action);
     }
 
 }
