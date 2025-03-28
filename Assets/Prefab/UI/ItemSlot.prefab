@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d726c2fa6d2c44fb10aa653be6737d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 2566586560478520196}
   itemCount: {fileID: 0}
 --- !u!1 &2084044578612646524
 GameObject:

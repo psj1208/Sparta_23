@@ -10,7 +10,7 @@ public class ItemSlot : MonoBehaviour
     private Image icon;
 
     [SerializeField]
-    private TextMeshProUGUI itemCount;
+    private Text itemCount;
 
     public void SetIcon(Skill skill)
     {
