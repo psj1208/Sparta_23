@@ -8,10 +8,11 @@ using UnityEngine;
 public class ItemSO : ScriptableObject, IItem
 {
     [SerializeField] private string itemName;
-    [SerializeField] private Sprite sprite;
+    [SerializeField] public Sprite sprite;
     [SerializeField] private EItemType itemType;
     [SerializeField] private int value;
     [SerializeField] private GameObject itemPrefab;
+    [SerializeField] public bool stackable = true;
 
     public string ItemName => itemName;
     public void UseItem(Player player)//PlayerController player
