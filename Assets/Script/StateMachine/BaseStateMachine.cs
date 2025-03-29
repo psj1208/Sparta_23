@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseStateMachine 
 {
-    protected IState CurrentState;
+    public IState CurrentState;
 
     public void ChangeState(IState state)
     {

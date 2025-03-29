@@ -32,7 +32,7 @@ public class Player : Character
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
+            PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
             return;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -56,19 +56,18 @@ public class Player : Character
     }
 
     /// <summary>
-    /// AttackState로 전환.
+    /// BattleState로 전환.
     /// </summary>
-    public void StartAttack()
+    public void StartBattleMode()
     {
-        PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
+        PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
     }
 
     //private void OnTriggerEnter(Collider other)
     //{
-    //    if (other.TryGetComponent<IItem>(out CurItem))
+    //    if (other.TryGetComponent<IItem>(out item))
     //    {
-    //        // AttackState로 변경
-
+    //        // this.CurItem = item;
     //    }
     //}
 }
