@@ -20,6 +20,11 @@ public class Player : Character
         PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
     }
 
+    private void Start()
+    {
+        GameManager.Instance.Player.ResourceController.AddChangeHealthEvent(hpBar.UpdateHealth); 
+    }
+
     private void Update()
     {
         PlayerStateMachine.Update();
