@@ -21,7 +21,14 @@ public class HpBar : MonoBehaviour
     {
         curHealthText.text = Mathf.Min((int)curHealth, 1).ToString();
         maxHealthText.text = Mathf.Min((int)maxHealth, 1).ToString();
-        curHealthBar.fillAmount = curHealth / maxHealth;
+        if (maxHealth > 0f)
+        {
+            curHealthBar.fillAmount = Mathf.Clamp01(curHealth / maxHealth);
+        }
+        else
+        {
+            curHealthBar.fillAmount = 0f;
+        }
     }
 
     public void UpdateShield(int shieldAmount)
