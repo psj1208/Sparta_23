@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public ResourceController ResourceController;
     [HideInInspector] public StatHandler StatHandler;
     [HideInInspector] public Animator Animator;
-    [SerializeField] protected HpBar hpBar;
+    [SerializeField] public HpBar hpBar;
 
     protected virtual void Awake()
     {
@@ -16,6 +16,6 @@ public class Character : MonoBehaviour
 
     protected virtual void Start()
     {
-        GameManager.Instance.Player.ResourceController.AddChangeHealthEvent(hpBar.UpdateHealth);
+        
     }
 }
