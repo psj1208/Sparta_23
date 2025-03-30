@@ -9,6 +9,8 @@ public class Player : Character
 
     public IItem CurItem;
 
+    private Coroutine DamageCoroutine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,6 +20,12 @@ public class Player : Character
 
         PlayerStateMachine = new PlayerStateMachine(this);
         PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
+    }
+
+    private void Start()
+    {
+        ResourceController.OnDamageAction += DamageAction;
+        ResourceController.OnDieAction += DieAction;
     }
 
     private void Update()
@@ -58,7 +66,7 @@ public class Player : Character
     /// <summary>
     /// BattleState로 전환.
     /// </summary>
-    public void StartBattleMode()
+    public void StartBattleTurn()
     {
         PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
     }
@@ -70,4 +78,25 @@ public class Player : Character
     //        // this.CurItem = item;
     //    }
     //}
+
+    void DamageAction()
+    {
+        if(DamageCoroutine != null)
+        {
+            StopCoroutine(DamageCoroutine);
+        }
+        DamageCoroutine = StartCoroutine(DamageAnimation());
+    }
+
+    void DieAction()
+    {
+        PlayerStateMachine.StartAnimation(PlayerStateMachine.DieAnimHash);
+    }
+
+    IEnumerator DamageAnimation()
+    {
+        PlayerStateMachine.StartAnimation(PlayerStateMachine.DamageAnimHash);
+        yield return null;
+        PlayerStateMachine.StopAnimation(PlayerStateMachine.DamageAnimHash);
+    }
 }
