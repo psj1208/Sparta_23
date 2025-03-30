@@ -10,19 +10,20 @@ public class ResourceController : MonoBehaviour
     public Action OnDamageAction;
     public Action OnDieAction;
 
-    private Player player;
+    private Character character;
     private StatHandler statHandler;
     private Action<float, float> onChangeHealth;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        character = GetComponent<Character>();
         statHandler = GetComponent<StatHandler>();
     }
 
     private void Start()
     {
         CurrentHealth = MaxHealth;
+        AddChangeHealthEvent(character.hpBar.UpdateHealth);
     }
 
     public void ChangeHealth(float amount)
@@ -53,6 +54,7 @@ public class ResourceController : MonoBehaviour
     public void AddChangeHealthEvent(Action<float, float> onChange)
     {
         onChangeHealth += onChange;
+        onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
     }
 
     public void RemoveChangeHealthEvent(Action<float, float> onChange)
