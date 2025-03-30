@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        Player = Instantiate(ResourceManager.Instance.LoadAsset<Player>());
+        Player = Instantiate(ResourceManager.Instance.LoadAsset<Player>(), new Vector3(-5.85f, -3.5f, 0f), Quaternion.identity); // 임시
         Claw = FindAnyObjectByType<ClawGame>();
     }
     // Start is called before the first frame update

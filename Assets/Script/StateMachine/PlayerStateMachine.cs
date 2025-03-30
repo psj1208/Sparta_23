@@ -8,7 +8,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     #region State
     public PlayerIdleState IdleState {  get; set; }
-    public PlayerAttackState AttackState { get; set; }
+    public PlayerBattleState BattleState { get; set; }
     #endregion
 
     #region AnimationData
@@ -26,7 +26,7 @@ public class PlayerStateMachine : BaseStateMachine
         this.Player = player;
 
         IdleState = new PlayerIdleState(this);
-        AttackState = new PlayerAttackState(this);
+        BattleState = new PlayerBattleState(this);
 
         IdleAnimHash = Animator.StringToHash(idleParameterName);
         AttackAnimHash = Animator.StringToHash(attackParameterName);

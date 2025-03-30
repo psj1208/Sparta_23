@@ -178,7 +178,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636307560}
-  - component: {fileID: 636307559}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -186,18 +185,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &636307559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636307558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a344c0db583e0c64cbedc17647e3bb75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &636307560
 Transform:
   m_ObjectHideFlags: 0
@@ -222,7 +209,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 868141240}
-  - component: {fileID: 868141239}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -230,18 +216,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &868141239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 868141238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13cf64ad905318b4291252e869facf1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &868141240
 Transform:
   m_ObjectHideFlags: 0
@@ -266,7 +240,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1218581369}
-  - component: {fileID: 1218581368}
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
@@ -274,27 +247,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1218581368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218581367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebcfbd014a873664996db5e7e19142e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolDatas:
-  - key: Bullet
-    gameObject: {fileID: 6164004132395255960, guid: e589913f8de69a2408889274f48cbb42, type: 3}
-    capacity: 500
-    interval: 500
-  - key: Monster
-    gameObject: {fileID: 8704504926687646495, guid: 9eac598d99aa9e042a7906b0ac008983, type: 3}
-    capacity: 20
-    interval: 10
 --- !u!4 &1218581369
 Transform:
   m_ObjectHideFlags: 0
@@ -319,7 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1551003941}
-  - component: {fileID: 1551003940}
+  - component: {fileID: 1551003942}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -327,20 +279,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1551003940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551003939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1432ab762c765dc49b9931c15f477709, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userCharacter: {fileID: 0}
-  isPowerShot: 0
 --- !u!4 &1551003941
 Transform:
   m_ObjectHideFlags: 0
@@ -356,6 +294,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1551003942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551003939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a34a608c4afb84448ba4b36fdc319cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDontDestroy: 1
+  player: {fileID: 0}
 --- !u!1 &1706281628
 GameObject:
   m_ObjectHideFlags: 0

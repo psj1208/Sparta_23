@@ -3,24 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    [HideInInspector] public ResourceController ResourceController;
-    [HideInInspector] public StatHandler StatHandler;
-    [HideInInspector] public Animator Animator;
-
     public PlayerStateMachine PlayerStateMachine;
 
-    private Queue<IItem> ItemQueue;
+    public IItem CurItem;
 
-    private void Awake()
+    private Coroutine DamageCoroutine;
+
+    protected override void Awake()
     {
+        base.Awake();
+        Animator = GetComponentInChildren<Animator>();
         ResourceController = GetComponent<ResourceController>();
         StatHandler = GetComponent<StatHandler>();
-        Animator = GetComponentInChildren<Animator>();
 
         PlayerStateMachine = new PlayerStateMachine(this);
         PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        ResourceController.OnDamageAction += DamageAction;
+        ResourceController.OnDieAction += DieAction;
     }
 
     private void Update()
@@ -35,7 +41,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
+            PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
             return;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -59,44 +65,39 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// 플레이어가 한 턴에 사용할 Item 들을 추가.
+    /// BattleState로 전환.
     /// </summary>
-    /// <param name="selectedItems">추가할 Item의 List</param>
-    public void AddItems(List<IItem> selectedItems)
+    public void StartBattleTurn()
     {
-        foreach(IItem item in selectedItems)
-        {
-            ItemQueue.Enqueue(item);
-        }
-    }
-
-    /// <summary>
-    /// AttackState로 전환.
-    /// </summary>
-    public void StartAttack()
-    {
-        PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
-    }
-
-    /// <summary>
-    /// ItemQueue에서 한 개의 Item을 Dequeue하여 실행.
-    /// </summary>
-    /// <returns>실행 성공 여부를 반환</returns>
-    public bool ExecuteItem()
-    {
-        if(ItemQueue.TryDequeue(out IItem item))
-        {
-            item.UseItem();
-            return true;
-        }
-        return false;
+        PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
     }
 
     //private void OnTriggerEnter(Collider other)
     //{
-    //    if (other.TryGetComponent<ItemObject>())
+    //    if (other.TryGetComponent<IItem>(out item))
     //    {
-    //        // AttackState로 변경
+    //        // this.CurItem = item;
     //    }
     //}
+
+    void DamageAction()
+    {
+        if(DamageCoroutine != null)
+        {
+            StopCoroutine(DamageCoroutine);
+        }
+        DamageCoroutine = StartCoroutine(DamageAnimation());
+    }
+
+    void DieAction()
+    {
+        PlayerStateMachine.StartAnimation(PlayerStateMachine.DieAnimHash);
+    }
+
+    IEnumerator DamageAnimation()
+    {
+        PlayerStateMachine.StartAnimation(PlayerStateMachine.DamageAnimHash);
+        yield return null;
+        PlayerStateMachine.StopAnimation(PlayerStateMachine.DamageAnimHash);
+    }
 }
