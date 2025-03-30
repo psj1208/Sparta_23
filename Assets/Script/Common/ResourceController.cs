@@ -23,7 +23,7 @@ public class ResourceController : MonoBehaviour
     private void Start()
     {
         CurrentHealth = MaxHealth;
-        AddChangeHealthEvent(character.hpBar.UpdateHealth);
+        AddChangeHealthEvent(character.CharacterStatUI.HpBar.UpdateHealth);
     }
 
     public void ChangeHealth(float amount)

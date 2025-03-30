@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public ResourceController ResourceController;
     [HideInInspector] public StatHandler StatHandler;
     [HideInInspector] public Animator Animator;
-    [SerializeField] public HpBar hpBar;
+    public CharacterStatUI CharacterStatUI;
 
     protected virtual void Awake()
     {
