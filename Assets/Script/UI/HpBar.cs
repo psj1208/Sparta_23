@@ -19,8 +19,9 @@ public class HpBar : MonoBehaviour
 
     public void UpdateHealth(float curHealth, float maxHealth)
     {
-        curHealthText.text = Mathf.Min((int)curHealth, 1).ToString();
-        maxHealthText.text = Mathf.Min((int)maxHealth, 1).ToString();
+
+        curHealthText.text = Mathf.Min((int)curHealth, maxHealth).ToString();
+        maxHealthText.text = maxHealth.ToString();
         if (maxHealth > 0f)
         {
             curHealthBar.fillAmount = Mathf.Clamp01(curHealth / maxHealth);
