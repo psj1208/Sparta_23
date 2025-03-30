@@ -22,8 +22,9 @@ public class Player : Character
         PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         ResourceController.OnDamageAction += DamageAction;
         ResourceController.OnDieAction += DieAction;
     }

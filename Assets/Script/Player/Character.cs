@@ -13,4 +13,9 @@ public class Character : MonoBehaviour
     {
         
     }
+
+    protected virtual void Start()
+    {
+        GameManager.Instance.Player.ResourceController.AddChangeHealthEvent(hpBar.UpdateHealth);
+    }
 }
