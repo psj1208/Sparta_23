@@ -30,6 +30,7 @@ public class ClawSpline : MonoBehaviour
     }
     [SerializeField] SplineContainer spline;
     [SerializeField] float timeBetweenPop;
+    float curTimePop;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float distanceBetween;
     [SerializeField] private float distanceOffset;
@@ -43,6 +44,7 @@ public class ClawSpline : MonoBehaviour
 
     private void Start()
     {
+        curTimePop = 0;
         TurnStart = false;    
     }
 
@@ -63,14 +65,14 @@ public class ClawSpline : MonoBehaviour
         //add하고 난 이후로 리스트 비었는지 검사 후에 리스트가 비었으면 턴 종료.
         TurnStart = true;
         collision.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigid);
-        if (rigid != null)
-            rigid.simulated = false;
         inputList.Add(new SplineMove(collision.gameObject));
         CalculateT();
     }
 
     void Moving()
     {
+        if (curTimePop < timeBetweenPop)
+            curTimePop += Time.deltaTime;
         for (int i = 0; i < inputList.Count; i++)
         {
             if (inputList[i].curSplinePos < inputList[i].targetSplinePos)
@@ -80,10 +82,17 @@ public class ClawSpline : MonoBehaviour
             spline.Evaluate(inputList[i].curSplinePos,out float3 position,out float3 tan, out float3 upVector);
             inputList[i].obj.transform.position = position;
         }
+        if (inputList[0].Arrive() && curTimePop >= timeBetweenPop)
+        {
+            Pop();
+            curTimePop = 0;
+        }
     }
 
     void CalculateT()
     {
+        if (inputList.Count <= 0)
+            return;
         inputList[0].targetSplinePos = 1;
         for (int i = 1; i < inputList.Count; i++)
             inputList[i].targetSplinePos = 1 - i * distanceBetween;
