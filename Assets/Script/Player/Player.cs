@@ -81,13 +81,14 @@ public class Player : Character
         return -StatHandler.GetStat(EStatType.Attack);
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.TryGetComponent<IItem>(out item))
-    //    {
-    //        // this.CurItem = item;
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other.gameObject.name);
+        if (other.TryGetComponent<IItem>(out IItem item))
+        {
+            this.CurItem = item;
+        }
+    }
 
     void DamageAction()
     {

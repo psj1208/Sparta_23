@@ -5,10 +5,7 @@ using UnityEngine;
 public interface IItem
 {
     string ItemName { get; }
-    void UseItem()
-    {
-
-    }
+    void UseItem(Player player);
 }
 
 public interface IState
