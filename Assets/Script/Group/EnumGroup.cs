@@ -18,3 +18,10 @@ public enum EItemType
     Heal,
     Gold
 }
+
+public enum ETurnState
+{
+    PlayerTurn,
+    EnemyTurn,
+    ClawTurn
+}
