@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Enemy_C
   m_EditorClassIdentifier: 
   power: 30
-  prefab: {fileID: 6710601932556410380, guid: 66336db242e5f564a88e940f516b33b1, type: 3}
+  prefab: {fileID: 1912417347722245468, guid: d2b5a052b40d3d24783c92f8b45472f1, type: 3}
