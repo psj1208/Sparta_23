@@ -11,8 +11,7 @@ public class TurnManager : Singleton<TurnManager>
     public event Action OnClawMachineStart; // 뽑기 시작 이벤트
     public event Action OnTurnChanged; // 턴 변경 이벤트
 
-    private enum TurnState { PlayerTurn, EnemyTurn, ClawMachine }
-    private TurnState currentState;
+    private ETurnState currentState;
 
 
     private void Start()
@@ -22,14 +21,14 @@ public class TurnManager : Singleton<TurnManager>
     
     private void StartPlayerTurn()
     {
-        currentState = TurnState.PlayerTurn;
+        currentState = ETurnState.PlayerTurn;
         OnTurnChanged?.Invoke();
         OnPlayerTurnStart?.Invoke();
     }
 
     private void StartEnemyTurn()
     {
-        currentState = TurnState.EnemyTurn;
+        currentState = ETurnState.EnemyTurn;
         OnTurnChanged?.Invoke();
         OnEnemyTurnStart?.Invoke();
 
@@ -39,7 +38,7 @@ public class TurnManager : Singleton<TurnManager>
     
     private IEnumerator EnemyAction()
     {
-        yield return new WaitForSeconds(1.5f); // 적의 행동 딜레이
+        yield return new WaitForSeconds(1.5f); 
 
         Player player = FindObjectOfType<Player>();
         if (player != null)
@@ -53,21 +52,21 @@ public class TurnManager : Singleton<TurnManager>
 
     private void StartClawMachine()
     {
-        currentState = TurnState.ClawMachine;
+        currentState = ETurnState.ClawTurn;
         OnTurnChanged?.Invoke();
         OnClawMachineStart?.Invoke();
     }
 
     public void EndPlayerTurn()
     {
-        if (currentState != TurnState.PlayerTurn) return;
+        if (currentState != ETurnState.PlayerTurn) return;
         OnTurnChanged?.Invoke();
         StartEnemyTurn();
     }
 
     public void EndClawMachine()
     {
-        if (currentState != TurnState.ClawMachine) return;
+        if (currentState != ETurnState.ClawTurn) return;
         OnTurnChanged?.Invoke();
         StartPlayerTurn();
     }
