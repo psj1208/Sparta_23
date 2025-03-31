@@ -153,10 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 1
-  parents:
-  - {fileID: 845118866536252363, guid: a47b40e53e667fe40b1ff3a9abc22b4f, type: 3}
-  - {fileID: 2323215572319988467, guid: e5b3417f06fdee44a816184cf4842f6f, type: 3}
-  - {fileID: 1768861113537175415, guid: 4396bef1339876248acfb6664be0d2db, type: 3}
+  parents: []
 --- !u!4 &127305771
 Transform:
   m_ObjectHideFlags: 0

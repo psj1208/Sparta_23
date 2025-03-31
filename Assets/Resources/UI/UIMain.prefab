@@ -128,6 +128,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiPosition: 0
+  slotPrefab: {fileID: 1732385256405445670, guid: e10e4c438a726524bbdde124486d8389, type: 3}
+  itemSlotList: {fileID: 3519646050053761832}
+  skillSlotList: {fileID: 3997860881881163951}
 --- !u!1 &4936386988109163940
 GameObject:
   m_ObjectHideFlags: 0

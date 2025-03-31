@@ -4,6 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum SlotType
+{
+    Item,
+    Skill
+}
+
 public class ItemSlot : MonoBehaviour
 {
     [SerializeField]
@@ -12,9 +18,19 @@ public class ItemSlot : MonoBehaviour
     [SerializeField]
     private Text itemCount;
 
-    public void SetIcon(Skill skill)
+    [SerializeField]
+    private SlotType slotType;
+
+    [SerializeField]
+    private ItemSO itemSO;
+
+    public void SetIcon(ScriptableObject obj)
     {
-        //icon.sprite       스프라이트 값 설정 필요
+        if (obj.GetType() == typeof(ItemSO))
+        {
+            icon.sprite = itemSO.sprite;
+        }
+
         icon.color = Color.white;           //아이템 이미지 부분의 알파값을 0으로 설정하여 알파값을 255로 되돌려줌
     }
 
