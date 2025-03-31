@@ -22,7 +22,6 @@ public class ClawGame : MonoBehaviour
     private void Start()
     {
         clawCount = 0;
-        ClawStart(2);
     }
 
     public void ClawStart(int num = 1)
