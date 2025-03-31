@@ -37,14 +37,4 @@ public class ClawGame : MonoBehaviour
         clawCount = num;
         ClawCont.StartGame(num);
     }
-
-    private void OnEnable()
-    {
-        TurnManager.Instance.OnClawMachineStart += clawStartAction;
-    }
-
-    private void OnDisable()
-    {
-        TurnManager.Instance.OnClawMachineStart -= clawStartAction;
-    }
 }
