@@ -634,8 +634,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8213671990034667196}
   - {fileID: 6072360707582964262}
@@ -683,8 +683,8 @@ Transform:
   m_GameObject: {fileID: 5088141978934172324}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 7.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 1.2, y: 9.125, z: 0}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6413382665012306685}
@@ -709,18 +709,19 @@ MonoBehaviour:
   CanMove: 0
   leftHand: {fileID: 8230353511177761152}
   rightHand: {fileID: 8444993568194036217}
+  startDownDistance: 2.1
   closeRot: 0
   openRot: 60
   waitingTime: 0.2
   rotDuration: 0.5
-  downDistance: 3.9
+  downDistance: 3
   downDuration: 1.5
-  leftEnd: 7.7
-  rightEnd: 2.2
+  leftEnd: 6
+  rightEnd: 1.9
   MoveSpeed: 4
   ReturnSpeed: 2
   boxSizeX: 1.5
-  boxSizeY: 2.35
+  boxSizeY: 2.4
   isTweening: 0
   lineRenderer: {fileID: 0}
   LinePoint: {fileID: 6720988996495927206}
@@ -1021,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spline: {fileID: 0}
-  timeBetweenPop: 0
+  timeBetweenPop: 0.5
   moveSpeed: 0.6
   distanceBetween: 0.07
   distanceOffset: 0.02

@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6423769436833443350}
   - component: {fileID: 7428342398574887847}
-  - component: {fileID: 2469252034604752013}
+  - component: {fileID: -4774673618000207624}
   m_Layer: 0
   m_Name: GoldGem
   m_TagString: Untagged
@@ -142,11 +142,11 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &2469252034604752013
-PolygonCollider2D:
+--- !u!58 &-4774673618000207624
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,23 +178,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.112982154, y: 0.22268277}
-      - {x: -0.0693056, y: 0.196453}
-      - {x: -0.19815171, y: 0.060567617}
-      - {x: -0.25365177, y: -0.100425184}
-      - {x: -0.16175285, y: -0.19928838}
-      - {x: 0.15587401, y: -0.22047989}
-      - {x: 0.19640318, y: -0.06183277}
-      - {x: 0.21893215, y: 0.14180355}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Radius: 0.25
