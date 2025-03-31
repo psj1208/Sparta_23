@@ -5,6 +5,7 @@ using DG.Tweening;
 //좌우 이동, esc 종료, 스페이스바 시작, 탭 집기.
 public class ClawControl : MonoBehaviour
 {
+    ClawGame game;
     [Header("Transform Pos")]
     [SerializeField] Vector3 InitialPos;
     Vector3 startPos;
@@ -41,8 +42,9 @@ public class ClawControl : MonoBehaviour
     [SerializeField] float boxSizeX;
     [SerializeField] float boxSizeY;
 
-    [Header("Tweening")]
+    [Header("Tweening&Game")]
     [SerializeField] private bool isTweening;
+    [SerializeField] private int clawCount;
     Tween MoveTween;
     Tween leftTween;
     Tween rightTween;
@@ -54,6 +56,10 @@ public class ClawControl : MonoBehaviour
     [SerializeField] Transform ClawParent;
 
     // Start is called before the first frame update
+    public void Init(ClawGame game)
+    {
+        this.game = game;
+    }
 
     private void Awake()
     {
@@ -70,7 +76,6 @@ public class ClawControl : MonoBehaviour
         rightPosX = transform.position.x - rightEnd;
         leftHand.rotation = Quaternion.Euler(0, 0, -closeRot);
         rightHand.rotation = Quaternion.Euler(0, 180, -closeRot);
-        StartGame();
     }
 
     // Update is called once per frame
@@ -81,8 +86,6 @@ public class ClawControl : MonoBehaviour
 
     private void LateUpdate()
     {
-        DebugStartGame();
-        DebugGameEnd();
         if (!IsGameStart)
             return;
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -91,18 +94,6 @@ public class ClawControl : MonoBehaviour
             Move();
     }
 
-    #region
-    public void DebugStartGame()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            StartGame();
-    }
-    public void DebugGameEnd()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            GameEnd();
-    }
-    #endregion
     public void LineRender()
     {
         if (lineRenderer == null)
@@ -111,10 +102,11 @@ public class ClawControl : MonoBehaviour
         lineRenderer.SetPosition(1, ClawParent.position);
         lineRenderer.positionCount = 2;
     }
-    public void StartGame()
+    public void StartGame(int count)
     {
         if (IsGameStart)
             return;
+        clawCount = count;
         transform.DOMove(startPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true)
             .OnComplete(()=>
             {
@@ -235,6 +227,9 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 CanMove = true;
+                clawCount--;
+                if (clawCount <= 0)
+                    GameEnd();
             });
     }
 
