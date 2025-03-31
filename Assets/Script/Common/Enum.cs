@@ -1,5 +1,6 @@
 public enum eUIPosition
 {
     UI,
-    Top
+    Top,
+    Popup,
 }

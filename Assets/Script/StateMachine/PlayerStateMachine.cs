@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStateMachine : BaseStateMachine
 {
     public Player Player;
+    public List<Enemy> curEnemies;
 
     #region State
     public PlayerIdleState IdleState {  get; set; }

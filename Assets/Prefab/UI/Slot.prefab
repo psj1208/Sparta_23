@@ -92,6 +92,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 2566586560478520196}
   itemCount: {fileID: 3444076781443343109}
+  slotType: 0
+  itemSO: {fileID: 0}
 --- !u!1 &2084044578612646524
 GameObject:
   m_ObjectHideFlags: 0

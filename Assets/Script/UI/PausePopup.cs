@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PausePopup : UIBase
+public class UIPopup : UIBase
 {
     public Button[] buttons;
     public UnityAction[] okActions;
@@ -20,6 +20,6 @@ public class PausePopup : UIBase
 
     public override void HideDirect()
     {
-        UIManager.Hide<PausePopup>();
+        UIManager.Hide<UIPopup>();
     }
 }
