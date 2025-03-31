@@ -56,6 +56,11 @@ public class StageManager : Singleton<StageManager>
         }
     }
 
+    public int GetCurrentStageIndex()
+    {
+        return currentStageIndex;
+    }
+    
     public void NextStage()
     {
         currentStageIndex++;
