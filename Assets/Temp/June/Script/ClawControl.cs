@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 //좌우 이동, esc 종료, 스페이스바 시작, 탭 집기.
 public class ClawControl : MonoBehaviour
 {
@@ -12,8 +11,8 @@ public class ClawControl : MonoBehaviour
     Vector3 startPos;
 
     [Header("Claw About")]
-    public bool IsGameStart;
-    public bool CanMove;
+    [SerializeField] bool IsGameStart;
+    [SerializeField] bool CanMove;
     [SerializeField] Transform leftHand;
     [SerializeField] Transform rightHand;
     [SerializeField] float startDownDistance;
@@ -45,6 +44,7 @@ public class ClawControl : MonoBehaviour
 
     [Header("Tweening&Game")]
     [SerializeField] private bool isTweening;
+    [SerializeField] private int clawCount;
     Tween MoveTween;
     Tween leftTween;
     Tween rightTween;
@@ -86,11 +86,12 @@ public class ClawControl : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!IsGameStart || !CanMove) 
+        if (!IsGameStart)
             return;
         if (Input.GetKeyDown(KeyCode.Tab))
             Open();
-        Move();
+        if (CanMove)
+            Move();
     }
 
     public void LineRender()
@@ -105,6 +106,7 @@ public class ClawControl : MonoBehaviour
     {
         if (IsGameStart)
             return;
+        clawCount = count;
         transform.DOMove(startPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true)
             .OnComplete(()=>
             {
@@ -123,7 +125,6 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 transform.DOMove(InitialPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true);
-                TurnManager.Instance.EndPlayerTurn();
             });
     }
 
@@ -218,14 +219,17 @@ public class ClawControl : MonoBehaviour
                 delayedCall = DOVirtual.DelayedCall(1f, CloseNotContinuos);
             });
     }
-    //일련의 동작 마지막
+
     private void CloseNotContinuos()
     {
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -closeRot), rotDuration);
         rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -closeRot), rotDuration)
             .OnComplete(()=>
             {
-                game.ClawSpli.SplineEnd();
+                CanMove = true;
+                clawCount--;
+                if (clawCount <= 0)
+                    GameEnd();
             });
     }
 

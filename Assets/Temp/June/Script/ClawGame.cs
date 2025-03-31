@@ -7,7 +7,7 @@ public class ClawGame : MonoBehaviour
     public ClawControl ClawCont;
     public ClawSpline ClawSpli;
     public Container container;
-    public int clawCount;
+    bool TurnEnd;
 
     private void Awake()
     {
@@ -21,15 +21,12 @@ public class ClawGame : MonoBehaviour
 
     private void Start()
     {
-        clawCount = 0;
-        ClawStart(2);
+        TurnEnd = false;
+        ClawStart();
     }
 
     public void ClawStart(int num = 1)
     {
-        if (num <= 0)
-            return;
-        clawCount = num;
         ClawCont.StartGame(num);
     }
 }
