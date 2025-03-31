@@ -14,6 +14,7 @@ public class ClawControl : MonoBehaviour
     [SerializeField] bool CanMove;
     [SerializeField] Transform leftHand;
     [SerializeField] Transform rightHand;
+    [SerializeField] float startDownDistance;
 
     [Header("Rotaion About")]
     [SerializeField] float closeRot;
@@ -64,7 +65,7 @@ public class ClawControl : MonoBehaviour
         IsGameStart = false;
         CanMove = false;
         InitialPos = transform.position;
-        startPos = InitialPos + Vector3.down * 1.5f;
+        startPos = InitialPos + Vector3.down * startDownDistance;
         leftPosX = transform.position.x - leftEnd;
         rightPosX = transform.position.x - rightEnd;
         leftHand.rotation = Quaternion.Euler(0, 0, -closeRot);
@@ -251,10 +252,11 @@ public class ClawControl : MonoBehaviour
         if(Application.isPlaying) return;
         Vector3 box = new Vector3(boxSizeX, boxSizeY, 1);
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(leftHand.position + Vector3.down * downDistance + Vector3.left * rightEnd + Vector3.down * 1.5f, box);
-        Gizmos.DrawWireCube(leftHand.position + Vector3.down * 1.5f, box);
-        Gizmos.DrawWireCube(leftHand.position + Vector3.left * leftEnd + Vector3.down * 1.5f, box);
-        Gizmos.DrawWireCube(leftHand.position + Vector3.left * rightEnd + Vector3.down * 1.5f, box);
+        Gizmos.DrawWireCube(leftHand.position, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.down * downDistance + Vector3.left * rightEnd + Vector3.down * startDownDistance, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.down * startDownDistance, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.left * leftEnd + Vector3.down * startDownDistance, box);
+        Gizmos.DrawWireCube(leftHand.position + Vector3.left * rightEnd + Vector3.down * startDownDistance, box);
 #endif
     }
 }
