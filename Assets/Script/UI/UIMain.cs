@@ -19,14 +19,4 @@ public class UIMain : UIBase
     {
         UIManager.Hide<UIMain>();
     }
-
-    public void OnClickPopupAlert()
-    {
-        UnityAction action = () =>
-        {
-            UIManager.Hide<PausePopup>();
-        };
-        UIManager.Show<PausePopup>(action);
-    }
-
 }
