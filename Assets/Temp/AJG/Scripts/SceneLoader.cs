@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadStage(E_StageType stageType)
     {
+        DOTween.KillAll();
         switch (stageType)
         {
             case E_StageType.Battle:
