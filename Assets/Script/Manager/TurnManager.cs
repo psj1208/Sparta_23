@@ -23,14 +23,12 @@ public class TurnManager : Singleton<TurnManager>
     {
         currentState = ETurnState.PlayerTurn;
         OnTurnChanged?.Invoke();
-        OnPlayerTurnStart?.Invoke();
     }
 
     private void StartEnemyTurn()
     {
         currentState = ETurnState.EnemyTurn;
         OnTurnChanged?.Invoke();
-        OnEnemyTurnStart?.Invoke();
 
         StartCoroutine(EnemyAction());
     }

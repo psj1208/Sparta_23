@@ -39,6 +39,8 @@ public class UIMain : UIBase
                 ItemSlot slot = go.GetComponent<ItemSlot>();
                 slot.SetIcon(obj);
                 slot.SetItemCount(count);
+
+                ItemInventoryManager.Instance.RegisterItemSlot(slot);
             }
         }
     }
