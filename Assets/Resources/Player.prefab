@@ -51,7 +51,7 @@ MonoBehaviour:
   ResourceController: {fileID: 0}
   StatHandler: {fileID: 0}
   Animator: {fileID: 0}
-  CharacterStatUI: {fileID: 0}
+  CharacterStatUI: {fileID: 3331964603359746671}
 --- !u!114 &3020588831660011985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,18 +204,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7199746058300528610}
     m_Modifications:
-    - target: {fileID: 1039448442480448803, guid: cc8c424411d1e4c478fa6e66f6882810, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 1039448442480448803, guid: cc8c424411d1e4c478fa6e66f6882810, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 1039448442480448803, guid: cc8c424411d1e4c478fa6e66f6882810, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -541.5
-      objectReference: {fileID: 0}
     - target: {fileID: 4548351787210346770, guid: cc8c424411d1e4c478fa6e66f6882810, type: 3}
       propertyPath: m_Name
       value: CharacterStatUI
@@ -305,6 +293,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc8c424411d1e4c478fa6e66f6882810, type: 3}
+--- !u!114 &3331964603359746671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3002838111968521220, guid: cc8c424411d1e4c478fa6e66f6882810, type: 3}
+  m_PrefabInstance: {fileID: 545425376043447915}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaaf24cdeb0fb34a9101409c39f861f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7590494398535691590 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7982462170753555245, guid: cc8c424411d1e4c478fa6e66f6882810, type: 3}
