@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6423769436833443350}
   - component: {fileID: 7428342398574887847}
-  - component: {fileID: 34114762032868315}
+  - component: {fileID: 534956801043237971}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -142,11 +142,11 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &34114762032868315
-PolygonCollider2D:
+--- !u!58 &534956801043237971
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,35 +178,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.2897759, y: 0.24515176}
-      - {x: 0.2920378, y: 0.34018043}
-      - {x: 0.23472007, y: 0.39893287}
-      - {x: 0.14432506, y: 0.36047444}
-      - {x: 0.041353628, y: 0.403201}
-      - {x: -0.052431166, y: 0.40750977}
-      - {x: -0.106971204, y: 0.3602677}
-      - {x: -0.009974018, y: 0.20373887}
-      - {x: -0.040799156, y: 0.13766046}
-      - {x: -0.068024084, y: 0.0903826}
-      - {x: -0.2645127, y: -0.107439175}
-      - {x: -0.35307866, y: -0.13578421}
-      - {x: -0.35802034, y: -0.29057324}
-      - {x: -0.18693459, y: -0.29941028}
-      - {x: -0.10199681, y: -0.14412965}
-      - {x: 0.07310564, y: 0.049639292}
-      - {x: 0.071197614, y: -0.23527788}
-      - {x: 0.21519051, y: -0.20363268}
-      - {x: 0.37057734, y: -0.073175356}
-      - {x: 0.44305432, y: 0.0478611}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Radius: 0.38

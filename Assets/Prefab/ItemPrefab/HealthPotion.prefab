@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6423769436833443350}
   - component: {fileID: 7428342398574887847}
-  - component: {fileID: 2876104514574059482}
+  - component: {fileID: 401547130475716731}
   m_Layer: 0
   m_Name: HealthPotion
   m_TagString: Untagged
@@ -142,11 +142,11 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &2876104514574059482
-PolygonCollider2D:
+--- !u!58 &401547130475716731
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,34 +178,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.23779346, y: 0.27210552}
-      - {x: 0.19225551, y: 0.309148}
-      - {x: 0.12579429, y: 0.3175731}
-      - {x: 0.096941836, y: 0.2645633}
-      - {x: 0.042266324, y: 0.26125568}
-      - {x: -0.0039079487, y: 0.17738612}
-      - {x: -0.03388633, y: 0.16308782}
-      - {x: -0.072570294, y: 0.15927395}
-      - {x: -0.16793573, y: 0.11912915}
-      - {x: -0.23318034, y: 0.06713253}
-      - {x: -0.28524202, y: -0.103153914}
-      - {x: -0.24634185, y: -0.22856343}
-      - {x: -0.122686386, y: -0.3329172}
-      - {x: 0.044369698, y: -0.33120665}
-      - {x: 0.13871855, y: -0.26393574}
-      - {x: 0.19772995, y: -0.16000347}
-      - {x: 0.19650626, y: 0.036991835}
-      - {x: 0.2675798, y: 0.11796515}
-      - {x: 0.27148134, y: 0.22561473}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Radius: 0.3
