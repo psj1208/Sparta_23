@@ -53,6 +53,7 @@ public class TurnManager : Singleton<TurnManager>
     
     private void StartPlayerTurn()
     {
+        Debug.Log(currentEnemies);
         currentState = ETurnState.PlayerTurn;
         OnTurnChanged?.Invoke();
         OnPlayerTurnStart?.Invoke(currentEnemies);

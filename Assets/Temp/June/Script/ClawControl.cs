@@ -196,6 +196,7 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, GoStartPos);
+                TurnManager.Instance.EndClawMachine();
             });
     }
 

@@ -3561,7 +3561,7 @@ MonoBehaviour:
   game: {fileID: 782650146}
   currentRound: 0
   playerSpawnPosition: {x: -1.5, y: -1}
-  selectedStages: 
+  selectedStages: 000000000000000000000000
   basicStageDifficulty: 30
 --- !u!4 &1876009881
 Transform:
