@@ -28,6 +28,7 @@ public class ClawSpline : MonoBehaviour
             return curSplinePos == targetSplinePos;
         }
     }
+    ClawGame game;
     [SerializeField] SplineContainer spline;
     [SerializeField] float timeBetweenPop;
     float curTimePop;
@@ -45,15 +46,20 @@ public class ClawSpline : MonoBehaviour
     private void Start()
     {
         curTimePop = 0;
-        TurnStart = false;    
+        TurnStart = false;
+    }
+
+    public void Init(ClawGame game)
+    {
+        this.game = game;
     }
 
     private void Update()
     {
         if (TurnStart == false)
             return;
-        if (Input.GetKeyDown(KeyCode.Q))
-            Pop();
+        if (inputList.Count <= 0)
+            SplineEnd();
     }
     private void LateUpdate()
     {
@@ -106,9 +112,16 @@ public class ClawSpline : MonoBehaviour
         CalculateT();
     }
 
-    //첫번째 인덱스가 도착했는지
-    void IsFirstIndexCome()
+    public void SplineEnd()
     {
-        
+
+    }
+
+    IEnumerator isEnd()
+    {
+        //2초 뒤에 리스트가 비었는지 검사
+        yield return new WaitForSeconds(2.0f);
+        while (inputList.Count > 0)
+            yield return null;
     }
 }
