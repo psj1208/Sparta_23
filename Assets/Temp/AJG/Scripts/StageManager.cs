@@ -47,16 +47,23 @@ public class StageManager : Singleton<StageManager>
         {
             currentRound++;
         }
+        else if (scene.name == "DontDestroy")
+        {
+        }
         else
         {
             ActivateCurrentStage();
         }
     }
 
+    public int GetCurrentStageIndex()
+    {
+        return currentStageIndex;
+    }
+    
     public void NextStage()
     {
         currentStageIndex++;
-        Debug.Log("currentStageIndex : " + currentStageIndex);
         if (currentStageIndex >= selectedStages.Count)
         {
             sceneLoader.ReturnToStageSelectScene();
@@ -69,7 +76,6 @@ public class StageManager : Singleton<StageManager>
 
     void ActivateCurrentStage()
     {
-        Debug.Log("selectedStages : " + selectedStages.Count);
         E_StageType currentStageType = selectedStages[currentStageIndex];
 
         if (currentStageType == E_StageType.Battle)
@@ -85,20 +91,42 @@ public class StageManager : Singleton<StageManager>
             // shopStageController.SetupShop();
         }
     }
-
+    
     public void SelectStages()
     {
         selectedStages.Clear();
         List<E_StageType> availableStages = new List<E_StageType> { E_StageType.Battle, E_StageType.Shop };
-        
+
         for (int i = 0; i < 3; i++)
         {
-            E_StageType randomStage = availableStages[Random.Range(0, availableStages.Count)];
-            selectedStages.Add(randomStage);
+            E_StageType selectedStage = GetWeightedRandomStage(availableStages);
+            selectedStages.Add(selectedStage);
         }
-        
         currentStageIndex = -1;
     }
+
+    private E_StageType GetWeightedRandomStage(List<E_StageType> stages)
+    {
+        float totalWeight = 0f;
+        foreach (var stage in stages)
+        {
+            totalWeight += stagePoints.ContainsKey(stage) ? stagePoints[stage] : 0f;
+        }
+    
+        float randomValue = Random.Range(0f, totalWeight);
+        float cumulativeWeight = 0f;
+
+        foreach (var stage in stages)
+        {
+            cumulativeWeight += stagePoints.ContainsKey(stage) ? stagePoints[stage] : 0f;
+            if (randomValue < cumulativeWeight)
+            {
+                return stage;
+            }
+        }
+        return stages[0]; // 예외 방지
+    }
+
     
     private void ApplyStageSettings()
     {
