@@ -1,28 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class StageManager : Singleton<StageManager>
 {
     public GameObject playerPrefab;
     public SceneLoader sceneLoader;
-    public List<EnemyData> allEnemies;
-    public int basicStageDifficulty = 30;
-    public Vector2 enemySpwanCenterPosition;
-    public Vector2 playerSpawnPosition;
-    public float spacing = 2f;
-
+    public BattleStageController battleStageController;
+    public ShopStageController shopStageController;
     public Dictionary<E_StageType, float> stagePoints;
-    public List<E_StageType> selectedStages = new List<E_StageType>();
-    private int currentStageIndex = 0;
-
-    public int currentStage = 0;
-    public int currentStageDifficulty;
-    private GameObject playerInstance;
     
+    public int currentRound = 0;
+    public Vector2 playerSpawnPosition;
+    public List<E_StageType> selectedStages = new List<E_StageType>();
+    public int basicStageDifficulty = 30;
+    
+    private int currentStageIndex = -1;
+    private GameObject playerInstance;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            NextStage();
+        }
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -32,18 +40,23 @@ public class StageManager : Singleton<StageManager>
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "StageTestScene") 
+        if (scene.name == "StageSelectScene") 
         {
-            StartBattleStage();
+            currentRound++;
+        }
+        else
+        {
+            ActivateCurrentStage();
         }
     }
-    
+
     public void NextStage()
-    {   
-        Debug.Log("currentStageIndex : " + currentStageIndex );
+    {
+        currentStageIndex++;
+        Debug.Log("currentStageIndex : " + currentStageIndex);
         if (currentStageIndex >= selectedStages.Count)
         {
             sceneLoader.ReturnToStageSelectScene();
@@ -52,90 +65,41 @@ public class StageManager : Singleton<StageManager>
         {
             sceneLoader.LoadStage(selectedStages[currentStageIndex]);
         }
-        currentStageIndex++;
     }
-    
-    void StartBattleStage()
-    {
-        currentStage++;
-        SpawnPlayer();
-        currentStageDifficulty = basicStageDifficulty + (currentStage * 5);
-        SpawnEnemies(enemySpwanCenterPosition, currentStageDifficulty);
-    }
-    
-    void SpawnPlayer()
-    {
-        if (playerInstance != null)
-            Destroy(playerInstance);
 
-        playerInstance = Instantiate(playerPrefab, playerSpawnPosition, Quaternion.identity);
-    }
-    
-    public void ClearStage()
+    void ActivateCurrentStage()
     {
-        currentStageIndex++;
-        if (currentStageIndex >= selectedStages.Count)
+        Debug.Log("selectedStages : " + selectedStages.Count);
+        E_StageType currentStageType = selectedStages[currentStageIndex];
+
+        if (currentStageType == E_StageType.Battle)
         {
-            SceneManager.LoadScene("StageSelectScene");
+            battleStageController.gameObject.SetActive(true);
+            shopStageController.gameObject.SetActive(false);
+            battleStageController.StartBattleStage(playerPrefab);
         }
-        else
+        else if (currentStageType == E_StageType.Shop)
         {
-            SceneManager.LoadScene("StageTestScene");
+            battleStageController.gameObject.SetActive(false);
+            shopStageController.gameObject.SetActive(true);
+            // shopStageController.SetupShop();
         }
     }
 
     public void SelectStages()
     {
         selectedStages.Clear();
-        List<E_StageType> availableStages = stagePoints.Keys.ToList();
+        List<E_StageType> availableStages = new List<E_StageType> { E_StageType.Battle, E_StageType.Shop };
+        
         for (int i = 0; i < 3; i++)
         {
             E_StageType randomStage = availableStages[Random.Range(0, availableStages.Count)];
             selectedStages.Add(randomStage);
         }
-        currentStageIndex = 0;
+        
+        currentStageIndex = -1;
     }
     
-    void SpawnEnemies(Vector2 center, int stageDifficulty)
-    {
-        int remainingDifficulty = stageDifficulty;
-        List<EnemyData> possibleEnemies = new List<EnemyData>(allEnemies);
-        List<GameObject> spawnedEnemies = new List<GameObject>();
-
-        while (remainingDifficulty > 0)
-        {
-            var validEnemies = possibleEnemies.Where(e => e.power <= remainingDifficulty).ToList();
-
-            if (validEnemies.Count == 0)
-                break;
-
-            EnemyData selectedEnemy = validEnemies[Random.Range(0, validEnemies.Count)];
-
-            remainingDifficulty -= selectedEnemy.power;
-
-            GameObject enemy = Instantiate(selectedEnemy.prefab, center, Quaternion.identity);
-            spawnedEnemies.Add(enemy);
-        }
-
-        ArrangeEnemies(spawnedEnemies, center);
-    }
-
-    void ArrangeEnemies(List<GameObject> enemies, Vector2 center)
-    {
-        int count = enemies.Count;
-        for (int i = 0; i < count; i++)
-        {
-            float offset = GetOffset(i, count);
-            Vector2 spawnPosition = new Vector2(center.x + offset, center.y);
-            enemies[i].transform.position = spawnPosition;
-        }
-    }
-
-    float GetOffset(int index, int count)
-    {
-        if (count == 1) return 0;
-        return (index - (count - 1) / 2f) * spacing;
-    }
     private void ApplyStageSettings()
     {
         // 스테이지 배율에 따라 적들에게 적용,
