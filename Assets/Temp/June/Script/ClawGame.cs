@@ -30,8 +30,9 @@ public class ClawGame : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable()
+    private void OnDisable()    
     {
+        TurnManager.Instance.OnClawMachineStart -= ClawCont.StartGame;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 

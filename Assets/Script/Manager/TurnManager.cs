@@ -41,7 +41,6 @@ public class TurnManager : Singleton<TurnManager>
 
     void Start()
     {
-        Debug.Log("Starting Battle Stage");
         StartClawMachine();
     }
     
