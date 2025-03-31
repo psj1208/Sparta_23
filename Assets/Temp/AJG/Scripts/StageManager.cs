@@ -47,6 +47,9 @@ public class StageManager : Singleton<StageManager>
         {
             currentRound++;
         }
+        else if (scene.name == "DontDestroy")
+        {
+        }
         else
         {
             ActivateCurrentStage();
@@ -56,7 +59,6 @@ public class StageManager : Singleton<StageManager>
     public void NextStage()
     {
         currentStageIndex++;
-        Debug.Log("currentStageIndex : " + currentStageIndex);
         if (currentStageIndex >= selectedStages.Count)
         {
             sceneLoader.ReturnToStageSelectScene();
@@ -69,7 +71,6 @@ public class StageManager : Singleton<StageManager>
 
     void ActivateCurrentStage()
     {
-        Debug.Log("selectedStages : " + selectedStages.Count);
         E_StageType currentStageType = selectedStages[currentStageIndex];
 
         if (currentStageType == E_StageType.Battle)
