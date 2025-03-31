@@ -31,16 +31,16 @@ public class ResourceController : MonoBehaviour
         CurrentHealth += amount;
         onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
 
-
-        if(CurrentHealth > MaxHealth)
+        if (CurrentHealth > MaxHealth)
         {
             CurrentHealth = MaxHealth;
+            onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
         }
         else if(CurrentHealth < 0)
         {
             CurrentHealth = 0;
             OnDieAction?.Invoke();
-
+            onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
             // TODO : GameOver
             return;
         }

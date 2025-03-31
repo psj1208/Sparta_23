@@ -28,12 +28,18 @@ public class PlayerBattleState : BaseState
         }
         #endif
 
-        if (!IsAnimationEnd && playerStateMachine.Player.CurItem != null)
+        if (!IsAnimationEnd && playerStateMachine.Player.CurItem != null && playerStateMachine.curEnemies != null)
         {
-            playerStateMachine.Player.CurItem?.UseItem();
+            // 아이템 수치 적용
+            playerStateMachine.Player.CurItem.UseItem();
             playerStateMachine.Player.CurItem = null;
             playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
-            // TODO : 실질적 데미지 적용
+
+            // 실질적 데미지 적용
+            foreach(Enemy enemy in playerStateMachine.curEnemies)
+            {
+                enemy.ResourceController.ChangeHealth(playerStateMachine.Player.GetAttackDamage());
+            }
         }
 
         if (IsAnimationEnd)
