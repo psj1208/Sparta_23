@@ -123,7 +123,6 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 transform.DOMove(InitialPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true);
-                TurnManager.Instance.EndPlayerTurn();
             });
     }
 

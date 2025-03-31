@@ -26,14 +26,14 @@ public class ClawGame : MonoBehaviour
     private void Start()
     {
 
-        clawCount = 0;
+        ClawCont.StartGame(1);
+        // clawCount = 0;
     }
 
     public void ClawStart(int num = 1)
     {
-        if (num <= 0)
-            return;
-        clawCount = num;
-        ClawCont.StartGame(num);
+        // if (num <= 0)
+        //     return;
+        // clawCount = num;
     }
 }

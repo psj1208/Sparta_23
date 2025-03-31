@@ -169,10 +169,10 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 260
-      y: 275
-      width: 192
-      height: 192
+      x: 307
+      y: 299
+      width: 64
+      height: 16
     spriteID: b0cfd18038e83674382bfc665c64895c
     spriteBone: []
     spriteOutline: []
@@ -414,6 +414,46 @@ ScriptedImporter:
       width: 64
       height: 15
     spriteID: 0226b8f65cb00044ea737f184b34954c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: 8-Tile-Sets_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 117
+      y: 329
+      width: 64
+      height: 16
+    spriteID: 4b937767e55d77349a25c3cce9ec74a2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: 8-Tile-Sets_15
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 243
+      y: 139
+      width: 64
+      height: 16
+    spriteID: 4ae733305192220439bd486283f3a4f1
     spriteBone: []
     spriteOutline: []
     vertices: []

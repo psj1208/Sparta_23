@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TurnManager : Singleton<TurnManager>
 {
@@ -12,7 +13,38 @@ public class TurnManager : Singleton<TurnManager>
     public event Action OnTurnChanged; // 턴 변경 이벤트
 
     private ETurnState currentState;
-    private List<Enemy> currentEnemies;
+    public List<Enemy> currentEnemies;
+
+    
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            GetEnemyListFromStageManager();
+            StartClawMachine();
+        }
+        else if (scene.name == "DontDestroy")
+        {
+        }
+        else
+        {
+        }
+    }
+
+    private void GetEnemyListFromStageManager()
+    {
+        currentEnemies = StageManager.Instance.battleStageController.spawnedEnemies;
+    }
 
     private void Start()
     {
