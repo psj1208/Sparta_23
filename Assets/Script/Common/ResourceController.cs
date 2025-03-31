@@ -7,22 +7,29 @@ public class ResourceController : MonoBehaviour
 {
     public float CurrentHealth {  get; private set; }
     public float MaxHealth => statHandler.GetStat(EStatType.Health);
+    public Action OnDamageAction;
+    public Action OnDieAction;
 
-    private Player player;
+    private Character character;
     private StatHandler statHandler;
-    private Action<float, float> OnChangeHealth;
+    private Action<float, float> onChangeHealth;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
+        character = GetComponent<Character>();
         statHandler = GetComponent<StatHandler>();
-
-        CurrentHealth = MaxHealth;
     }
+
+    private void Start()
+    {
+        CurrentHealth = MaxHealth;
+        AddChangeHealthEvent(character.CharacterStatUI.HpBar.UpdateHealth);
+    }
+
     public void ChangeHealth(float amount)
     {
-        if (amount < 0) StartCoroutine(DamageAnimation());
         CurrentHealth += amount;
+        onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
 
 
         if(CurrentHealth > MaxHealth)
@@ -32,28 +39,26 @@ public class ResourceController : MonoBehaviour
         else if(CurrentHealth < 0)
         {
             CurrentHealth = 0;
+            OnDieAction?.Invoke();
 
             // TODO : GameOver
-            player.PlayerStateMachine.StartAnimation(player.PlayerStateMachine.DieAnimHash);
+            return;
         }
 
-        OnChangeHealth?.Invoke(CurrentHealth, amount);
+        if (amount < 0)
+        {
+            OnDamageAction?.Invoke();
+        }
     }
 
     public void AddChangeHealthEvent(Action<float, float> onChange)
     {
-        OnChangeHealth += onChange;
+        onChangeHealth += onChange;
+        onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
     }
 
     public void RemoveChangeHealthEvent(Action<float, float> onChange)
     {
-        OnChangeHealth -= onChange;
-    }
-
-    IEnumerator DamageAnimation()
-    {
-        player.PlayerStateMachine.StartAnimation(player.PlayerStateMachine.DamageAnimHash);
-        yield return null;
-        player.PlayerStateMachine.StopAnimation(player.PlayerStateMachine.DamageAnimHash);
+        onChangeHealth -= onChange;
     }
 }

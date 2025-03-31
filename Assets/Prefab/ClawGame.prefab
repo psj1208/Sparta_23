@@ -616,6 +616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 910018354037340761}
+  - component: {fileID: 757251454800477300}
   m_Layer: 0
   m_Name: ClawGame
   m_TagString: Untagged
@@ -633,13 +634,28 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8213671990034667196}
   - {fileID: 6072360707582964262}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &757251454800477300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049508422736679944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1b955e5fb1d0f4e8947362fd505163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClawCont: {fileID: 0}
+  ClawSpli: {fileID: 0}
+  container: {fileID: 0}
 --- !u!1 &5088141978934172324
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,8 +683,8 @@ Transform:
   m_GameObject: {fileID: 5088141978934172324}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2, y: 7.25, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 1.2, y: 9.125, z: 0}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6413382665012306685}
@@ -693,18 +709,19 @@ MonoBehaviour:
   CanMove: 0
   leftHand: {fileID: 8230353511177761152}
   rightHand: {fileID: 8444993568194036217}
+  startDownDistance: 2.1
   closeRot: 0
   openRot: 60
   waitingTime: 0.2
   rotDuration: 0.5
-  downDistance: 3.9
+  downDistance: 3
   downDuration: 1.5
-  leftEnd: 8.65
-  rightEnd: 2.2
+  leftEnd: 6
+  rightEnd: 1.9
   MoveSpeed: 4
-  ReturnSpeed: 4
+  ReturnSpeed: 2
   boxSizeX: 1.5
-  boxSizeY: 2.35
+  boxSizeY: 2.4
   isTweening: 0
   lineRenderer: {fileID: 0}
   LinePoint: {fileID: 6720988996495927206}
@@ -913,22 +930,22 @@ MonoBehaviour:
           w: 0.8516104
     - Position:
         x: -7
-        y: -3
+        y: -2.25
         z: 0
       TangentIn:
         x: -0
         y: -0
-        z: -0.13462912
+        z: -0.07071068
       TangentOut:
         x: 0
         y: 0
-        z: 0.13462912
+        z: 0.07071068
       Rotation:
         value:
-          x: 0.70265585
-          y: 0.07921266
-          z: -0.33450696
-          w: 0.62298083
+          x: 0.70375836
+          y: -0.06873265
+          z: -0.44903097
+          w: 0.54623365
     m_MetaData:
     - Mode: 0
       Tension: 0.5
@@ -1005,8 +1022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spline: {fileID: 0}
+  timeBetweenPop: 0.5
   moveSpeed: 0.6
-  distanceBetween: 0.05
+  distanceBetween: 0.07
+  distanceOffset: 0.02
   inputList: []
 --- !u!1 &6194490358926243173
 GameObject:
@@ -1158,7 +1177,7 @@ Transform:
   m_GameObject: {fileID: 6926273974573709305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.6, y: 0.75, z: 0}
+  m_LocalPosition: {x: -7.6000004, y: 0.75, z: 0}
   m_LocalScale: {x: 0.5, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1548,8 +1567,8 @@ Transform:
   m_GameObject: {fileID: 7213725876901238476}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.25, y: -1, z: 0}
-  m_LocalScale: {x: 9, y: 0.5, z: 1}
+  m_LocalPosition: {x: -3.75, y: -1, z: 0}
+  m_LocalScale: {x: 8, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6072360707582964262}

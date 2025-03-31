@@ -3,24 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
-    [HideInInspector] public ResourceController ResourceController;
-    [HideInInspector] public StatHandler StatHandler;
-    [HideInInspector] public Animator Animator;
-
     public PlayerStateMachine PlayerStateMachine;
 
-    private Queue<Skill> SkillQueue;
+    public IItem CurItem;
 
-    private void Awake()
+    private Coroutine DamageCoroutine;
+
+    protected override void Awake()
     {
+        base.Awake();
+        Animator = GetComponentInChildren<Animator>();
         ResourceController = GetComponent<ResourceController>();
         StatHandler = GetComponent<StatHandler>();
-        Animator = GetComponentInChildren<Animator>();
 
         PlayerStateMachine = new PlayerStateMachine(this);
         PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        ResourceController.OnDamageAction += DamageAction;
+        ResourceController.OnDieAction += DieAction;
     }
 
     private void Update()
@@ -35,7 +41,7 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
+            PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
             return;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -59,36 +65,39 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// 플레이어가 한 턴에 사용할 공격Skill 들을 추가.
+    /// BattleState로 전환.
     /// </summary>
-    /// <param name="selectedSkills">추가할 Skill의 List</param>
-    public void AddSkills(List<Skill> selectedSkills)
+    public void StartBattleTurn()
     {
-        foreach(Skill skill in selectedSkills)
-        {
-            SkillQueue.Enqueue(skill);
-        }
+        PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
     }
 
-    /// <summary>
-    /// AttackState로 전환.
-    /// </summary>
-    public void StartAttack()
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.TryGetComponent<IItem>(out item))
+    //    {
+    //        // this.CurItem = item;
+    //    }
+    //}
+
+    void DamageAction()
     {
-        PlayerStateMachine.ChangeState(PlayerStateMachine.AttackState);
+        if(DamageCoroutine != null)
+        {
+            StopCoroutine(DamageCoroutine);
+        }
+        DamageCoroutine = StartCoroutine(DamageAnimation());
     }
 
-    /// <summary>
-    /// SkillQueue에서 한 개의 Skill을 Dequeue하여 실행.
-    /// </summary>
-    /// <returns>실행 성공 여부를 반환</returns>
-    public bool ExecuteSkill()
+    void DieAction()
     {
-        if(SkillQueue.TryDequeue(out Skill skill))
-        {
-            skill.Use();
-            return true;
-        }
-        return false;
+        PlayerStateMachine.StartAnimation(PlayerStateMachine.DieAnimHash);
+    }
+
+    IEnumerator DamageAnimation()
+    {
+        PlayerStateMachine.StartAnimation(PlayerStateMachine.DamageAnimHash);
+        yield return null;
+        PlayerStateMachine.StopAnimation(PlayerStateMachine.DamageAnimHash);
     }
 }

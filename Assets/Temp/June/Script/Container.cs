@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Container : MonoBehaviour
 {
-    [SerializeField] float TimeBetweenPop;
+    ClawGame game;
+    [SerializeField][Range(0, 1)] float TimeBetweenPop;
     [SerializeField] List<GameObject> objs;
     Collider2D col;
+
+    public void Init(ClawGame game)
+    {
+        this.game = game;
+    }
 
     private void Start()
     {

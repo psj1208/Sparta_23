@@ -614,18 +614,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClawGame
       objectReference: {fileID: 0}
-    - target: {fileID: 6939509645710948373, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.6000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167619478682316331, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8167619478682316331, guid: 2d540e4d21570c94397b1636198eefbb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.75
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -662,6 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDontDestroy: 1
   Player: {fileID: 0}
+  Claw: {fileID: 0}
 --- !u!4 &1164333511
 Transform:
   m_ObjectHideFlags: 0
