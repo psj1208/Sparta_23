@@ -14,6 +14,14 @@ public class ItemSO : ScriptableObject, IItem
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] public bool stackable = true;
 
+    public ItemSO(string name, Sprite icon, bool stackable, int value)
+    {
+        this.itemName = name;
+        this.sprite = icon;
+        this.stackable = stackable;
+        this.value = value;
+    }
+
     public string ItemName => itemName;
     public void UseItem(Player player)//PlayerController player
     {
