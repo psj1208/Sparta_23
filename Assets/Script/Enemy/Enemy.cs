@@ -25,10 +25,13 @@ public class Enemy : Character
         DieAnimHash = Animator.StringToHash(dieParameterName);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         ResourceController.OnDamageAction += Damaged;
         ResourceController.OnDieAction += Die;
+
+        TurnManager.Instance.OnEnemyTurnStart += AttackOnce;
     }
 
 #if DEBUG
@@ -44,7 +47,7 @@ public class Enemy : Character
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            AttackOnce();
+            AttackOnce(GameManager.Instance.Player);
         }
     }
 #endif
@@ -52,10 +55,10 @@ public class Enemy : Character
     /// <summary>
     /// Enemy의 공격 함수
     /// </summary>
-    public void AttackOnce()
+    public void AttackOnce(Player player)
     {
         TriggerAnimation(AttackAnimHash);
-        // TODO : 플레이어에게 실질적 데미지 입히기
+        player.ResourceController.ChangeHealth(-StatHandler.GetStat(EStatType.Attack));
     }
 
     /// <summary>

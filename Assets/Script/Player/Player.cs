@@ -27,6 +27,8 @@ public class Player : Character
         base.Start();
         ResourceController.OnDamageAction += DamageAction;
         ResourceController.OnDieAction += DieAction;
+
+        TurnManager.Instance.OnPlayerTurnStart += StartBattleTurn;
     }
 
     private void Update()
@@ -67,9 +69,16 @@ public class Player : Character
     /// <summary>
     /// BattleState로 전환.
     /// </summary>
-    public void StartBattleTurn()
+    /// <param name="enemy">현재 상대하는 몬스터</param>
+    public void StartBattleTurn(List<Enemy> enemy)
     {
+        PlayerStateMachine.curEnemies = enemy;
         PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
+    }
+
+    public float GetAttackDamage()
+    {
+        return -StatHandler.GetStat(EStatType.Attack);
     }
 
     //private void OnTriggerEnter(Collider other)
@@ -96,8 +105,9 @@ public class Player : Character
 
     IEnumerator DamageAnimation()
     {
+        yield return new WaitForSeconds(0.5f);
         PlayerStateMachine.StartAnimation(PlayerStateMachine.DamageAnimHash);
         yield return null;
         PlayerStateMachine.StopAnimation(PlayerStateMachine.DamageAnimHash);
-    }
+    }    
 }

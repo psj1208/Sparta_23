@@ -36,7 +36,6 @@ public class ClawSpline : MonoBehaviour
     [SerializeField] private float distanceBetween;
     [SerializeField] private float distanceOffset;
     [SerializeField] List<SplineMove> inputList;
-    bool TurnStart;
     Coroutine curCourtine;
 
     private void Awake()
@@ -47,7 +46,6 @@ public class ClawSpline : MonoBehaviour
     private void Start()
     {
         curTimePop = 0;
-        TurnStart = false;
     }
 
     public void Init(ClawGame game)
@@ -62,8 +60,6 @@ public class ClawSpline : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //add하고 난 이후로 리스트 비었는지 검사 후에 리스트가 비었으면 턴 종료.
-        TurnStart = true;
         collision.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigid);
         inputList.Add(new SplineMove(collision.gameObject));
         CalculateT();

@@ -9,6 +9,8 @@ public class ClawGame : MonoBehaviour
     public Container container;
     public int clawCount;
 
+    private System.Action clawStartAction;
+
     private void Awake()
     {
         ClawCont = GetComponentInChildren<ClawControl>();
@@ -17,12 +19,14 @@ public class ClawGame : MonoBehaviour
         ClawCont.Init(this);
         ClawSpli.Init(this);
         container.Init(this);
+
+        clawStartAction = () => ClawStart();
     }
 
     private void Start()
     {
+
         clawCount = 0;
-        ClawStart(2);
     }
 
     public void ClawStart(int num = 1)
