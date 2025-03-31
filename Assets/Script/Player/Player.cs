@@ -103,10 +103,9 @@ public class Player : Character
 
     IEnumerator DamageAnimation()
     {
+        yield return new WaitForSeconds(0.5f);
         PlayerStateMachine.StartAnimation(PlayerStateMachine.DamageAnimHash);
         yield return null;
         PlayerStateMachine.StopAnimation(PlayerStateMachine.DamageAnimHash);
-    }
-
-    
+    }    
 }
