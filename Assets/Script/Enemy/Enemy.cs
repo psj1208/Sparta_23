@@ -30,6 +30,8 @@ public class Enemy : Character
         base.Start();
         ResourceController.OnDamageAction += Damaged;
         ResourceController.OnDieAction += Die;
+
+        TurnManager.Instance.OnEnemyTurnStart += AttackOnce;
     }
 
 #if DEBUG

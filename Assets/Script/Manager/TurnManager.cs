@@ -6,8 +6,8 @@ using UnityEngine;
 public class TurnManager : Singleton<TurnManager>
 {
 
-    public event Action OnPlayerTurnStart; // 플레이어 턴 시작 이벤트
-    public event Action OnEnemyTurnStart; // 적 턴 시작 이벤트
+    public event Action<List<Enemy>> OnPlayerTurnStart; // 플레이어 턴 시작 이벤트
+    public event Action<Player> OnEnemyTurnStart; // 적 턴 시작 이벤트
     public event Action OnClawMachineStart; // 뽑기 시작 이벤트
     public event Action OnTurnChanged; // 턴 변경 이벤트
 
