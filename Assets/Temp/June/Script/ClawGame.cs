@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClawGame : MonoBehaviour
 {
@@ -21,12 +22,36 @@ public class ClawGame : MonoBehaviour
         container.Init(this);
 
         clawStartAction = () => ClawStart();
+
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+            TurnManager.Instance.OnClawMachineStart += ClawCont.StartGame;
+        }
+        else if (scene.name == "DontDestroy")
+        {
+        }
+        else
+        {
+        }
+    }
+    
+    
     private void Start()
     {
-
-        ClawCont.StartGame(1);
         // clawCount = 0;
     }
 

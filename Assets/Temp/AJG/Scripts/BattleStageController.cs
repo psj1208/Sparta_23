@@ -22,6 +22,8 @@ public class BattleStageController : MonoBehaviour
     void SpawnPlayer(GameObject playerPrefab, Vector2 position)
     {
         GameObject playerInstance = Instantiate(playerPrefab, position, Quaternion.identity);
+        Player player = playerInstance.GetComponent<Player>();
+        GameManager.Instance.Player = player;
     }
 
     void SpawnEnemies(Vector2 center, int stageDifficulty)

@@ -101,7 +101,7 @@ public class ClawControl : MonoBehaviour
         lineRenderer.SetPosition(1, ClawParent.position);
         lineRenderer.positionCount = 2;
     }
-    public void StartGame(int count)
+    public void StartGame()
     {
         if (IsGameStart)
             return;

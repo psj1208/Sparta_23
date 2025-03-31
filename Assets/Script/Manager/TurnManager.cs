@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TurnManager : Singleton<TurnManager>
 {
-
     public event Action<List<Enemy>> OnPlayerTurnStart; // 플레이어 턴 시작 이벤트
     public event Action<Player> OnEnemyTurnStart; // 적 턴 시작 이벤트
     public event Action OnClawMachineStart; // 뽑기 시작 이벤트
@@ -14,7 +14,6 @@ public class TurnManager : Singleton<TurnManager>
 
     private ETurnState currentState;
     public List<Enemy> currentEnemies;
-
     
     private void OnEnable()
     {
@@ -31,7 +30,6 @@ public class TurnManager : Singleton<TurnManager>
         if (scene.name == "MainScene")
         {
             GetEnemyListFromStageManager();
-            StartClawMachine();
         }
         else if (scene.name == "DontDestroy")
         {
@@ -41,19 +39,19 @@ public class TurnManager : Singleton<TurnManager>
         }
     }
 
+    void Start()
+    {
+        Debug.Log("Starting Battle Stage");
+        StartClawMachine();
+    }
+    
     private void GetEnemyListFromStageManager()
     {
         currentEnemies = StageManager.Instance.battleStageController.spawnedEnemies;
     }
-
-    private void Start()
-    {
-        StartClawMachine();
-    }
     
     private void StartPlayerTurn()
     {
-        Debug.Log(currentEnemies);
         currentState = ETurnState.PlayerTurn;
         OnTurnChanged?.Invoke();
         OnPlayerTurnStart?.Invoke(currentEnemies);
@@ -85,6 +83,7 @@ public class TurnManager : Singleton<TurnManager>
 
     private void StartClawMachine()
     {
+        Debug.Log("Starting Claw Machine");
         currentState = ETurnState.ClawTurn;
         OnTurnChanged?.Invoke();
         OnClawMachineStart?.Invoke();
@@ -94,6 +93,7 @@ public class TurnManager : Singleton<TurnManager>
     {
         if (currentState != ETurnState.PlayerTurn) return;
         OnTurnChanged?.Invoke();
+        GameManager.Instance.Player.PlayerStateMachine.ChangeState(GameManager.Instance.Player.PlayerStateMachine.IdleState);
         StartEnemyTurn();
     }
 
