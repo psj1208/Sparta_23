@@ -25,8 +25,9 @@ public class Enemy : Character
         DieAnimHash = Animator.StringToHash(dieParameterName);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         ResourceController.OnDamageAction += Damaged;
         ResourceController.OnDieAction += Die;
     }
