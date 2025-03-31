@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UITop : UIBase
 {
@@ -18,6 +19,6 @@ public class UITop : UIBase
 
     public void OnPauseClick()
     {
-        UIManager.Show<PausePopup>();
+        UIManager.Show<UIPopup>();
     }
 }
