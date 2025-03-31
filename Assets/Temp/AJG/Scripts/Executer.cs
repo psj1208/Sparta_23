@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Executer : MonoBehaviour
 {
-    public SceneLoader sceneLoader;
     public LayerMask stageItemLayer;
     
     // 딕셔너리로 포인트별로 값을 저장해두고 StageManager에서 사용한다.
@@ -17,9 +16,16 @@ public class Executer : MonoBehaviour
     //     Destroy(other.gameObject);
     // }
     //
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            StageManager.Instance.SelectStages();
+        }
+    }
+    
     private void Start()
     {
-        // 참조 복사
         StageManager.Instance.stagePoints = stagePoints;
     }
 

@@ -37,6 +37,7 @@ public class ClawSpline : MonoBehaviour
     [SerializeField] private float distanceOffset;
     [SerializeField] List<SplineMove> inputList;
     bool TurnStart;
+    Coroutine curCourtine;
 
     private void Awake()
     {
@@ -54,13 +55,6 @@ public class ClawSpline : MonoBehaviour
         this.game = game;
     }
 
-    private void Update()
-    {
-        if (TurnStart == false)
-            return;
-        if (inputList.Count <= 0)
-            SplineEnd();
-    }
     private void LateUpdate()
     {
         if (inputList.Count > 0)
@@ -114,7 +108,8 @@ public class ClawSpline : MonoBehaviour
 
     public void SplineEnd()
     {
-
+        if (curCourtine == null) 
+            curCourtine = StartCoroutine(isEnd());
     }
 
     IEnumerator isEnd()
@@ -123,5 +118,10 @@ public class ClawSpline : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         while (inputList.Count > 0)
             yield return null;
+        game.ClawCont.CanMove = true;
+        game.clawCount--;
+        if(game.clawCount <= 0)
+            game.ClawCont.GameEnd();
+        curCourtine = null;
     }
 }

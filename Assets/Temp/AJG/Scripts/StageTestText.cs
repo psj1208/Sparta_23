@@ -11,6 +11,6 @@ public class StageTestText : MonoBehaviour
 
     void Start()
     {
-        text.text = StageManager.Instance.currentStage.ToString();
+        text.text = StageManager.Instance.currentRound.ToString();
     }
 }
