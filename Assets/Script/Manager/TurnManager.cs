@@ -12,7 +12,7 @@ public class TurnManager : Singleton<TurnManager>
     public event Action OnTurnChanged; // 턴 변경 이벤트
 
     private ETurnState currentState;
-
+    private List<Enemy> currentEnemies;
 
     private void Start()
     {
@@ -23,14 +23,14 @@ public class TurnManager : Singleton<TurnManager>
     {
         currentState = ETurnState.PlayerTurn;
         OnTurnChanged?.Invoke();
-        //OnPlayerTurnStart?.Invoke();
+        OnPlayerTurnStart?.Invoke(currentEnemies);
     }
 
     private void StartEnemyTurn()
     {
         currentState = ETurnState.EnemyTurn;
         OnTurnChanged?.Invoke();
-        //OnEnemyTurnStart?.Invoke();
+        OnEnemyTurnStart?.Invoke(GameManager.Instance.Player);
 
         StartCoroutine(EnemyAction());
     }
