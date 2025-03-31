@@ -34,14 +34,9 @@ public class UIMain : UIBase
         if (obj.GetType() == typeof(ItemSO))
         {
             go = Instantiate(slotPrefab, itemSlotList);
-            if (go != null)
-            {
-                ItemSlot slot = go.GetComponent<ItemSlot>();
-                slot.SetIcon(obj);
-                slot.SetItemCount(count);
-
-                ItemInventoryManager.Instance.RegisterItemSlot(slot);
-            }
+            ItemSlot slot = go.GetComponent<ItemSlot>();
+            slot.SetIcon(obj);
+            slot.SetItemCount(count);
         }
     }
 }
