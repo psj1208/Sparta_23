@@ -100,5 +100,4 @@ public class Player : Character
         yield return null;
         PlayerStateMachine.StopAnimation(PlayerStateMachine.DamageAnimHash);
     }
-    
 }
