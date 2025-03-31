@@ -10,6 +10,6 @@ public class StageTestButton : MonoBehaviour
 
     private void Start()
     {
-        testButton.onClick.AddListener(() => StageManager.Instance.ClearStage());
+        // testButton.onClick.AddListener(() => StageManager.Instance.ClearStage());
     }
 }
