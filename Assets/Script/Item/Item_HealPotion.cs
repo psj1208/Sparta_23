@@ -5,17 +5,11 @@ using UnityEngine;
 public class Item_HealPotion : MonoBehaviour, IItem
 {
     public string ItemName { get; }
-    private float baseDamage;
+    private float baseValue;
 
     public void UseItem(Player player)
     {
-        foreach(Enemy enemy in player.PlayerStateMachine.curEnemies)
-        {
-            if(enemy != null)
-            {
-                player.PlayerStateMachine.StartAnimation(player.PlayerStateMachine.AttackAnimHash);
-                enemy?.ResourceController.ChangeHealth(player.PlayerStateMachine.Player.GetAttackDamage() + baseDamage);
-            }
-        }
+        if (player == null)
+            player.ResourceController.ChangeHealth(baseValue);
     }
 }

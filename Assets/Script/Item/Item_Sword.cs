@@ -14,7 +14,7 @@ public class Item_Sword : MonoBehaviour, IItem
             if(enemy != null)
             {
                 player.PlayerStateMachine.StartAnimation(player.PlayerStateMachine.AttackAnimHash);
-                enemy?.ResourceController.ChangeHealth(player.PlayerStateMachine.Player.GetAttackDamage() + baseDamage);
+                enemy?.ResourceController.ChangeHealth(-(player.PlayerStateMachine.Player.StatHandler.GetTotalAttack() + baseDamage));
             }
         }
     }

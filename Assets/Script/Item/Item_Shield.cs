@@ -9,13 +9,6 @@ public class Item_Shield : MonoBehaviour, IItem
 
     public void UseItem(Player player)
     {
-        foreach(Enemy enemy in player.PlayerStateMachine.curEnemies)
-        {
-            if(enemy != null)
-            {
-                player.PlayerStateMachine.StartAnimation(player.PlayerStateMachine.AttackAnimHash);
-                enemy?.ResourceController.ChangeHealth(player.PlayerStateMachine.Player.GetAttackDamage() + baseDamage);
-            }
-        }
+
     }
 }
