@@ -8,10 +8,10 @@ using UnityEngine;
 public class ItemInventoryManager : Singleton<ItemInventoryManager>
 {
     public Dictionary<ItemSO, int> itemDeck = new Dictionary<ItemSO, int>(); 
-    public List<SkillSO> skills = new List<SkillSO>();
+    public List<ASkill> skills = new List<ASkill>();
     public ItemSpawner itemSpawner;
     [SerializeField] private List<ItemSO> startingItems;
-    [SerializeField] private List<SkillSO> startingSkills;
+    [SerializeField] private List<ASkill> startingSkills;
     public UIMain uiMain;
     public event Action OnInventoryInitialized;
 
@@ -68,7 +68,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         UpdateInventoryUI();
     }
 
-    public void AddSkill(SkillSO skill)
+    public void AddSkill(ASkill skill)
     {
         if (skill == null || skills.Contains(skill)) return;
         skills.Add(skill);
@@ -87,7 +87,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         UpdateInventoryUI();
     }
 
-    public void RemoveSkill(SkillSO skill)
+    public void RemoveSkill(ASkill skill)
     {
         if (skill == null || !skills.Contains(skill)) return;
         skills.Remove(skill);
@@ -111,7 +111,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         uiMain.ClearSKillSlot();
         foreach (var skill in skills)
         {
-            uiMain.AddSkillSlot(skill);
+            uiMain.AddSkillSlot(skill.skillData);
         }
     }
 }
