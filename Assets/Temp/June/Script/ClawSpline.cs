@@ -116,6 +116,13 @@ public class ClawSpline : MonoBehaviour
             yield return null;
         if (TurnManager.IsInstance)
             TurnManager.Instance.EndPlayerTurn();
+        if (StageManager.IsInstance)
+        {
+            if (StageManager.Instance.GetCurrentStageIndex() == -1)
+            {
+                StageManager.Instance.SelectStages();
+            }
+        }
         game.ClawCont.CanMove = true;
         game.clawCount--;
         if(game.clawCount <= 0)
