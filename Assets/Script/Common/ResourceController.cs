@@ -34,11 +34,12 @@ public class ResourceController : MonoBehaviour
             float remainDefence = originDefense - (-amount);
             if(remainDefence >= 0)
             {
-                character.StatHandler.ModifyStat(EStatType.Defense, (remainDefence - originDefense));
+                character.StatHandler.ModifyStat(EStatType.Defense, amount);
                 amount = 0;
             }
             else
             {
+                character.StatHandler.ModifyStat(EStatType.Defense, -originDefense);
                 amount = remainDefence;
             }
 

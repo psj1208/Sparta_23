@@ -50,7 +50,7 @@ public class BattleStageController : MonoBehaviour
             GameObject obj = Instantiate(selectedEnemy.prefab, center, Quaternion.identity);
             Enemy enemy = obj.GetComponent<Enemy>();
             enemy.BattleStageController = this;
-            enemy.StatHandler.AddStageDifficulty(StageManager.Instance.currentRound * 2);
+            enemy.StatHandler.AddStageDifficulty(StageManager.Instance.currentRound * 5);
             spawnedEnemies.Add(enemy);
         }
         ArrangeEnemies(spawnedEnemies, center);

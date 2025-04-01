@@ -105,6 +105,6 @@ public class Enemy : Character
 
     void TriggerAnimation(int animationHash)
     {
-        Animator.SetTrigger(animationHash);
+        Animator?.SetTrigger(animationHash);
     }
 }

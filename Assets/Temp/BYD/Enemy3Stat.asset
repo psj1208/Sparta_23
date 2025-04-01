@@ -17,6 +17,6 @@ MonoBehaviour:
   - StatType: 0
     Value: 150
   - StatType: 1
-    Value: 5
+    Value: 15
   - StatType: 2
-    Value: 4
+    Value: 8
