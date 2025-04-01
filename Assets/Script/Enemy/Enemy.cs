@@ -31,6 +31,7 @@ public class Enemy : Character
         ResourceController.OnDamageAction += Damaged;
         ResourceController.OnDieAction += Die;
 
+        TurnManager.Instance.OnEnemyTurnStart -= AttackOnce;
         TurnManager.Instance.OnEnemyTurnStart += AttackOnce;
     }
 

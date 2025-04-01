@@ -70,8 +70,8 @@ public class ClawControl : MonoBehaviour
     {
         IsGameStart = false;
         CanMove = false;
-        InitialPos = transform.position;
-        startPos = InitialPos + Vector3.down * startDownDistance;
+        // InitialPos = transform.position;
+        // startPos = InitialPos + Vector3.down * startDownDistance;
         leftPosX = transform.position.x - leftEnd;
         rightPosX = transform.position.x - rightEnd;
         leftHand.rotation = Quaternion.Euler(0, 0, -closeRot);
@@ -105,6 +105,8 @@ public class ClawControl : MonoBehaviour
     {
         if (IsGameStart)
             return;
+        InitialPos = transform.position;
+        startPos = InitialPos + Vector3.down * startDownDistance;
         transform.DOMove(startPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true)
             .OnComplete(()=>
             {

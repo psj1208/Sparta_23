@@ -28,6 +28,7 @@ public class Player : Character
         ResourceController.OnDamageAction += DamageAction;
         ResourceController.OnDieAction += DieAction;
 
+        TurnManager.Instance.OnPlayerTurnStart -= StartBattleTurn;
         TurnManager.Instance.OnPlayerTurnStart += StartBattleTurn;
     }
 
