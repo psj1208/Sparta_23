@@ -115,7 +115,10 @@ public class ClawSpline : MonoBehaviour
         while (inputList.Count > 0)
             yield return null;
         if (TurnManager.IsInstance)
+        {
+            yield return new WaitForSeconds(2.0f);
             TurnManager.Instance.EndPlayerTurn();
+        }
         if (StageManager.IsInstance)
         {
             if (StageManager.Instance.GetCurrentStageIndex() == -1)
@@ -126,7 +129,9 @@ public class ClawSpline : MonoBehaviour
         game.ClawCont.CanMove = true;
         game.clawCount--;
         if(game.clawCount <= 0)
+        {
             game.ClawCont.GameEnd();
+        }
         curCourtine = null;
     }
 }

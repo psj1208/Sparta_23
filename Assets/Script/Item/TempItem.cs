@@ -9,5 +9,6 @@ public class TempItem : MonoBehaviour, IItem
     public void UseItem(Player player)
     {
         player.StatHandler.ModifyStat(EStatType.Attack, value, true, 0);
+        Destroy(gameObject);
     }
 }
