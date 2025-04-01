@@ -25,10 +25,13 @@ public class ItemSlot : MonoBehaviour
     [SerializeField]
     private ItemSO itemSO;
 
-    public void SetIcon(ItemSO item)
+    public void SetIcon(ScriptableObject obj)
     {
-        icon.sprite = item.sprite;
-
+        if (obj is ItemSO item) // obj를 ItemSO로 캐스팅
+        {
+            icon.sprite = item.sprite;
+            icon.color = Color.white; // 아이콘을 보이게 설정
+        }
         icon.color = Color.white;           //아이템 이미지 부분의 알파값을 0으로 설정하여 알파값을 255로 되돌려줌
     }
 

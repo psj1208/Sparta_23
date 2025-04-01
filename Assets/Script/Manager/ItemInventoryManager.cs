@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,9 @@ using UnityEngine;
 
 public class ItemInventoryManager : Singleton<ItemInventoryManager>
 {
-    public List<ItemSO> itemDeck = new List<ItemSO>();  // The deck of items the player holds
-    [SerializeField] private List<ItemSO> startingItems; // The default items the player starts with
+    public Dictionary<ItemSO, int> itemDeck = new Dictionary<ItemSO, int>(); 
+    [SerializeField] private List<ItemSO> startingItems;
+    public event Action OnInventoryInitialized;
 
     private void Start()
     {
@@ -16,97 +18,77 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
 
     private IEnumerator InitializeInventory()
     {
-        // Wait until UIMain is available (instantiated)
         while (UIManager.Get<UIMain>() == null)
         {
-            yield return null; // Wait until UIMain is instantiated
+            yield return null;
         }
-
-        // UIMain is now ready, initialize the inventory
-        UIMain uiMain = UIManager.Get<UIMain>();
-
-        // Add default starting items to the inventory
+        
         foreach (var item in startingItems)
         {
             AddItem(item);
         }
-
-        // Update the UI to reflect the items in the inventory
+        
         UpdateInventoryUI();
+
+        OnInventoryInitialized?.Invoke();
+    }
+
+    public Dictionary<ItemSO, int> GetInventoryItems()
+    {
+        return new Dictionary<ItemSO, int>(itemDeck);
     }
 
     public void AddItem(ItemSO item)
     {
-        // Check if the item is already in the deck (if stackable, increase count)
-        if (item.stackable && itemDeck.Contains(item))
+        if (item == null) return;
+
+        if (item.stackable)
         {
-            // Increase the count if the item is stackable
-            GetItemCount(item);
+            if (itemDeck.ContainsKey(item))
+                itemDeck[item]++;
+            else
+                itemDeck[item] = 1;
         }
         else
         {
-            // Add the item to the deck if not already there
-            itemDeck.Add(item);
+            itemDeck[item] = 1;
         }
 
-        // Update the UI
-        UIMain uiMain = UIManager.Get<UIMain>();
-        if (uiMain != null)
-        {
-            uiMain.AddSlot(item, GetItemCount(item));  // Add slot for this item with its current count
-        }
+        UpdateInventoryUI();
     }
 
-
-    private int GetItemCount(ItemSO item)
+    public void RemoveItem(ItemSO item, int amount = 1)
     {
-        int count = 0;
+        if (item == null || !itemDeck.ContainsKey(item)) return;
 
-        // Loop through the deck and count how many of the same item there are
-        foreach (var deckItem in itemDeck)
-        {
-            if (deckItem == item)
-            {
-                count++;
-            }
-        }
+        itemDeck[item] -= amount;
 
-        return count;
+        if (itemDeck[item] <= 0)
+            itemDeck.Remove(item);
+
+        UpdateInventoryUI();
     }
 
     private void UpdateInventoryUI()
     {
         UIMain uiMain = UIManager.Get<UIMain>();
-        if (uiMain != null)
-        {
-            // Clear all existing slots in the UI first
-            foreach (Transform child in uiMain.itemSlotList)
-            {
-                Destroy(child.gameObject);
-            }
+        if (uiMain == null) return;
 
-            // Now add all items from the deck to the UI
-            foreach (var item in itemDeck)
-            {
-                uiMain.AddSlot(item, GetItemCount(item));
-            }
+        uiMain.ClearSlots();
+
+        foreach (var item in itemDeck)
+        {
+            uiMain.AddSlot(item.Key, item.Value);
         }
     }
 
-    public int GetItemCount()
+    public int GetItemCount(ItemSO item)
     {
-        return itemDeck.Count;
+        return itemDeck.ContainsKey(item) ? itemDeck[item] : 0;
     }
 
-    public ItemSO GetItemAtIndex(int index)
+    public List<ItemSO> GetAllItems()
     {
-        if (index >= 0 && index < itemDeck.Count)
-        {
-            return itemDeck[index];
-        }
-
-        Debug.LogError("Item index out of range");
-        return null;
+        return new List<ItemSO>(itemDeck.Keys);
     }
-
 }

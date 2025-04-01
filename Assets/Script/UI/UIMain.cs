@@ -27,34 +27,24 @@ public class UIMain : UIBase
         UIManager.Hide<UIMain>();
     }
 
-    public void AddSlot(ItemSO item, int count)
+    public void AddSlot(ScriptableObject obj, int count)
     {
         GameObject go = null;
 
-        if (item.GetType() == typeof(ItemSO))
+        if (obj.GetType() == typeof(ItemSO))
         {
-            go = Instantiate(slotPrefab, itemSlotList); // Instantiate a new slot
-
-            if (go != null)
-            {
-                ItemSlot slot = go.GetComponent<ItemSlot>();
-
-                // Debugging the item and count
-                Debug.Log("Adding item: " + item.name + " with count: " + count);
-
-                slot.SetIcon(item); // Set the item sprite
-                slot.SetItemCount(count); // Set the item count
-
-            }
-            else
-            {
-                Debug.LogError("Failed to instantiate slotPrefab!");
-            }
+            go = Instantiate(slotPrefab, itemSlotList);
+            ItemSlot slot = go.GetComponent<ItemSlot>();
+            slot.SetIcon(obj);
+            slot.SetItemCount(count);
         }
-        else
+    }
+
+    public void ClearSlots()
+    {
+        foreach (Transform child in itemSlotList)
         {
-            Debug.LogError("The object is not of type ItemSO!");
+            Destroy(child.gameObject);
         }
-
     }
 }
