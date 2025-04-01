@@ -15,7 +15,7 @@ public class StageItemGenerator : MonoBehaviour
         StartStageItemGenerate(generateAmount);
     }
 
-    public void StartStageItemGenerate(int generateAmount)
+    public void StartStageItemGenerate(int generateAmount = 5)
     {
         for (int i = 0; i < generateAmount; i++)
         {

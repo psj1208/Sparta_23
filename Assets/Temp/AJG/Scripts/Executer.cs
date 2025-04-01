@@ -43,7 +43,6 @@ public class Executer : MonoBehaviour
                 {
                     stagePoints.Add(stageItem.data.stageType, stageItem.point);
                 }
-                Destroy(other.gameObject);
             }
         }
     }
