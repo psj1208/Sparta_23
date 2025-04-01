@@ -5,11 +5,14 @@ using UnityEngine;
 public class Item_HealPotion : MonoBehaviour, IItem
 {
     public string ItemName { get; }
-    private float baseValue;
+    public float baseValue;
 
     public void UseItem(Player player)
     {
-        if (player == null)
+        if (player != null)
+        {
+            Debug.Log(baseValue);
             player.ResourceController.ChangeHealth(baseValue);
+        }
     }
 }

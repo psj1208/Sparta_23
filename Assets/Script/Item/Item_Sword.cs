@@ -5,10 +5,11 @@ using UnityEngine;
 public class Item_Sword : MonoBehaviour, IItem
 {
     public string ItemName { get; }
-    private float baseDamage;
+    public float baseDamage;
 
     public void UseItem(Player player)
     {
+        Debug.Log(baseDamage);
         foreach(Enemy enemy in player.PlayerStateMachine.curEnemies)
         {
             if(enemy != null)

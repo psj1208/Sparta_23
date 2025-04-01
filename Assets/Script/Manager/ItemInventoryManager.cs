@@ -23,7 +23,6 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
     
     public void InitializeInventory()
     {
-        Debug.Log("Initialize");
         uiMain = UIManager.Get<UIMain>();
         UpdateInventoryUI();
         OnInventoryInitialized?.Invoke();
