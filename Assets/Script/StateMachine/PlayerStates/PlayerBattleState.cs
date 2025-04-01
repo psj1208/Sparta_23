@@ -40,7 +40,7 @@ public class PlayerBattleState : BaseState
             // 실질적 데미지 적용
             foreach(Enemy enemy in playerStateMachine.curEnemies)
             {
-                enemy.ResourceController.ChangeHealth(playerStateMachine.Player.GetAttackDamage());
+                enemy?.ResourceController.ChangeHealth(playerStateMachine.Player.GetAttackDamage());
             }
         }
 
