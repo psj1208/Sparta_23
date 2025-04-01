@@ -32,7 +32,8 @@ public class ClawGame : MonoBehaviour
 
     private void OnDisable()    
     {
-        TurnManager.Instance.OnClawMachineStart -= ClawCont.StartGame;
+        if (TurnManager.IsInstance)
+            TurnManager.Instance.OnClawMachineStart -= ClawCont.StartGame;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -42,11 +43,9 @@ public class ClawGame : MonoBehaviour
         {
             TurnManager.Instance.OnClawMachineStart += ClawCont.StartGame;
         }
-        else if (scene.name == "DontDestroy")
+        else if (scene.name == "StageSelectScene")
         {
-        }
-        else
-        {
+            ClawCont.StartGame();
         }
     }
     

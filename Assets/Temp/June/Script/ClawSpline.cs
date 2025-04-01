@@ -114,7 +114,8 @@ public class ClawSpline : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         while (inputList.Count > 0)
             yield return null;
-        TurnManager.Instance.EndPlayerTurn();
+        if (TurnManager.IsInstance)
+            TurnManager.Instance.EndPlayerTurn();
         game.ClawCont.CanMove = true;
         game.clawCount--;
         if(game.clawCount <= 0)
