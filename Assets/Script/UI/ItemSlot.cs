@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,12 +25,9 @@ public class ItemSlot : MonoBehaviour
     [SerializeField]
     private ItemSO itemSO;
 
-    public void SetIcon(ScriptableObject obj)
+    public void SetIcon(ItemSO item)
     {
-        if (obj.GetType() == typeof(ItemSO))
-        {
-            icon.sprite = itemSO.sprite;
-        }
+        icon.sprite = item.sprite;
 
         icon.color = Color.white;           //아이템 이미지 부분의 알파값을 0으로 설정하여 알파값을 255로 되돌려줌
     }

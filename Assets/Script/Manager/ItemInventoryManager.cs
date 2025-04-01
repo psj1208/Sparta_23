@@ -6,92 +6,107 @@ using UnityEngine;
 
 public class ItemInventoryManager : Singleton<ItemInventoryManager>
 {
-    public int maxStackedItems = 100;
-    public ItemSlot[] itemSlots;
-    public GameObject inventoryItemPrefab;
-
-    [SerializeField] private List<ItemSO> startingItems;
+    public List<ItemSO> itemDeck = new List<ItemSO>();  // The deck of items the player holds
+    [SerializeField] private List<ItemSO> startingItems; // The default items the player starts with
 
     private void Start()
     {
-        itemSlots = FindObjectsOfType<ItemSlot>(); // 🔹 자동으로 모든 ItemSlot 찾기
-        AddStartingItems();
+        StartCoroutine(InitializeInventory());
     }
 
-    private void AddStartingItems()
+    private IEnumerator InitializeInventory()
     {
-        UIMain uiMain = UIManager.Get<UIMain>();
-        if (uiMain == null) return;
+        // Wait until UIMain is available (instantiated)
+        while (UIManager.Get<UIMain>() == null)
+        {
+            yield return null; // Wait until UIMain is instantiated
+        }
 
+        // UIMain is now ready, initialize the inventory
+        UIMain uiMain = UIManager.Get<UIMain>();
+
+        // Add default starting items to the inventory
         foreach (var item in startingItems)
         {
             AddItem(item);
-            uiMain.AddSlot(item, 1);
         }
 
+        // Update the UI to reflect the items in the inventory
         UpdateInventoryUI();
     }
 
-    public void UpdateInventoryUI()
+    public void AddItem(ItemSO item)
+    {
+        // Check if the item is already in the deck (if stackable, increase count)
+        if (item.stackable && itemDeck.Contains(item))
+        {
+            // Increase the count if the item is stackable
+            GetItemCount(item);
+        }
+        else
+        {
+            // Add the item to the deck if not already there
+            itemDeck.Add(item);
+        }
+
+        // Update the UI
+        UIMain uiMain = UIManager.Get<UIMain>();
+        if (uiMain != null)
+        {
+            uiMain.AddSlot(item, GetItemCount(item));  // Add slot for this item with its current count
+        }
+    }
+
+
+    private int GetItemCount(ItemSO item)
+    {
+        int count = 0;
+
+        // Loop through the deck and count how many of the same item there are
+        foreach (var deckItem in itemDeck)
+        {
+            if (deckItem == item)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private void UpdateInventoryUI()
     {
         UIMain uiMain = UIManager.Get<UIMain>();
-        if (uiMain == null) return;
-
-        foreach (var slot in itemSlots)
+        if (uiMain != null)
         {
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null)
+            // Clear all existing slots in the UI first
+            foreach (Transform child in uiMain.itemSlotList)
             {
-                uiMain.AddSlot(itemInSlot.item, itemInSlot.count);
+                Destroy(child.gameObject);
+            }
+
+            // Now add all items from the deck to the UI
+            foreach (var item in itemDeck)
+            {
+                uiMain.AddSlot(item, GetItemCount(item));
             }
         }
     }
 
-    public void RegisterItemSlot(ItemSlot slot)
+    public int GetItemCount()
     {
-        List<ItemSlot> slotList = itemSlots.ToList();
-        slotList.Add(slot);
-        itemSlots = slotList.ToArray();
+        return itemDeck.Count;
     }
 
-    public bool AddItem(ItemSO item)
+    public ItemSO GetItemAtIndex(int index)
     {
-        for (int i = 0; i < itemSlots.Length; i++)
+        if (index >= 0 && index < itemDeck.Count)
         {
-            ItemSlot slot = itemSlots[i];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.count < maxStackedItems && itemInSlot.item.stackable == true)
-            {
-                itemInSlot.count++;
-                itemInSlot.RefreshCount();
-
-                UIMain uiMain = UIManager.Get<UIMain>();
-                if (uiMain != null) uiMain.AddSlot(item, itemInSlot.count);
-                return true;
-            }
+            return itemDeck[index];
         }
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            ItemSlot slot = itemSlots[i];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot == null)
-            {
-                SpawnNewItem(item, slot);
 
-                // 🔹 UI 업데이트
-                UIMain uiMain = UIManager.Get<UIMain>();
-                if (uiMain != null) uiMain.AddSlot(item, 1);
-
-                return true;
-            }
-        }
-        return false;
+        Debug.LogError("Item index out of range");
+        return null;
     }
 
-    void SpawnNewItem (ItemSO item, ItemSlot slot)
-    {
-        GameObject newItemGO = Instantiate(inventoryItemPrefab, slot.transform);
-        InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
-        inventoryItem.InitialiseItem(item);
-    }
 }
