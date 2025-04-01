@@ -110,11 +110,21 @@ public class ClawSplinePhysics : MonoBehaviour
 
     IEnumerator isEnd()
     {
-        //2초 뒤에 리스트가 비었는지 검사
-        yield return new WaitForSeconds(2.0f);
-        Debug.Log("검사 시작");
         while (inputList.Count > 0)
-            yield return new WaitForFixedUpdate();
+            yield return null;
+        yield return new WaitForSeconds(1.0f);
+        if (TurnManager.IsInstance)
+        {
+            yield return new WaitForSeconds(2.0f);
+            TurnManager.Instance.EndPlayerTurn();
+        }
+        if (StageManager.IsInstance)
+        {
+            if (StageManager.Instance.GetCurrentStageIndex() == -1)
+            {
+                StageManager.Instance.SelectStages();
+            }
+        }
         game.ClawCont.CanMove = true;
         game.clawCount--;
         if (game.clawCount <= 0)

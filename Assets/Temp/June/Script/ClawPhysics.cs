@@ -280,10 +280,13 @@ public class ClawPhysics : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+#if UNITY_EDITOR
+        if (Application.isPlaying) return;
         Vector2 boxSize = new Vector2(boxSizeX, boxSizeY);
         Gizmos.DrawWireCube(transform.position, boxSize);
         Gizmos.DrawWireCube(transform.position + Vector3.down * startDownDistance, boxSize);
         Gizmos.DrawWireCube(transform.position + Vector3.down * startDownDistance + Vector3.left * RightEnd, boxSize);
         Gizmos.DrawWireCube(transform.position + Vector3.down * startDownDistance + Vector3.left * LeftEnd, boxSize);
+#endif
     }
 }
