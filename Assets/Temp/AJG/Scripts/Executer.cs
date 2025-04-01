@@ -16,13 +16,6 @@ public class Executer : MonoBehaviour
     //     Destroy(other.gameObject);
     // }
     //
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StageManager.Instance.SelectStages();
-        }
-    }
     
     private void Start()
     {
@@ -51,7 +44,6 @@ public class Executer : MonoBehaviour
                     stagePoints.Add(stageItem.data.stageType, stageItem.point);
                 }
 
-                Destroy(other.gameObject);
             }
         }
     }
