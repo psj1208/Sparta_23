@@ -30,7 +30,18 @@ public class ResourceController : MonoBehaviour
     {
         if (amount < 0)
         {
-            amount += character.StatHandler.GetStat(EStatType.Defense);
+            float originDefense = character.StatHandler.GetStat(EStatType.Defense);
+            float remainDefence = originDefense - (-amount);
+            if(remainDefence >= 0)
+            {
+                character.StatHandler.ModifyStat(EStatType.Defense, (remainDefence - originDefense));
+                amount = 0;
+            }
+            else
+            {
+                amount = remainDefence;
+            }
+
             amount = amount > 0 ? 0 : amount;
             OnDamageAction?.Invoke();
         }
