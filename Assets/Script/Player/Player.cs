@@ -30,6 +30,11 @@ public class Player : Character
 
         TurnManager.Instance.OnPlayerTurnStart -= StartBattleTurn;
         TurnManager.Instance.OnPlayerTurnStart += StartBattleTurn;
+
+        StatHandler.OnAtkUpdate += CharacterStatUI.HpBar.UpdateAdditionalAtk;
+        StatHandler.OnDefUpdate += CharacterStatUI.HpBar.UpdateShield;
+        StatHandler.OnAtkUpdate((int)StatHandler.GetStat(EStatType.Attack));
+        StatHandler.OnDefUpdate((int)StatHandler.GetStat(EStatType.Defense));
     }
 
     private void Update()

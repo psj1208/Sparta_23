@@ -37,6 +37,11 @@ public class Enemy : Character
 
         TurnManager.Instance.OnEnemyTurnStart -= AttackOnce;
         TurnManager.Instance.OnEnemyTurnStart += AttackOnce;
+
+        StatHandler.OnAtkUpdate += CharacterStatUI.HpBar.UpdateAdditionalAtk;
+        StatHandler.OnDefUpdate += CharacterStatUI.HpBar.UpdateShield;
+        StatHandler.OnAtkUpdate((int)StatHandler.GetStat(EStatType.Attack));
+        StatHandler.OnDefUpdate((int)StatHandler.GetStat(EStatType.Defense));
     }
 
 #if DEBUG
