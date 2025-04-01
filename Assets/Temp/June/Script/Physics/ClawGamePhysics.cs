@@ -17,9 +17,6 @@ public class ClawGamePhysics : MonoBehaviour
         ClawCont = GetComponentInChildren<ClawPhysics>();
         ClawSpli = GetComponentInChildren<ClawSplinePhysics>();
         container = GetComponentInChildren<ContainerPhyscis>();
-        ClawCont.Init(this);
-        ClawSpli.Init(this);
-        container.Init(this);
 
         clawStartAction = () => ClawStart();
     }
@@ -50,6 +47,9 @@ public class ClawGamePhysics : MonoBehaviour
 
     private void Start()
     {
+        ClawCont.Init(this);
+        ClawSpli.Init(this);
+        container.Init(this);
         clawCount = 0;
     }
 

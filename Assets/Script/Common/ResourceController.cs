@@ -28,6 +28,13 @@ public class ResourceController : MonoBehaviour
 
     public void ChangeHealth(float amount)
     {
+        if (amount < 0)
+        {
+            amount += character.StatHandler.GetStat(EStatType.Defense);
+            amount = amount > 0 ? 0 : amount;
+            OnDamageAction?.Invoke();
+        }
+
         CurrentHealth += amount;
         onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
 
@@ -43,11 +50,6 @@ public class ResourceController : MonoBehaviour
             onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
             // TODO : GameOver
             return;
-        }
-
-        if (amount < 0)
-        {
-            OnDamageAction?.Invoke();
         }
     }
 
