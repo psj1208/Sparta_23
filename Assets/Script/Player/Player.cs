@@ -82,11 +82,6 @@ public class Player : Character
         PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
     }
 
-    public float GetAttackDamage()
-    {
-        return -StatHandler.GetStat(EStatType.Attack);
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.gameObject.name);

@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerBattleState : BaseState
 {
     private PlayerStateMachine playerStateMachine;
+    private StatHandler playerStatHandler;
 
     public PlayerBattleState(BaseStateMachine stateMachine) : base(stateMachine)
     {
         playerStateMachine = stateMachine as PlayerStateMachine;
+        playerStatHandler = playerStateMachine.Player.StatHandler;
     }
 
     public override void Enter()
@@ -42,7 +44,7 @@ public class PlayerBattleState : BaseState
                 if(enemy != null)
                 {
                     playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
-                    enemy?.ResourceController.ChangeHealth(playerStateMachine.Player.GetAttackDamage());
+                    enemy?.ResourceController.ChangeHealth(-playerStatHandler.GetTotalAttack());
                 }
             }
         }

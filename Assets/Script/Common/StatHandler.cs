@@ -63,4 +63,12 @@ public class StatHandler : MonoBehaviour
                 return;
         }
     }
+
+    /// <summary>
+    /// 총 공격력 계산해주는 함수
+    /// </summary>
+    public float GetTotalAttack()
+    {
+        return currentStats[EStatType.Attack];
+    }
 }

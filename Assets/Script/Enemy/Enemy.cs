@@ -68,7 +68,7 @@ public class Enemy : Character
     public void AttackOnce(Player player)
     {
         TriggerAnimation(AttackAnimHash);
-        player.ResourceController.ChangeHealth(-StatHandler.GetStat(EStatType.Attack));
+        player.ResourceController.ChangeHealth(-StatHandler.GetTotalAttack());
     }
     
     /// <summary>
