@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   itemName: Shield
-  sprite: {fileID: 0}
-  itemType: 1
+  sprite: {fileID: 21300000, guid: efbcba6d6b63d824588f8de0fc836b82, type: 3}
+  itemType: 0
   value: 10
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 6993259336275722287, guid: 05c8a415a6d35554c8c98caba783ebde, type: 3}
+  stackable: 1
