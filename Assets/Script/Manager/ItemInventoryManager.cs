@@ -25,7 +25,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         
         foreach (var item in startingItems)
         {
-            AddItem(item);
+            AddItemMultipleTimes(item, 3);
         }
         
         UpdateInventoryUI();
@@ -36,6 +36,16 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
     public Dictionary<ItemSO, int> GetInventoryItems()
     {
         return new Dictionary<ItemSO, int>(itemDeck);
+    }
+
+    private void AddItemMultipleTimes(ItemSO item, int multiplier)
+    {
+        if (item == null) return;
+
+        for (int i = 0; i < multiplier; i++)
+        {
+            AddItem(item); 
+        }
     }
 
     public void AddItem(ItemSO item)
