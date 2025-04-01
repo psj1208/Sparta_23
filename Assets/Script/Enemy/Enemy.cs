@@ -23,6 +23,7 @@ public class Enemy : Character
         Animator = GetComponent<Animator>();
         ResourceController = GetComponent<ResourceController>();
         StatHandler = GetComponent<StatHandler>();
+        StatHandler.IsEnemy = true;
 
         AttackAnimHash = Animator.StringToHash(attackParameterName);
         DamageAnimHash = Animator.StringToHash(damageParameterName);
@@ -37,6 +38,11 @@ public class Enemy : Character
 
         TurnManager.Instance.OnEnemyTurnStart -= AttackOnce;
         TurnManager.Instance.OnEnemyTurnStart += AttackOnce;
+
+        StatHandler.OnAtkUpdate += CharacterStatUI.HpBar.UpdateAdditionalAtk;
+        StatHandler.OnDefUpdate += CharacterStatUI.HpBar.UpdateShield;
+        StatHandler.OnAtkUpdate((int)StatHandler.GetStat(EStatType.Attack));
+        StatHandler.OnDefUpdate((int)StatHandler.GetStat(EStatType.Defense));
     }
 
 #if DEBUG
@@ -63,7 +69,7 @@ public class Enemy : Character
     public void AttackOnce(Player player)
     {
         TriggerAnimation(AttackAnimHash);
-        player.ResourceController.ChangeHealth(-StatHandler.GetStat(EStatType.Attack));
+        player.ResourceController.ChangeHealth(-StatHandler.GetTotalAttack());
     }
     
     /// <summary>
@@ -99,6 +105,6 @@ public class Enemy : Character
 
     void TriggerAnimation(int animationHash)
     {
-        Animator.SetTrigger(animationHash);
+        Animator?.SetTrigger(animationHash);
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine;
 public class ItemSO : ScriptableObject
 {
     [SerializeField] private string itemName;
+    public string Description;
     [SerializeField] public Sprite sprite;
     [SerializeField] private EItemType itemType;
     [SerializeField] private int value;

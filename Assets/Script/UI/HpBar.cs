@@ -34,11 +34,25 @@ public class HpBar : MonoBehaviour
 
     public void UpdateShield(int shieldAmount)
     {
-        additionalDefText.text = shieldAmount.ToString();
+        if (shieldAmount == 0)
+        {
+            additionalDefText.text = string.Empty;
+        }
+        else
+        {
+            additionalDefText.text = shieldAmount.ToString();
+        }
     }
 
     public void UpdateAdditionalAtk(int atkAmount)
     {
-        additionalAtkText.text = atkAmount.ToString();
+        if (atkAmount == 0)
+        {
+            additionalDefText.text = string.Empty;
+        }
+        else
+        {
+            additionalAtkText.text = atkAmount.ToString();
+        }
     }
 }

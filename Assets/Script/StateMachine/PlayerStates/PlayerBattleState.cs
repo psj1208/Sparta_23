@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerBattleState : BaseState
 {
     private PlayerStateMachine playerStateMachine;
+    private StatHandler playerStatHandler;
 
     public PlayerBattleState(BaseStateMachine stateMachine) : base(stateMachine)
     {
         playerStateMachine = stateMachine as PlayerStateMachine;
+        playerStatHandler = playerStateMachine.Player.StatHandler;
     }
 
     public override void Enter()

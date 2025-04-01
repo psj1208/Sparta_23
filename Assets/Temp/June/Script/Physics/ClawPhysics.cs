@@ -256,8 +256,8 @@ public class ClawPhysics : MonoBehaviour
         //시작 위치로
         while (true)
         {
-            parentRigid.MovePosition(Vector2.MoveTowards(parentRigid.position, rightPos, horizontalMoveSpeed * Time.fixedDeltaTime));
-            if (Vector2.Distance(parentRigid.position, rightPos) < 0.01f)
+            parentRigid.MovePosition(Vector2.MoveTowards(parentRigid.position, startPos, horizontalMoveSpeed * Time.fixedDeltaTime));
+            if (Vector2.Distance(parentRigid.position, startPos) < 0.01f)
             {
                 parentRigid.position = startPos; // 정확한 위치 보정
                 yield return new WaitForFixedUpdate();
