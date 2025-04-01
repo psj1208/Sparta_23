@@ -13,5 +13,6 @@ public class CanvasSample : CanvasBase<CanvasSample>
             UIManager.SetParents(parents);
         UIManager.Show<UIMain>();
         UIManager.Show<UITop>();
+        ItemInventoryManager.Instance.InitializeInventory();
     }
 }

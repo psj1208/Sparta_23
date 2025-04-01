@@ -54,6 +54,8 @@ public class StageManager : Singleton<StageManager>
         if (scene.name == "StageSelectScene") 
         {
             currentRound++;
+            currentStageIndex = -1;
+            
         }
         else if (scene.name == "DontDestroy")
         {

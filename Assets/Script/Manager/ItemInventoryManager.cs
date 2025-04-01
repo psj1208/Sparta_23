@@ -9,27 +9,21 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
 {
     public Dictionary<ItemSO, int> itemDeck = new Dictionary<ItemSO, int>(); 
     [SerializeField] private List<ItemSO> startingItems;
+    public UIMain uiMain;
     public event Action OnInventoryInitialized;
 
     private void Start()
     {
-        StartCoroutine(InitializeInventory());
-    }
-
-    private IEnumerator InitializeInventory()
-    {
-        while (UIManager.Get<UIMain>() == null)
-        {
-            yield return null;
-        }
-        
         foreach (var item in startingItems)
         {
             AddItemMultipleTimes(item, 3);
         }
-        
+    }
+    
+    public void InitializeInventory()
+    {
+        uiMain = UIManager.Get<UIMain>();
         UpdateInventoryUI();
-
         OnInventoryInitialized?.Invoke();
     }
 
@@ -81,9 +75,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
 
     private void UpdateInventoryUI()
     {
-        UIMain uiMain = UIManager.Get<UIMain>();
         if (uiMain == null) return;
-
         uiMain.ClearSlots();
 
         foreach (var item in itemDeck)

@@ -36,7 +36,7 @@ public class ResourceController : MonoBehaviour
             CurrentHealth = MaxHealth;
             onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
         }
-        else if(CurrentHealth < 0)
+        else if(CurrentHealth <= 0)
         {
             CurrentHealth = 0;
             OnDieAction?.Invoke();

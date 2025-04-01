@@ -33,14 +33,17 @@ public class PlayerBattleState : BaseState
         if (!IsAnimationEnd && playerStateMachine.Player.CurItem != null && playerStateMachine.curEnemies != null)
         {
             // 아이템 수치 적용
-            playerStateMachine.Player.CurItem.UseItem(playerStateMachine.Player);
+            playerStateMachine.Player.CurItem.GetItemData().UseItem(playerStateMachine.Player);
             playerStateMachine.Player.CurItem = null;
-            playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
 
             // 실질적 데미지 적용
             foreach(Enemy enemy in playerStateMachine.curEnemies)
             {
-                enemy.ResourceController.ChangeHealth(playerStateMachine.Player.GetAttackDamage());
+                if(enemy != null)
+                {
+                    playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
+                    enemy?.ResourceController.ChangeHealth(playerStateMachine.Player.GetAttackDamage());
+                }
             }
         }
 

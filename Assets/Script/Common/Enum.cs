@@ -4,3 +4,10 @@ public enum eUIPosition
     Top,
     Popup,
 }
+
+enum ClawState
+{
+    Idle,
+    Close,
+    Open
+}

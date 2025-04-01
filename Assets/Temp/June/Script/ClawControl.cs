@@ -75,7 +75,7 @@ public class ClawControl : MonoBehaviour
         leftPosX = transform.position.x - leftEnd;
         rightPosX = transform.position.x - rightEnd;
         leftHand.rotation = Quaternion.Euler(0, 0, -closeRot);
-        rightHand.rotation = Quaternion.Euler(0, 180, -closeRot);
+        rightHand.rotation = Quaternion.Euler(0, 0, closeRot);
     }
 
     // Update is called once per frame
@@ -166,7 +166,7 @@ public class ClawControl : MonoBehaviour
         CanMove = false;
         MoveTween.Kill();
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -openRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -openRot), rotDuration)
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 0, openRot), rotDuration)
             .OnComplete(() =>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, GoDown);
@@ -185,7 +185,7 @@ public class ClawControl : MonoBehaviour
     private void Close()
     {
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -closeRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -closeRot), rotDuration)
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 0, closeRot), rotDuration)
             .OnComplete(()=>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, GoUP);
@@ -215,7 +215,7 @@ public class ClawControl : MonoBehaviour
     private void OpenAndClose()
     {
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -openRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -openRot), rotDuration)
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 0, openRot), rotDuration)
             .OnComplete(()=>
             {
                 delayedCall = DOVirtual.DelayedCall(1f, CloseNotContinuos);
@@ -225,7 +225,7 @@ public class ClawControl : MonoBehaviour
     private void CloseNotContinuos()
     {
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -closeRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -closeRot), rotDuration)
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 0, closeRot), rotDuration)
             .OnComplete(()=>
             {
                 game.ClawSpli.SplineEnd();
