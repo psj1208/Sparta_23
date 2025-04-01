@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UIReward : UIBase
+public class UIShop : UIBase
 {
     [SerializeField]
     private Transform cardList;

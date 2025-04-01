@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RewardCard : MonoBehaviour
+public class Card : MonoBehaviour
 {
     [SerializeField]
     private Image itemIcon;
@@ -17,6 +17,9 @@ public class RewardCard : MonoBehaviour
 
     [SerializeField]
     private GameObject prefab;
+
+    [SerializeField]
+    private GoldUI goldArea;
 
     private ItemSO item;
 
@@ -38,5 +41,11 @@ public class RewardCard : MonoBehaviour
     {
         ItemInventoryManager.Instance.AddItem(item);
         StageManager.Instance.NextStage();
+    }
+
+    public void ShowGold(int gold)
+    {
+        goldArea.gameObject.SetActive(true);
+        goldArea.SetGoldText(gold);
     }
 }
