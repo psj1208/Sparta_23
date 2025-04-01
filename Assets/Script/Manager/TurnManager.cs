@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class TurnManager : Singleton<TurnManager>
 {
+    public List<ItemObject> items;
+    public ItemSO itemData;
+    public Player player;
     public event Action<List<Enemy>> OnPlayerTurnStart; // 플레이어 턴 시작 이벤트
     public event Action<Player> OnEnemyTurnStart; // 적 턴 시작 이벤트
     public event Action OnClawMachineStart; // 뽑기 시작 이벤트
@@ -42,8 +45,20 @@ public class TurnManager : Singleton<TurnManager>
     void Start()
     {
         StartClawMachine();
+        player = FindObjectOfType<Player>();
+        Debug.Log(player);
+        Applyitems();
     }
-    
+
+    private void Applyitems()
+    {
+        foreach (var item in items)
+        {
+            item.SetItemData(itemData);
+            item.GetItemData().UseItem(player);
+        }
+    }
+
     private void GetEnemyListFromStageManager()
     {
         currentEnemies = StageManager.Instance.battleStageController.spawnedEnemies;

@@ -83,7 +83,7 @@ public class StatHandler : MonoBehaviour
 
     IEnumerator ApplyStatDuration(EStatType type, float value, float turn, int coroutineID)
     {
-        while(Turns[coroutineID] > 0)
+        while(Turns[coroutineID] >= 0)
         {
             yield return null;
         }

@@ -29,7 +29,7 @@ public class ItemSO : ScriptableObject
         switch (itemType)
         {
             case EItemType.Attack:
-                player.StatHandler.ModifyStat(EStatType.Attack, value, false, 0);
+                player.StatHandler.ModifyStat(EStatType.Attack, value, false, 1);
                 break;
 
             case EItemType.Defense:

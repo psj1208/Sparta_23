@@ -2642,6 +2642,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 0
+  items:
+  - {fileID: 3145669227800225416, guid: 05dd76b2c6e2d6f4faa880e0c51c329c, type: 3}
+  - {fileID: 3145669227800225416, guid: 05dd76b2c6e2d6f4faa880e0c51c329c, type: 3}
+  - {fileID: 3145669227800225416, guid: 05dd76b2c6e2d6f4faa880e0c51c329c, type: 3}
+  itemData: {fileID: 11400000, guid: 72ea01ff4ac7d144887c21f855581998, type: 2}
+  player: {fileID: 0}
   currentEnemies: []
 --- !u!4 &655536936
 Transform:
@@ -3137,6 +3143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 1
+  itemSpawner: {fileID: 0}
   startingItems:
   - {fileID: 11400000, guid: abe40298768e3954ab84994a2d8f0bbe, type: 2}
   - {fileID: 11400000, guid: 72ea01ff4ac7d144887c21f855581998, type: 2}
