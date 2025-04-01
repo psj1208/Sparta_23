@@ -5,7 +5,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Scriptable Object / New Item")]
 
-public class ItemSO : ScriptableObject, IItem
+public class ItemSO : ScriptableObject
 {
     [SerializeField] private string itemName;
     public string Description;
@@ -46,5 +46,4 @@ public class ItemSO : ScriptableObject, IItem
                 break;
         }
     }
-
 }

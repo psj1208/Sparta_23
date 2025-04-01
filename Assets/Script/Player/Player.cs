@@ -7,7 +7,7 @@ public class Player : Character
 {
     public PlayerStateMachine PlayerStateMachine;
 
-    public ItemObject CurItem;
+    public IItem CurItem;
 
     private Coroutine DamageCoroutine;
 
@@ -97,7 +97,7 @@ public class Player : Character
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.gameObject.name);
-        if (other.TryGetComponent<ItemObject>(out ItemObject item))
+        if (other.TryGetComponent<IItem>(out IItem item))
         {
             this.CurItem = item;
         }
