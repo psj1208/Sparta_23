@@ -12,14 +12,14 @@ public class UIMain : UIBase
     private GameObject slotPrefab;
 
     [SerializeField]
-    private Transform itemSlotList;
+    public Transform itemSlotList;
 
     [SerializeField]
     private Transform skillSlotList;
 
     public override void Opened(params object[] param)
     {
-        
+
     }
 
     public override void HideDirect()
@@ -37,6 +37,14 @@ public class UIMain : UIBase
             ItemSlot slot = go.GetComponent<ItemSlot>();
             slot.SetIcon(obj);
             slot.SetItemCount(count);
+        }
+    }
+
+    public void ClearSlots()
+    {
+        foreach (Transform child in itemSlotList)
+        {
+            Destroy(child.gameObject);
         }
     }
 }

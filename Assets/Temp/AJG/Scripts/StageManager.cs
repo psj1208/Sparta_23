@@ -15,6 +15,8 @@ public class StageManager : Singleton<StageManager>
     public ShopStageController shopStageController;
     public Dictionary<E_StageType, float> stagePoints;
     
+    
+    public ClawGame game;
     public int currentRound = 0;
     public Vector2 playerSpawnPosition;
     public List<E_StageType> selectedStages = new List<E_StageType>();
@@ -22,6 +24,12 @@ public class StageManager : Singleton<StageManager>
     
     private int currentStageIndex = -1;
     private GameObject playerInstance;
+
+
+    // private void Start()
+    // {
+    //     game.ClawStart();
+    // }
 
     private void Update()
     {
@@ -112,7 +120,8 @@ public class StageManager : Singleton<StageManager>
         {
             totalWeight += stagePoints.ContainsKey(stage) ? stagePoints[stage] : 0f;
         }
-    
+        
+        
         float randomValue = Random.Range(0f, totalWeight);
         float cumulativeWeight = 0f;
 

@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 9e396a3f1fceb4743b27cd2a957dae7e, type: 2}
+  point: 10
   spriteRenderer: {fileID: 3809942914075901336}
 --- !u!58 &3784179179965325302
 CircleCollider2D:

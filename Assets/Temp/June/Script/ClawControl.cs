@@ -70,8 +70,8 @@ public class ClawControl : MonoBehaviour
     {
         IsGameStart = false;
         CanMove = false;
-        InitialPos = transform.position;
-        startPos = InitialPos + Vector3.down * startDownDistance;
+        // InitialPos = transform.position;
+        // startPos = InitialPos + Vector3.down * startDownDistance;
         leftPosX = transform.position.x - leftEnd;
         rightPosX = transform.position.x - rightEnd;
         leftHand.rotation = Quaternion.Euler(0, 0, -closeRot);
@@ -101,10 +101,12 @@ public class ClawControl : MonoBehaviour
         lineRenderer.SetPosition(1, ClawParent.position);
         lineRenderer.positionCount = 2;
     }
-    public void StartGame(int count)
+    public void StartGame()
     {
         if (IsGameStart)
             return;
+        InitialPos = transform.position;
+        startPos = InitialPos + Vector3.down * startDownDistance;
         transform.DOMove(startPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true)
             .OnComplete(()=>
             {
@@ -123,7 +125,6 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 transform.DOMove(InitialPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true);
-                TurnManager.Instance.EndPlayerTurn();
             });
     }
 
@@ -197,6 +198,8 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, GoStartPos);
+                if (TurnManager.IsInstance)
+                    TurnManager.Instance.EndClawMachine();
             });
     }
 
