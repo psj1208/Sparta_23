@@ -84,7 +84,7 @@ public class BattleStageController : MonoBehaviour
 
         if (spawnedEnemies.Count <= 0)
         {
-            UIManager.Show<StageClearPanel>();
+            UIManager.Show<UIReward>(ResourceObjectUtil.ShowRandomObjects<ItemSO>("Assets/Script/Scriptable/ScriptableObject(item)", 3));
         }
     }
 }
