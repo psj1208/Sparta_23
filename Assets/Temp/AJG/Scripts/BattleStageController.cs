@@ -76,7 +76,6 @@ public class BattleStageController : MonoBehaviour
 
         if (spawnedEnemies.Count <= 0)
         {
-            Debug.Log("check");
             UIManager.Show<StageClearPanel>();
         }
     }

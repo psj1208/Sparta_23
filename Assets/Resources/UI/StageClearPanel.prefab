@@ -64,7 +64,6 @@ GameObject:
   - component: {fileID: 2769334423908975894}
   - component: {fileID: 3696980113425282082}
   - component: {fileID: 3562250361407104858}
-  - component: {fileID: 4709797962368678118}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -130,21 +129,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4709797962368678118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4543208876136624015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2c45b43ee9d5604a9832b4b826d4759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiPosition: 2
-  panel: {fileID: 4543208876136624015}
-  nextStageButton: {fileID: 1763054132505081504}
 --- !u!1 &4812852595678152539
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,33 +10,15 @@ public class StageClearPanel : UIBase
     
     public override void Opened(params object[] param)
     {
-        Debug.Log("opened");
-        ShowPanel();
+        nextStageButton.onClick.AddListener(OnLoadNextStageClicked);
     }
 
     public override void HideDirect()
     {
     }
     
-    void Start()
-    {
-        panel.SetActive(false);
-        nextStageButton.onClick.AddListener(OnLoadNextStageClicked);
-    }
-
-    public void ShowPanel()
-    {
-        panel.SetActive(true);
-    }
-
-    public void HidePanel()
-    {
-        panel.SetActive(false);
-    }
-
     void OnLoadNextStageClicked()
     {
-        // HidePanel();
         StageManager.Instance.NextStage();
     }
 }
