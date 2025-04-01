@@ -23,6 +23,7 @@ public class Enemy : Character
         Animator = GetComponent<Animator>();
         ResourceController = GetComponent<ResourceController>();
         StatHandler = GetComponent<StatHandler>();
+        StatHandler.IsEnemy = true;
 
         AttackAnimHash = Animator.StringToHash(attackParameterName);
         DamageAnimHash = Animator.StringToHash(damageParameterName);

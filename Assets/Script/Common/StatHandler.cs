@@ -7,6 +7,7 @@ public class StatHandler : MonoBehaviour
 {
     public Action<int> OnAtkUpdate;
     public Action<int> OnDefUpdate;
+    public bool IsEnemy = false;
 
     [SerializeField] private StatData StatData; // 전체 Default Stat 정보
     private Dictionary<EStatType, float> currentStats = new Dictionary<EStatType, float>(); // Default Stat Dictionary
@@ -27,6 +28,11 @@ public class StatHandler : MonoBehaviour
         {
             currentStats[entry.StatType] = entry.Value;
         }
+    }
+
+    public void AddStageDifficulty(float plusAtk)
+    {
+        currentStats[EStatType.Attack] += plusAtk;
     }
 
     public float GetStat(EStatType type)
