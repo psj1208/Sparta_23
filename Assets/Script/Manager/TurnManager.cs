@@ -85,7 +85,7 @@ public class TurnManager : Singleton<TurnManager>
         currentState = ETurnState.ClawTurn;
         OnTurnChanged?.Invoke();
         OnClawMachineStart?.Invoke();
-        ItemInventoryManager.Instance.InitializeInventory();
+        ItemInventoryManager.Instance.itemSpawner.SpawnInventoryItems();
     }
 
     public void EndPlayerTurn()

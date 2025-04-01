@@ -8,6 +8,7 @@ using UnityEngine;
 public class ItemInventoryManager : Singleton<ItemInventoryManager>
 {
     public Dictionary<ItemSO, int> itemDeck = new Dictionary<ItemSO, int>(); 
+    public ItemSpawner itemSpawner;
     [SerializeField] private List<ItemSO> startingItems;
     public UIMain uiMain;
     public event Action OnInventoryInitialized;

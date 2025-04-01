@@ -11,7 +11,6 @@ public class ItemSpawner : MonoBehaviour
     {
         spawnPoints = new List<Vector2>();
         spawnPoints.Add(new Vector3(-2.8f, 2.5f));
-        ItemInventoryManager.Instance.OnInventoryInitialized += SpawnInventoryItems;
     }
 
     public void SpawnInventoryItems()

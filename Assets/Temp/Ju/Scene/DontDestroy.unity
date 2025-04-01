@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 1
+  itemSpawner: {fileID: 751296590}
   startingItems:
   - {fileID: 11400000, guid: abe40298768e3954ab84994a2d8f0bbe, type: 2}
   - {fileID: 11400000, guid: 72ea01ff4ac7d144887c21f855581998, type: 2}
