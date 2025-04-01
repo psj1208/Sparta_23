@@ -78,8 +78,20 @@ public class Player : Character
     /// <param name="enemy">현재 상대하는 몬스터</param>
     public void StartBattleTurn(List<Enemy> enemy)
     {
+        ReduceItemsTurn();
         PlayerStateMachine.curEnemies = enemy;
         PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
+    }
+
+    private void ReduceItemsTurn()
+    {
+        if(StatHandler.Turns?.Count > 0)
+        {
+            for(int i = 0; i < StatHandler.Turns.Count; i++)
+            {
+                StatHandler.Turns[i] -= 1;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

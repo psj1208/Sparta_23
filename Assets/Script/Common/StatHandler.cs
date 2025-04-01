@@ -7,6 +7,7 @@ public class StatHandler : MonoBehaviour
 {
     public Action<int> OnAtkUpdate;
     public Action<int> OnDefUpdate;
+    public List<int> Turns = new List<int>();
     public bool IsEnemy = false;
 
     [SerializeField] private StatData StatData; // 전체 Default Stat 정보
@@ -45,16 +46,18 @@ public class StatHandler : MonoBehaviour
     /// </summary>
     /// <param name="type">변경할 스탯의 타입</param>
     /// <param name="value">값</param>
-    /// <param name="isPermanent">영구적인 변화인지, 일시 효과인지</param>
-    /// <param name="turnTime">일시 효과 적용 시간</param>
-    public void ModifyStat(EStatType type, float value, bool isPermanent = true, int turnTime = 0)
+    /// <param name="isPermanent">영구적용인지 turn만큼 적용인지</param>
+    /// <param name="turn">적용되는 턴</param>
+    public void ModifyStat(EStatType type, float value, bool isPermanent = true, int turn = 0)
     {
         if (!currentStats.ContainsKey(type)) return;
         currentStats[type] += value;
 
         if(!isPermanent)
         {
-            // TODO : 일시적 효과 적용
+            turn = turn <= 0 ? 3 : turn;
+            Turns.Add(turn);
+            StartCoroutine(ApplyStatDuration(type, value, turn, Turns.Count - 1));
         }
 
         switch(type)
@@ -76,5 +79,26 @@ public class StatHandler : MonoBehaviour
     public float GetTotalAttack()
     {
         return currentStats[EStatType.Attack];
+    }
+
+    IEnumerator ApplyStatDuration(EStatType type, float value, float turn, int coroutineID)
+    {
+        while(Turns[coroutineID] > 0)
+        {
+            yield return null;
+        }
+        currentStats[type] -= value;
+
+        switch (type)
+        {
+            case EStatType.Attack:
+                OnAtkUpdate?.Invoke((int)currentStats[type]);
+                break;
+            case EStatType.Defense:
+                OnDefUpdate?.Invoke((int)currentStats[type]);
+                break;
+            default:
+                break;
+        }
     }
 }
