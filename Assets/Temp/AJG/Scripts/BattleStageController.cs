@@ -36,7 +36,8 @@ public class BattleStageController : MonoBehaviour
     {
         int remainingDifficulty = stageDifficulty;
         List<EnemyData> possibleEnemies = new List<EnemyData>(allEnemies);
-        while (remainingDifficulty > 0)
+    
+        while (remainingDifficulty > 0 && spawnedEnemies.Count < 3) // 최대 3마리까지만
         {
             var validEnemies = possibleEnemies.Where(e => e.power <= remainingDifficulty).ToList();
 
@@ -53,6 +54,7 @@ public class BattleStageController : MonoBehaviour
             enemy.StatHandler.AddStageDifficulty(StageManager.Instance.currentRound * 5);
             spawnedEnemies.Add(enemy);
         }
+    
         ArrangeEnemies(spawnedEnemies, center);
     }
 
