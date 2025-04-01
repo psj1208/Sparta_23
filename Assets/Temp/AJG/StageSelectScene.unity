@@ -317,10 +317,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 93af9fb8ac6ea644bbcbee24f32334d9, type: 2}
   - {fileID: 11400000, guid: 260f1d066627f7245a0def898985f9f0, type: 2}
   - {fileID: 11400000, guid: f253c228225a7754791f9a88e7bc7eb5, type: 2}
-  enemySpawnCenter: {x: 4.5, y: -3}
-  playerSpawnPosition: {x: -4.5, y: -3}
+  enemySpawnCenter: {x: 3.8, y: -3}
+  playerSpawnPosition: {x: -5, y: -3}
   spawnedEnemies: []
-  spacing: 2
+  spacing: 3.3
 --- !u!1 &84282892
 GameObject:
   m_ObjectHideFlags: 0
