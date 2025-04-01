@@ -15,6 +15,9 @@ public class RewardCard : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI itemDescription;
 
+    [SerializeField]
+    private GameObject prefab;
+
     private ItemSO item;
 
     public ItemSO Item { get { return item; } }
@@ -34,5 +37,6 @@ public class RewardCard : MonoBehaviour
     public void OnClickCardItem()
     {
         ItemInventoryManager.Instance.AddItem(item);
+        StageManager.Instance.NextStage();
     }
 }
