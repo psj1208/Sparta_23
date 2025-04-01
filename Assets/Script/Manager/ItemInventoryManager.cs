@@ -4,31 +4,56 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ItemInventoryManager : Singleton<ItemInventoryManager>
 {
-    public Dictionary<ItemSO, int> itemDeck = new Dictionary<ItemSO, int>(); 
+    public Dictionary<ItemSO, int> itemDeck = new Dictionary<ItemSO, int>();
     [SerializeField] private List<ItemSO> startingItems;
+    public UIMain uiMain;
     public event Action OnInventoryInitialized;
+
+    private void Awake()
+    {
+
+    }
 
     private void Start()
     {
-        StartCoroutine(InitializeInventory());
     }
 
-    
-    private IEnumerator InitializeInventory()
+    private void OnEnable()
     {
-        while (UIManager.Get<UIMain>() == null)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
         {
-            yield return null;
+            uiMain = FindAnyObjectByType<UIMain>();
+            InitializeInventory();
         }
-        
+        else if (scene.name == "DontDestroy")
+        {
+        }
+        else
+        {
+        }
+    }
+
+    private void InitializeInventory()
+    {
         foreach (var item in startingItems)
         {
             AddItemMultipleTimes(item, 3);
         }
-        
+
         UpdateInventoryUI();
 
         OnInventoryInitialized?.Invoke();
@@ -45,7 +70,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
 
         for (int i = 0; i < multiplier; i++)
         {
-            AddItem(item); 
+            AddItem(item);
         }
     }
 
@@ -82,7 +107,6 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
 
     private void UpdateInventoryUI()
     {
-        UIMain uiMain = UIManager.Get<UIMain>();
         if (uiMain == null) return;
 
         uiMain.ClearSlots();
