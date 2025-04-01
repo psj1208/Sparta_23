@@ -16,6 +16,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         StartCoroutine(InitializeInventory());
     }
 
+    
     private IEnumerator InitializeInventory()
     {
         while (UIManager.Get<UIMain>() == null)
