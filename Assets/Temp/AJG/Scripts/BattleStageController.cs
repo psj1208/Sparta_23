@@ -25,7 +25,7 @@ public class BattleStageController : MonoBehaviour
         Player player = playerInstance.GetComponent<Player>();
         GameManager.Instance.Player = player;
     }
-
+    
     void SpawnEnemies(Vector2 center, int stageDifficulty)
     {
         int remainingDifficulty = stageDifficulty;
@@ -43,6 +43,7 @@ public class BattleStageController : MonoBehaviour
 
             GameObject obj = Instantiate(selectedEnemy.prefab, center, Quaternion.identity);
             Enemy enemy = obj.GetComponent<Enemy>();
+            enemy.BattleStageController = this;
             spawnedEnemies.Add(enemy);
         }
         ArrangeEnemies(spawnedEnemies, center);
@@ -63,5 +64,20 @@ public class BattleStageController : MonoBehaviour
     {
         if (count == 1) return 0;
         return (index - (count - 1) / 2f) * spacing;
+    }
+
+    public void RemoveEnemy(Enemy enemy)
+    {
+        if (spawnedEnemies.Contains(enemy))
+        {
+            spawnedEnemies.Remove(enemy);
+            Destroy(enemy.gameObject);
+        }
+
+        if (spawnedEnemies.Count <= 0)
+        {
+            Debug.Log("check");
+            UIManager.Show<StageClearPanel>();
+        }
     }
 }

@@ -13,6 +13,10 @@ public class Enemy : Character
     public int DieAnimHash { get; private set; }
     #endregion
 
+    private BattleStageController _battleStageController;
+    public BattleStageController BattleStageController { get { return _battleStageController; } set { _battleStageController = value; } }
+    
+    
     protected override void Awake()
     {
         base.Awake();
@@ -32,6 +36,7 @@ public class Enemy : Character
         ResourceController.OnDieAction += Die;
 
         TurnManager.Instance.OnEnemyTurnStart -= AttackOnce;
+        TurnManager.Instance.OnEnemyTurnStart += AttackOnce;
         TurnManager.Instance.OnEnemyTurnStart += AttackOnce;
     }
 
@@ -61,7 +66,7 @@ public class Enemy : Character
         TriggerAnimation(AttackAnimHash);
         player.ResourceController.ChangeHealth(-StatHandler.GetStat(EStatType.Attack));
     }
-
+    
     /// <summary>
     /// Enemy 피격
     /// </summary>
@@ -69,14 +74,37 @@ public class Enemy : Character
     {
         TriggerAnimation(DamageAnimHash);
     }
-
     /// <summary>
     /// Enemy 사망
     /// </summary>
     public void Die()
     {
         TriggerAnimation(DieAnimHash);
+        StartCoroutine(WaitForDieAnimation());
     }
+    
+    private IEnumerator WaitForDieAnimation()
+    {
+        // 현재 실행 중인 애니메이션 상태 정보 가져오기
+        AnimatorStateInfo stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+
+        // 'Die' 애니메이션이 실제로 재생될 때까지 대기
+        while (!stateInfo.IsName(dieParameterName))
+        {
+            yield return null;
+            stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+        }
+
+        // 애니메이션 길이만큼 대기
+        yield return new WaitForSeconds(stateInfo.length);
+
+        // 배틀 스테이지 컨트롤러에서 자신을 제거
+        BattleStageController.RemoveEnemy(this);
+
+        // 게임 오브젝트 제거
+        Destroy(gameObject);
+    }
+    
 
     void TriggerAnimation(int animationHash)
     {
