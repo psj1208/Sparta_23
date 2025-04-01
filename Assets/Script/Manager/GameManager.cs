@@ -5,13 +5,13 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public Player Player;
-    public ClawGame Claw;
+    public ClawGamePhysics Claw;
 
     protected override void Awake()
     {
         base.Awake();
         //Player = Instantiate(ResourceManager.Instance.LoadAsset<Player>(), new Vector3(-5.85f, -3.5f, 0f), Quaternion.identity); // 임시
-        Claw = FindAnyObjectByType<ClawGame>();
+        Claw = FindAnyObjectByType<ClawGamePhysics>();
     }
     // Start is called before the first frame update
     void Start()
