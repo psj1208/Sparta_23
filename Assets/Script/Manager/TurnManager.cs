@@ -68,7 +68,10 @@ public class TurnManager : Singleton<TurnManager>
     private IEnumerator EnemyAction()
     {
         yield return new WaitForSeconds(1.5f);
-
+        if (currentEnemies.Count <= 0)
+        {
+            yield break;
+        }
         OnEnemyTurnStart?.Invoke(GameManager.Instance.Player);
 
         yield return new WaitForSeconds(1.0f);

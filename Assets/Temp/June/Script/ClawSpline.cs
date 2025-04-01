@@ -114,6 +114,7 @@ public class ClawSpline : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         while (inputList.Count > 0)
             yield return null;
+        yield return new WaitForSeconds(1.0f);
         if (TurnManager.IsInstance)
         {
             yield return new WaitForSeconds(2.0f);
