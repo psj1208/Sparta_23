@@ -13,15 +13,6 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
     public UIMain uiMain;
     public event Action OnInventoryInitialized;
 
-    private void Awake()
-    {
-
-    }
-
-    private void Start()
-    {
-    }
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -36,7 +27,6 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
     {
         if (scene.name == "MainScene")
         {
-            uiMain = FindAnyObjectByType<UIMain>();
             InitializeInventory();
         }
         else if (scene.name == "DontDestroy")
@@ -46,14 +36,27 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         {
         }
     }
+    // private void Start()
+    // {
+    //     StartCoroutine(GetUiMain());
+    // }
+    //
+    //
+    // private IEnumerator GetUiMain()
+    // {
+    //     UIManager.UiListClear();
+    //     while (UIManager.Get<UIMain>() == null)
+    //         yield return null;
+    // }
 
-    private void InitializeInventory()
+    public void InitializeInventory()
     {
+        uiMain = UIManager.Get<UIMain>();
+        uiMain = FindAnyObjectByType<UIMain>();
         foreach (var item in startingItems)
         {
             AddItemMultipleTimes(item, 3);
         }
-
         UpdateInventoryUI();
 
         OnInventoryInitialized?.Invoke();
@@ -108,7 +111,6 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
     private void UpdateInventoryUI()
     {
         if (uiMain == null) return;
-
         uiMain.ClearSlots();
 
         foreach (var item in itemDeck)
