@@ -8,8 +8,10 @@ using UnityEngine;
 public class ItemInventoryManager : Singleton<ItemInventoryManager>
 {
     public Dictionary<ItemSO, int> itemDeck = new Dictionary<ItemSO, int>(); 
+    public List<SkillSO> skills = new List<SkillSO>();
     public ItemSpawner itemSpawner;
     [SerializeField] private List<ItemSO> startingItems;
+    [SerializeField] private List<SkillSO> startingSkills;
     public UIMain uiMain;
     public event Action OnInventoryInitialized;
 
@@ -19,12 +21,17 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         {
             AddItemMultipleTimes(item, 3);
         }
+        foreach (var skill in startingSkills)
+        {
+            AddSkill(skill);
+        }
     }
     
     public void InitializeInventory()
     {
         uiMain = UIManager.Get<UIMain>();
         UpdateInventoryUI();
+        UpdateSkillUI();
         OnInventoryInitialized?.Invoke();
     }
 
@@ -58,8 +65,14 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         {
             itemDeck[item] = 1;
         }
-
         UpdateInventoryUI();
+    }
+
+    public void AddSkill(SkillSO skill)
+    {
+        if (skill == null || skills.Contains(skill)) return;
+        skills.Add(skill);
+        UpdateSkillUI();
     }
 
     public void RemoveItem(ItemSO item, int amount = 1)
@@ -74,10 +87,17 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         UpdateInventoryUI();
     }
 
+    public void RemoveSkill(SkillSO skill)
+    {
+        if (skill == null || !skills.Contains(skill)) return;
+        skills.Remove(skill);
+        UpdateSkillUI();
+    }
+
     private void UpdateInventoryUI()
     {
         if (uiMain == null) return;
-        uiMain.ClearSlots();
+        uiMain.ClearItemSlots();
 
         foreach (var item in itemDeck)
         {
@@ -85,13 +105,13 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
         }
     }
 
-    public int GetItemCount(ItemSO item)
+    private void UpdateSkillUI()
     {
-        return itemDeck.ContainsKey(item) ? itemDeck[item] : 0;
-    }
-
-    public List<ItemSO> GetAllItems()
-    {
-        return new List<ItemSO>(itemDeck.Keys);
+        if (uiMain == null) return;
+        uiMain.ClearSKillSlot();
+        foreach (var skill in skills)
+        {
+            uiMain.AddSkillSlot(skill);
+        }
     }
 }

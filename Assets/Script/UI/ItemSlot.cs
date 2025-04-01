@@ -27,12 +27,24 @@ public class ItemSlot : MonoBehaviour
 
     public void SetIcon(ScriptableObject obj)
     {
-        if (obj is ItemSO item) // obj를 ItemSO로 캐스팅
+        if (obj is ItemSO item)
         {
             icon.sprite = item.sprite;
-            icon.color = Color.white; // 아이콘을 보이게 설정
+            icon.color = Color.white;
         }
-        icon.color = Color.white;           //아이템 이미지 부분의 알파값을 0으로 설정하여 알파값을 255로 되돌려줌
+        else if (obj is SkillSO skill)
+        {
+            icon.sprite = skill.sprite;
+            icon.color = Color.white;
+        }
+        else
+        {
+            icon.sprite = null;
+            icon.color = Color.clear;
+            return;
+        }
+
+        
     }
 
     public void SetItemCount(int count)

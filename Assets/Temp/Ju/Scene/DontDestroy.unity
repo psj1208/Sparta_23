@@ -214,11 +214,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 1
+  skills:
+  - {fileID: 11400000, guid: addda3ceeb3926340a1e1aa224c36761, type: 2}
   itemSpawner: {fileID: 751296590}
   startingItems:
   - {fileID: 11400000, guid: abe40298768e3954ab84994a2d8f0bbe, type: 2}
   - {fileID: 11400000, guid: 72ea01ff4ac7d144887c21f855581998, type: 2}
   - {fileID: 11400000, guid: de497175eedef074181120f6240b4845, type: 2}
+  startingSkills: []
   uiMain: {fileID: 0}
 --- !u!4 &751296592
 Transform:
