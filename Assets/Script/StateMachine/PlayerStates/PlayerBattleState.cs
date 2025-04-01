@@ -27,11 +27,13 @@ public class PlayerBattleState : BaseState
             playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
         }
         #endif
-
+        // Debug.Log(IsAnimationEnd);
+        // Debug.Log(playerStateMachine.Player.CurItem);
+        // Debug.Log(playerStateMachine.curEnemies);
         if (!IsAnimationEnd && playerStateMachine.Player.CurItem != null && playerStateMachine.curEnemies != null)
         {
             // 아이템 수치 적용
-            playerStateMachine.Player.CurItem.UseItem();
+            playerStateMachine.Player.CurItem.UseItem(playerStateMachine.Player);
             playerStateMachine.Player.CurItem = null;
             playerStateMachine.StartAnimation(playerStateMachine.AttackAnimHash);
 

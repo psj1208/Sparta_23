@@ -101,7 +101,7 @@ public class ClawControl : MonoBehaviour
         lineRenderer.SetPosition(1, ClawParent.position);
         lineRenderer.positionCount = 2;
     }
-    public void StartGame(int count)
+    public void StartGame()
     {
         if (IsGameStart)
             return;
@@ -123,7 +123,6 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 transform.DOMove(InitialPos, MoveSpeed).SetEase(Ease.Linear).SetSpeedBased(true);
-                TurnManager.Instance.EndPlayerTurn();
             });
     }
 
@@ -197,6 +196,7 @@ public class ClawControl : MonoBehaviour
             .OnComplete(()=>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, GoStartPos);
+                TurnManager.Instance.EndClawMachine();
             });
     }
 
