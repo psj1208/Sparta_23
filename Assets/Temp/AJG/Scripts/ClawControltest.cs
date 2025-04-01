@@ -42,7 +42,7 @@ public class ClawControlTest : MonoBehaviour
     {
         originalPosition = claw.position;
         leftHand.rotation = Quaternion.Euler(0, 0, -closeRot);
-        rightHand.rotation = Quaternion.Euler(0, 180, -closeRot);
+        rightHand.rotation = Quaternion.Euler(0, 0, closeRot);
     }
 
     void Update()
@@ -77,7 +77,7 @@ public class ClawControlTest : MonoBehaviour
             }
         }
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -openRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -openRot), rotDuration)
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 0, openRot), rotDuration)
             .OnComplete(() =>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, Close);
@@ -88,7 +88,7 @@ public class ClawControlTest : MonoBehaviour
     void Close()
     {
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -closeRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -closeRot), rotDuration)
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 0, closeRot), rotDuration)
             .OnComplete(Up);
     }
 
@@ -115,7 +115,7 @@ public class ClawControlTest : MonoBehaviour
             }
         }
         leftTween = leftHand.DOLocalRotate(new Vector3(0, 0, -openRot), rotDuration);
-        rightTween = rightHand.DOLocalRotate(new Vector3(0, 180, -openRot), rotDuration)
+        rightTween = rightHand.DOLocalRotate(new Vector3(0, 0, openRot), rotDuration)
             .OnComplete(() =>
             {
                 delayedCall = DOVirtual.DelayedCall(waitingTime, StageManager.Instance.SelectStages);
