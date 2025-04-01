@@ -13,6 +13,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
 
     private void Start()
     {
+<<<<<<< Updated upstream
         StartCoroutine(InitializeInventory());
     }
 
@@ -23,13 +24,22 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
             yield return null;
         }
         
+=======
+>>>>>>> Stashed changes
         foreach (var item in startingItems)
         {
             AddItemMultipleTimes(item, 3);
         }
+<<<<<<< Updated upstream
         
+=======
+    }
+    
+    public void InitializeInventory()
+    {
+        uiMain = UIManager.Get<UIMain>();
+>>>>>>> Stashed changes
         UpdateInventoryUI();
-
         OnInventoryInitialized?.Invoke();
     }
 

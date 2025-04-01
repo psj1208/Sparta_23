@@ -14,11 +14,17 @@ public class BattleStageController : MonoBehaviour
     
     public void StartBattleStage(GameObject playerPrefab)
     {
+        ClearData();
         SpawnPlayer(playerPrefab, playerSpawnPosition);
         currentStageDifficulty = StageManager.Instance.basicStageDifficulty + (StageManager.Instance.currentRound * 20);
         SpawnEnemies(enemySpawnCenter, currentStageDifficulty);
     }
 
+    private void ClearData()
+    {
+        spawnedEnemies.Clear();
+    }
+    
     void SpawnPlayer(GameObject playerPrefab, Vector2 position)
     {
         GameObject playerInstance = Instantiate(playerPrefab, position, Quaternion.identity);
@@ -56,6 +62,7 @@ public class BattleStageController : MonoBehaviour
         {
             float offset = GetOffset(i, count);
             Vector2 spawnPosition = new Vector2(center.x + offset, center.y);
+            Debug.Log(spawnPosition);
             enemies[i].transform.position = spawnPosition;
         }
     }

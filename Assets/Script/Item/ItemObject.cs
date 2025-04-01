@@ -11,4 +11,9 @@ public class ItemObject : MonoBehaviour
         itemData = data;
         Debug.Log($"ItemObject: {itemData.ItemName} 설정");
     }
+
+    public ItemSO GetItemData()
+    {
+        return itemData;
+    }
 }

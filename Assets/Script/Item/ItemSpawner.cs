@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private List<Transform> spawnPoints;
+    [SerializeField] private List<Vector2> spawnPoints;
 
     private void Start()
     {
+        spawnPoints = new List<Vector2>();
+        spawnPoints.Add(new Vector3(-2.8f, 2.5f));
         ItemInventoryManager.Instance.OnInventoryInitialized += SpawnInventoryItems;
     }
 
@@ -24,8 +26,8 @@ public class ItemSpawner : MonoBehaviour
 
             for (int i = 0; i < itemCount; i++)
             {
-                Transform spawnPoint = spawnPoints[spawnIndex];
-                GameObject newItem = Instantiate(itemData.itemPrefab, spawnPoint.position, Quaternion.identity);
+                Vector2 spawnPoint = spawnPoints[spawnIndex];
+                GameObject newItem = Instantiate(itemData.itemPrefab, spawnPoint, Quaternion.identity);
 
                 if (newItem == null)
                 {
