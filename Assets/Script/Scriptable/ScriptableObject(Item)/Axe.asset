@@ -17,3 +17,4 @@ MonoBehaviour:
   itemType: 0
   value: 20
   itemPrefab: {fileID: 6993259336275722287, guid: a5e5a94af37679447933e0bb68d4e745, type: 3}
+  stackable: 1
