@@ -60,7 +60,6 @@ public class TurnManager : Singleton<TurnManager>
     {
         currentState = ETurnState.EnemyTurn;
         OnTurnChanged?.Invoke();
-        OnEnemyTurnStart?.Invoke(GameManager.Instance.Player);
 
         StartCoroutine(EnemyAction());
     }
@@ -68,13 +67,9 @@ public class TurnManager : Singleton<TurnManager>
     
     private IEnumerator EnemyAction()
     {
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(1.5f);
 
-        Player player = FindObjectOfType<Player>();
-        if (player != null)
-        {
-            player.ResourceController.ChangeHealth(-10);
-        }
+        OnEnemyTurnStart?.Invoke(GameManager.Instance.Player);
 
         yield return new WaitForSeconds(1.0f);
         StartClawMachine(); 
