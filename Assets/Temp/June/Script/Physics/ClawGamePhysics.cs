@@ -40,7 +40,7 @@ public class ClawGamePhysics : MonoBehaviour
     {
         if (scene.name == "MainScene")
         {
-            TurnManager.Instance.OnClawMachineStart += () => ClawStart(1);
+            TurnManager.Instance.OnClawMachineStart += ClawCont.GameStart;
         }
         else if (scene.name == "StageSelectScene")
         {
