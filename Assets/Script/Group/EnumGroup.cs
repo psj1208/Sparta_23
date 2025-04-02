@@ -25,3 +25,12 @@ public enum ETurnState
     EnemyTurn,
     ClawTurn
 }
+
+public enum ESFXType
+{
+    Attack,
+    Damaged,
+    GoodEffect,
+    UIClick,
+    Clear1,
+}

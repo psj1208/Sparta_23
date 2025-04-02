@@ -68,6 +68,7 @@ public class Enemy : Character
     /// </summary>
     public void AttackOnce(Player player)
     {
+        AudioManager.Instance.PlaySFX(ESFXType.Attack);
         TriggerAnimation(AttackAnimHash);
         player.ResourceController.ChangeHealth(-StatHandler.GetTotalAttack());
     }
@@ -77,6 +78,7 @@ public class Enemy : Character
     /// </summary>
     public void Damaged()
     {
+        AudioManager.Instance.PlaySFX(ESFXType.Damaged);
         TriggerAnimation(DamageAnimHash);
     }
     /// <summary>
