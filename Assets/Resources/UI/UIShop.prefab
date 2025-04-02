@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6491305364622386587}
-  - component: {fileID: 6947241694461480189}
+  - component: {fileID: 6878721500167282869}
   - component: {fileID: 163808743663956815}
   - component: {fileID: 3579313520262741274}
   m_Layer: 5
@@ -41,7 +41,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6947241694461480189
+--- !u!114 &6878721500167282869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,12 +50,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 496128462568122716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfbff0e495503fb44a051265619a7905, type: 3}
+  m_Script: {fileID: 11500000, guid: 94e4c1f2192d4a045b895cf3ebc9ecf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPosition: 2
+  uiPosition: 0
   cardList: {fileID: 7301622782738523927}
-  card: {fileID: 5790464587204163049, guid: 08936802fb20f324f80a7db6a2ef0d63, type: 3}
+  card: {fileID: 2068011292431869827, guid: 08936802fb20f324f80a7db6a2ef0d63, type: 3}
+  exitButton: {fileID: 927320534169865533}
 --- !u!222 &163808743663956815
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -451,7 +452,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6947241694461480189}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIReward, Assembly-CSharp
         m_MethodName: OnclickSkipButton
         m_Mode: 1
