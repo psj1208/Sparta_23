@@ -9,7 +9,7 @@ public class UIReward : UIBase
     private Transform cardList;
 
     [SerializeField]
-    private Card card;
+    private GameObject card;
 
     public override void HideDirect()
     {
@@ -27,7 +27,7 @@ public class UIReward : UIBase
         {
             foreach (ItemSO item in itemList)
             {
-                Card rewardCard = Instantiate(card, cardList);
+                Card rewardCard = Instantiate(card, cardList).GetComponentInChildren<Card>();
                 rewardCard.SetItem(item);
             }
         }
