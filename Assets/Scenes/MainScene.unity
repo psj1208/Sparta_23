@@ -2642,6 +2642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 0
+  player: {fileID: 0}
   currentEnemies: []
 --- !u!4 &655536936
 Transform:
@@ -3211,7 +3212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c82f357f6711749b558d5d5ca73186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notificationPrefab: {fileID: 9134573488853233170, guid: 8fbe684f12b07f846b6cb1331ef21bd0, type: 3}
+  notificationPrefab: {fileID: 2077893743374718, guid: ce8ddba7beb3f7447bf498244e6d419d, type: 3}
   notificationParent: {fileID: 1774649870}
   poolSize: 5
 --- !u!1660057539 &9223372036854775807
