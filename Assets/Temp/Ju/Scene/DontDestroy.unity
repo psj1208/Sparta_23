@@ -214,9 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 1
-  skills:
-  - {fileID: 3179674936935085655, guid: 057c3f336c83a3d499dd2464f8704a7d, type: 3}
-  - {fileID: 3179674936935085655, guid: 057c3f336c83a3d499dd2464f8704a7d, type: 3}
+  skills: []
   itemSpawner: {fileID: 751296590}
   startingItems:
   - {fileID: 11400000, guid: abe40298768e3954ab84994a2d8f0bbe, type: 2}
