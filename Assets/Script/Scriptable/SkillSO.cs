@@ -9,5 +9,7 @@ public class SkillSO : ScriptableObject
     public string SkillName { get; }
     
     [SerializeField] public Sprite sprite;
+
+    [SerializeField] public GameObject skillPrefab;
     
 }

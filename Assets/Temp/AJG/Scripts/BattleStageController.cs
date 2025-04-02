@@ -86,7 +86,13 @@ public class BattleStageController : MonoBehaviour
 
         if (spawnedEnemies.Count <= 0)
         {
-            UIManager.Show<UIReward>(ResourceObjectUtil.ShowRandomObjects<ItemSO>("Assets/Script/Scriptable/ScriptableObject(item)", 3));
+            List<ScriptableObject> combinedList = new List<ScriptableObject>();
+
+            combinedList.AddRange(ResourceObjectUtil.ShowRandomObjects<ItemSO>("Assets/Script/Scriptable/ScriptableObject(item)", 3).Cast<ScriptableObject>());
+            combinedList.AddRange(ResourceObjectUtil.ShowRandomObjects<SkillSO>("Assets/Script/Scriptable/ScriptableObject(skill)", 3).Cast<ScriptableObject>());
+           
+            List<ScriptableObject> randomSelection = combinedList.OrderBy(x => UnityEngine.Random.value).Take(3).ToList();
+            UIManager.Show<UIReward>(randomSelection);
         }
     }
 }

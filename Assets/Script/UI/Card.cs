@@ -23,7 +23,11 @@ public class Card : MonoBehaviour
 
     private ItemSO item;
 
+    private SkillSO skill;
+
     public ItemSO Item { get { return item; } }
+
+    public SkillSO Skill { get { return skill; } }
 
     public void SetItem(ItemSO cardItem)
     {
@@ -37,9 +41,33 @@ public class Card : MonoBehaviour
         itemDescription.text = cardItem.Description;
     }
 
+    public void SetSkill(SkillSO cardSkill)
+    {
+        skill = cardSkill;
+        if (cardSkill.sprite != null)
+        {
+            itemIcon.sprite = cardSkill.sprite;
+            itemIcon.color = Color.white;
+        }
+        itemName.text = cardSkill.name;
+    }
+
     public void OnClickCardItem()
     {
-        ItemInventoryManager.Instance.AddItem(item);
+        if (item is ItemSO itemData)
+        {
+            ItemInventoryManager.Instance.AddItem(item);
+        }
+        else if (skill is SkillSO skillData)
+        {
+            GameObject skillObject = Instantiate(skillData.skillPrefab);
+            ASkill skillToAdd = skillObject.GetComponent<ASkill>();
+
+            if (skillToAdd != null)
+            {
+                ItemInventoryManager.Instance.AddSkill(skillToAdd);
+            }
+        }
         StageManager.Instance.NextStage();
     }
 
