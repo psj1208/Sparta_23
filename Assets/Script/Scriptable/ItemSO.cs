@@ -14,6 +14,7 @@ public class ItemSO : ScriptableObject
     [SerializeField] private int value;
     [SerializeField] public GameObject itemPrefab;
     [SerializeField] public bool stackable = true;
+    public int BuyPrice;
 
     public ItemSO(string name, Sprite icon, bool stackable, int value)
     {
