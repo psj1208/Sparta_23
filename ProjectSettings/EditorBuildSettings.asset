@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Temp/Ju/Scene/DontDestroy.unity
+    path: Assets/Scenes/DontDestroy.unity
     guid: ad03af04edfde0a4f843fd968b827250
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
