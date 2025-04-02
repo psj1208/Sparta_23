@@ -47,12 +47,3 @@ public class AudioManager : Singleton<AudioManager>
         SFXSource.PlayOneShot(SFXClips[typeNum]);
     }
 }
-public enum ESFXType
-{
-    Attack, 
-    Damaged,
-    GoodEffect,
-    UIClick,
-    Clear1,
-}
-
