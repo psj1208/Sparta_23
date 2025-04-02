@@ -60,14 +60,12 @@ public class Card : MonoBehaviour
         }
         else if (skill is SkillSO skillData)
         {
-            GameObject skillObject = Instantiate(skillData.skillPrefab);
-            ASkill skillToAdd = skillObject.GetComponent<ASkill>();
-
-            if (skillToAdd != null)
+            if (skillData.skillPrefab != null)
             {
-                ItemInventoryManager.Instance.AddSkill(skillToAdd);
+                ItemInventoryManager.Instance.AddSkill(skillData.skillPrefab.GetComponent<ASkill>());
             }
         }
+
         StageManager.Instance.NextStage();
     }
 
