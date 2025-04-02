@@ -15,7 +15,7 @@ MonoBehaviour:
   CharacterName: Player
   stats:
   - StatType: 0
-    Value: 100
+    Value: 200
   - StatType: 1
     Value: 5
   - StatType: 2
