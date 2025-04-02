@@ -23,37 +23,56 @@ public class UIShop : UIBase
     public override void Opened(params object[] param)
     {
         exitButton.onClick.AddListener(OnclickSkipButton);
+
         foreach (Transform child in cardList)
         {
             Destroy(child.gameObject);
         }
 
-        if (!(param[0] is ItemSO))
+        foreach (object obj in param)
         {
-            Debug.Log("ItemSO 형식이 아님");
-            return;
+            if (obj is ItemSO item)
+            {
+                CreateItemCard(item);
+            }
+            else if (obj is SkillSO skill)
+            {
+                CreateSkillCard(skill);
+            }
         }
+    }
 
-        foreach (ItemSO item in param)
+    private void CreateItemCard(ItemSO item)
+    {
+        Card rewardCard = Instantiate(card, cardList).GetComponentInChildren<Card>();
+        rewardCard.SetItem(item);
+        rewardCard.ShowGold(item.BuyPrice);
+
+        Button cardButton = rewardCard.GetComponentInChildren<Button>();
+        if (cardButton != null)
         {
-            Debug.Log("생성 중");
-            Card rewardCard = Instantiate(card, cardList).GetComponentInChildren<Card>();
-            rewardCard.SetItem(item);
-            rewardCard.ShowGold(item.BuyPrice);
-            //rewardCard의 버튼 컴포넌트를 가져와서 클릭 시에 해당 카드가 파괴되도록
-            Button cardButton = rewardCard.GetComponentInChildren<Button>();
-            if (cardButton != null)
+            cardButton.onClick.AddListener(() =>
             {
-                cardButton.onClick.AddListener(() =>
-                {
-                    ItemInventoryManager.Instance.AddItem(rewardCard.Item);
-                    Destroy(rewardCard.gameObject);
-                });
-            }
-            else
+                Destroy(rewardCard.gameObject);
+            });
+        }
+    }
+
+    private void CreateSkillCard(SkillSO skill)
+    {
+        Card rewardCard = Instantiate(card, cardList).GetComponentInChildren<Card>();
+        rewardCard.SetSkill(skill);
+        rewardCard.ShowGold(skill.BuyPrice);  
+
+        Button cardButton = rewardCard.GetComponentInChildren<Button>();
+        if (cardButton != null)
+        {
+            cardButton.onClick.AddListener(() =>
             {
-                Debug.LogWarning("No Button");
-            }
+                GameObject skillObject = Instantiate(skill.skillPrefab); 
+                ASkill skillToAdd = skillObject.GetComponent<ASkill>();
+                Destroy(rewardCard.gameObject);
+            });
         }
     }
 

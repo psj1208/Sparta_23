@@ -38,7 +38,7 @@ public class CardStage : MonoBehaviour
             itemIcon.sprite = stageData.stageSprite;
             itemIcon.color = Color.white;
         }
-        itemName.text = stageData.name;
-        // itemDescription.text = stageData.description;
+        itemName.text = stageData.stageName;
+        itemDescription.text = stageData.stageDescription;
     }
 }

@@ -260,13 +260,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 41629490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a093fa99f72a92e47b578040bc2d22bc, type: 3}
+  m_Script: {fileID: 11500000, guid: f6c10f379bfd0d3418f0892c4b43c90e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   allEnemies:
   - {fileID: 11400000, guid: 93af9fb8ac6ea644bbcbee24f32334d9, type: 2}
   - {fileID: 11400000, guid: 260f1d066627f7245a0def898985f9f0, type: 2}
   - {fileID: 11400000, guid: f253c228225a7754791f9a88e7bc7eb5, type: 2}
+  - {fileID: 11400000, guid: 6d564f7e96c0f7c428748d14dacdbec7, type: 2}
+  - {fileID: 11400000, guid: 8d73911fd8e37b04eab706a6c892d018, type: 2}
   enemySpawnCenter: {x: 3.8, y: -3}
   playerSpawnPosition: {x: -5, y: -3}
   spawnedEnemies: []

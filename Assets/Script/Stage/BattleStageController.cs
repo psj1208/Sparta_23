@@ -16,6 +16,7 @@ public class BattleStageController : MonoBehaviour
     {
         ClearData();
         SpawnPlayer(playerPrefab, playerSpawnPosition);
+        Instantiate(ResourceManager.Instance.LoadAsset<DestroyZone>());
         currentStageDifficulty = StageManager.Instance.basicStageDifficulty + (StageManager.Instance.currentRound * 20);
         SpawnEnemies(enemySpawnCenter, currentStageDifficulty);
     }
