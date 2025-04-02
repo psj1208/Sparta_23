@@ -15,3 +15,4 @@ MonoBehaviour:
   stageType: 1
   stageSprite: {fileID: 21300000, guid: cae4dfaf0c3fde749859a70762a3ed9b, type: 3}
   stageName: Shop
+  stageDescription: "\uC0C1\uC810\uC785\uB2C8\uB2E4."

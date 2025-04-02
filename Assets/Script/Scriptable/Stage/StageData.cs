@@ -16,4 +16,5 @@ public class StageData : ScriptableObject
     public E_StageType stageType;
     public Sprite stageSprite;
     public string stageName;
+    public string stageDescription;
 }
