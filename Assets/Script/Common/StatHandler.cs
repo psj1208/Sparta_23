@@ -48,7 +48,7 @@ public class StatHandler : MonoBehaviour
     /// <param name="value">값</param>
     /// <param name="isPermanent">영구적용인지 turn만큼 적용인지</param>
     /// <param name="turn">적용되는 턴</param>
-    public void ModifyStat(EStatType type, float value, bool isPermanent = true, int turn = 0)
+    public void ModifyStat(EStatType type, float value, bool isPermanent = true, int turn = 3)
     {
         if (!currentStats.ContainsKey(type)) return;
         currentStats[type] += value;
@@ -87,7 +87,9 @@ public class StatHandler : MonoBehaviour
         {
             yield return null;
         }
+
         currentStats[type] -= value;
+        if (currentStats[type] < 0) currentStats[type] = 0;
 
         switch (type)
         {
