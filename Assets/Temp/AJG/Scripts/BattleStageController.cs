@@ -18,6 +18,7 @@ public class BattleStageController : MonoBehaviour
         SpawnPlayer(playerPrefab, playerSpawnPosition);
         currentStageDifficulty = StageManager.Instance.basicStageDifficulty + (StageManager.Instance.currentRound * 20);
         SpawnEnemies(enemySpawnCenter, currentStageDifficulty);
+        AudioManager.Instance.PlayRandomBGM();
     }
 
     private void ClearData()
