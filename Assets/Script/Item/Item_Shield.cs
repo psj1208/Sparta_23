@@ -11,7 +11,7 @@ public class Item_Shield : MonoBehaviour, IItem
     {
         if (player != null)
         {
-            player.StatHandler.ModifyStat(EStatType.Defense, 30, false, 1);        
+            player.StatHandler.ModifyStat(EStatType.Defense, baseValue, false, 0);
         }
     }
 }
