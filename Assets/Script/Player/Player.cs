@@ -104,6 +104,7 @@ public class Player : Character
         if (other.TryGetComponent<IItem>(out IItem item))
         {
             this.CurItem = item;
+            other.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
             AudioManager.Instance.PlaySFX(ESFXType.GoodEffect);
         }
     }

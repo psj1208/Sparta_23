@@ -118,6 +118,18 @@ public class StatHandler : MonoBehaviour
 
             if (value <= 0) break;
         }
+        // Enemy의 경우 currentStat이 남아있을 수 있음.
+        if (currentStats[type] > value)
+        {
+            currentStats[type] -= value;
+            ModifyStat(type, -value);
+        }
+        else
+        {
+            value -= currentStats[type];
+            ModifyStat(type, -currentStats[type]);
+            currentStats[type] = 0;
+        }
         return value;
     }
 
