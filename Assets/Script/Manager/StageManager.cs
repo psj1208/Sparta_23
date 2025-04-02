@@ -24,12 +24,7 @@ public class StageManager : Singleton<StageManager>
     
     private int currentStageIndex = -1;
     private GameObject playerInstance;
-
-
-    // private void Start()
-    // {
-    //     game.ClawStart();
-    // }
+    
 
     private void Update()
     {
