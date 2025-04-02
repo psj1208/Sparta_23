@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Enemy : Character
@@ -15,8 +16,11 @@ public class Enemy : Character
 
     private BattleStageController _battleStageController;
     public BattleStageController BattleStageController { get { return _battleStageController; } set { _battleStageController = value; } }
-    
-    
+
+    private WaitForSeconds WaitDelay;
+
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +32,8 @@ public class Enemy : Character
         AttackAnimHash = Animator.StringToHash(attackParameterName);
         DamageAnimHash = Animator.StringToHash(damageParameterName);
         DieAnimHash = Animator.StringToHash(dieParameterName);
+
+        WaitDelay = new WaitForSeconds(0.5f);
     }
 
     protected override void Start()
@@ -78,8 +84,7 @@ public class Enemy : Character
     /// </summary>
     public void Damaged()
     {
-        AudioManager.Instance.PlaySFX(ESFXType.Damaged);
-        TriggerAnimation(DamageAnimHash);
+        StartCoroutine(DamageDelay());
     }
     /// <summary>
     /// Enemy 사망
@@ -90,6 +95,13 @@ public class Enemy : Character
         StartCoroutine(WaitForDieAnimation());
     }
     
+    private IEnumerator DamageDelay()
+    {
+        yield return WaitDelay;
+        TriggerAnimation(DamageAnimHash);
+        AudioManager.Instance.PlaySFX(ESFXType.Damaged);
+    }
+
     private IEnumerator WaitForDieAnimation()
     {
         AnimatorStateInfo stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
