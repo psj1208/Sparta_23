@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEditor.VersionControl;
 
 public class NotificationManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class NotificationManager : MonoBehaviour
             Instance = this;
     }
 
-    public void ShowDamageIndicator(string message, Transform enemyTransform)
+    public void ShowDamageIndicator(float amount, Transform enemyTransform)
     {
         if (enemyTransform == null) return;
         
@@ -28,7 +29,15 @@ public class NotificationManager : MonoBehaviour
         damageIndicator.SetActive(true);
 
         TextMeshProUGUI text = damageIndicator.GetComponentInChildren<TextMeshProUGUI>();
-        text.text = message;
+        if (amount > 0)
+        {
+            text.color = Color.green;
+            text.text = amount.ToString();
+        }
+        else
+        {
+            text.text = amount.ToString();
+        }
 
         RectTransform rectTransform = damageIndicator.GetComponent<RectTransform>();
         if (rectTransform == null) return;

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3260927600773988989}
   - component: {fileID: 3362706303363906392}
+  - component: {fileID: 2792330413411065242}
+  - component: {fileID: 7477822700542743932}
   m_Layer: 5
   m_Name: DamageIndicator
   m_TagString: Untagged
@@ -50,6 +52,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 7145818567050835096}
+--- !u!225 &2792330413411065242
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077893743374718}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!222 &7477822700542743932
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077893743374718}
+  m_CullTransparentMesh: 1
 --- !u!1 &708266003563162600
 GameObject:
   m_ObjectHideFlags: 0
