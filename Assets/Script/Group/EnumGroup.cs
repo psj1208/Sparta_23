@@ -34,3 +34,17 @@ public enum ESFXType
     UIClick,
     Clear1,
 }
+
+public enum eUIPosition
+{
+    UI,
+    Top,
+    Popup,
+}
+
+enum ClawState
+{
+    Idle,
+    Close,
+    Open
+}
