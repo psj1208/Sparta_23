@@ -120,6 +120,7 @@ public class Player : Character
     void DieAction()
     {
         PlayerStateMachine.StartAnimation(PlayerStateMachine.DieAnimHash);
+        GameManager.Instance.GameOver();
     }
 
     IEnumerator DamageAnimation()
