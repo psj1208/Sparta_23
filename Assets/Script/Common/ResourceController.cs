@@ -48,7 +48,7 @@ public class ResourceController : MonoBehaviour
         }
 
         CurrentHealth += amount;
-        NotificationManager.Instance.ShowDamageIndicator(amount.ToString(), this.transform);
+        NotificationManager.Instance.ShowDamageIndicator(amount, this.transform);
         onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
         if (CurrentHealth > MaxHealth)
         {
