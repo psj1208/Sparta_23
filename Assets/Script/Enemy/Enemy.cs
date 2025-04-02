@@ -113,6 +113,7 @@ public class Enemy : Character
         yield return new WaitForSeconds(stateInfo.length);
 
         BattleStageController.RemoveEnemy(this);
+        TurnManager.Instance.OnEnemyTurnStart -= AttackOnce;
         Destroy(gameObject);
     }
     
