@@ -15,10 +15,7 @@ public class StageManager : Singleton<StageManager>
     public ShopStageController shopStageController;
     public Dictionary<E_StageType, float> stagePoints;
     
-    
-    public ClawGame game;
     public int currentRound = 0;
-    public Vector2 playerSpawnPosition;
     public List<E_StageType> selectedStages = new List<E_StageType>();
     public int basicStageDifficulty = 30;
     
@@ -55,12 +52,28 @@ public class StageManager : Singleton<StageManager>
         else if (scene.name == "DontDestroy")
         {
         }
+        else if (scene.name == "StartScene")
+        {
+            ClearAll();
+        }
         else
         {
+            Debug.Log(scene.name);
             ActivateCurrentStage();
         }
     }
 
+    public void ClearAll()
+    {
+        currentStageIndex = -1;
+        currentRound = 0;
+        battleStageController.ClearData();
+        battleStageController.gameObject.SetActive(false);
+        shopStageController.gameObject.SetActive(false);
+        stagePoints.Clear();
+        selectedStages.Clear();
+    }
+    
     public int GetCurrentStageIndex()
     {
         return currentStageIndex;

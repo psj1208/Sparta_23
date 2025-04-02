@@ -125,7 +125,6 @@ public class ClawPhysics : MonoBehaviour
 
     public void GameStart()
     {
-        Debug.Log("Start");
         CanMove = false;
         StartCoroutine(GameStartCourt());
     }

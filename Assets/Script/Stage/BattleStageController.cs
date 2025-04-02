@@ -21,16 +21,18 @@ public class BattleStageController : MonoBehaviour
         SpawnEnemies(enemySpawnCenter, currentStageDifficulty);
     }
 
-    private void ClearData()
+    public void ClearData()
     {
         spawnedEnemies.Clear();
     }
     
     void SpawnPlayer(GameObject playerPrefab, Vector2 position)
     {
+        
         GameObject playerInstance = Instantiate(playerPrefab, position, Quaternion.identity);
         Player player = playerInstance.GetComponent<Player>();
         GameManager.Instance.Player = player;
+        Debug.Log(GameManager.Instance.Player);
     }
     
     void SpawnEnemies(Vector2 center, int stageDifficulty)

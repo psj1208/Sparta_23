@@ -11,5 +11,6 @@ public class StartCanvas : CanvasBase<StartCanvas>
         if (parents.Count > 0)
             UIManager.SetParents(parents);
         UIManager.Show<UIStart>();
+        GameManager.Instance.isGameOver = false;
     }
 }

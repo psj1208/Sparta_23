@@ -43,8 +43,11 @@ public class TurnManager : Singleton<TurnManager>
     void Start()
     {
         player = FindObjectOfType<Player>();
-        StartClawMachine();
-        ApplySkills();
+        if (player != null)
+        {
+            StartClawMachine();
+            ApplySkills();
+        }
     }
 
     private void ApplySkills()
@@ -103,7 +106,8 @@ public class TurnManager : Singleton<TurnManager>
         OnTurnChanged?.Invoke();
         OnClawMachineStart?.Invoke();
         ItemInventoryManager.Instance.itemSpawner.SpawnInventoryItems();
-        GameManager.Instance.Player.ReduceItemsTurn();
+        if (GameManager.Instance.Player != null)
+            GameManager.Instance.Player.ReduceItemsTurn();
     }
 
     public void EndPlayerTurn()
