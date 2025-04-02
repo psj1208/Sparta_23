@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: GoldGem
   m_EditorClassIdentifier: 
   itemName: GoldGem
+  Description: "\uC2DC\uC138\uAC00 \uACE0\uC815\uC778 \uAE08\uB369\uC774\uB2E4."
   sprite: {fileID: 21300000, guid: e0db05e04569cb043962b8311ebc3097, type: 3}
   itemType: 3
   value: 50
   itemPrefab: {fileID: 0}
+  stackable: 0
+  BuyPrice: 0

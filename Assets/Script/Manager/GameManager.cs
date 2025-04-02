@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     public Player Player;
     public ClawGamePhysics Claw;
+    public bool isGameOver = false;
 
     protected override void Awake()
     {
@@ -23,5 +25,18 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         
+    }
+
+    public void GameOver()
+    {
+        UIManager.Hide<UITop>();
+        UIManager.Show<UIGameOver>();
+        Invoke("LoadStartScene", 3f);
+        isGameOver = true;
+    }
+
+    void LoadStartScene()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }

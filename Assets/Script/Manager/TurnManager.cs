@@ -58,6 +58,11 @@ public class TurnManager : Singleton<TurnManager>
 
     private void GetEnemyListFromStageManager()
     {
+        if (GameManager.Instance.isGameOver)
+        {
+            return;
+        }
+
         currentEnemies = StageManager.Instance.battleStageController.spawnedEnemies;
     }
     
@@ -98,13 +103,14 @@ public class TurnManager : Singleton<TurnManager>
         OnTurnChanged?.Invoke();
         OnClawMachineStart?.Invoke();
         ItemInventoryManager.Instance.itemSpawner.SpawnInventoryItems();
+        GameManager.Instance.Player.ReduceItemsTurn();
     }
 
     public void EndPlayerTurn()
     {
         if (currentState != ETurnState.PlayerTurn) return;
         OnTurnChanged?.Invoke();
-        GameManager.Instance.Player.PlayerStateMachine.ChangeState(GameManager.Instance.Player.PlayerStateMachine.IdleState);
+        GameManager.Instance.Player.EndBattleTurn();
         StartEnemyTurn();
     }
 

@@ -78,18 +78,22 @@ public class Player : Character
     /// <param name="enemy">현재 상대하는 몬스터</param>
     public void StartBattleTurn(List<Enemy> enemy)
     {
-        ReduceItemsTurn();
         PlayerStateMachine.curEnemies = enemy;
         PlayerStateMachine.ChangeState(PlayerStateMachine.BattleState);
     }
 
-    private void ReduceItemsTurn()
+    public void EndBattleTurn()
     {
-        if(StatHandler.Turns?.Count > 0)
+        PlayerStateMachine.ChangeState(PlayerStateMachine.IdleState);
+    }
+
+    public void ReduceItemsTurn()
+    {
+        foreach(List<TurnLimitStat> stat in StatHandler.TurnLimitStats.Values)
         {
-            for(int i = 0; i < StatHandler.Turns.Count; i++)
+            for(int i = 0; i < stat.Count; i++)
             {
-                StatHandler.Turns[i] -= 1;
+                stat[i].RemainTurns--;
             }
         }
     }
@@ -100,6 +104,7 @@ public class Player : Character
         if (other.TryGetComponent<IItem>(out IItem item))
         {
             this.CurItem = item;
+            other.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
             AudioManager.Instance.PlaySFX(ESFXType.GoodEffect);
         }
     }
@@ -116,6 +121,7 @@ public class Player : Character
     void DieAction()
     {
         PlayerStateMachine.StartAnimation(PlayerStateMachine.DieAnimHash);
+        GameManager.Instance.GameOver();
     }
 
     IEnumerator DamageAnimation()
