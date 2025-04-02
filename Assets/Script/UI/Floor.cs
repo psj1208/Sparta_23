@@ -13,7 +13,7 @@ public class Floor : MonoBehaviour
 
     public void SetCurFloor(int curFloor)
     {
-        curFloorText.text = curFloor.ToString();
+        curFloorText.text = (curFloor + 1).ToString();
     }
 
     public void SetTotalFloor(int totalFloor)
