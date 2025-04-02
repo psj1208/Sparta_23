@@ -283,11 +283,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1b26659582b0e42a13b8bfa99ade7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
-  itemName: {fileID: 0}
-  itemDescription: {fileID: 0}
+  itemIcon: {fileID: 6665555294211746440}
+  itemName: {fileID: 8097238168340293971}
+  itemDescription: {fileID: 8930644094776151217}
   prefab: {fileID: 0}
-  goldArea: {fileID: 0}
+  goldArea: {fileID: 1001379953564379549}
 --- !u!1 &4152669347513428528
 GameObject:
   m_ObjectHideFlags: 0

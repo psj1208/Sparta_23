@@ -55,7 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPosition: 2
   cardList: {fileID: 7301622782738523927}
-  card: {fileID: 5790464587204163049, guid: 08936802fb20f324f80a7db6a2ef0d63, type: 3}
+  card: {fileID: 2068011292431869827, guid: 08936802fb20f324f80a7db6a2ef0d63, type: 3}
 --- !u!222 &163808743663956815
 CanvasRenderer:
   m_ObjectHideFlags: 0
