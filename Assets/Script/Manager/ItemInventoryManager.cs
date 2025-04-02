@@ -70,7 +70,7 @@ public class ItemInventoryManager : Singleton<ItemInventoryManager>
 
     public void AddSkill(ASkill skill)
     {
-        if (skill == null || skills.Contains(skill)) return;
+        if (skill == null) return;
         skills.Add(skill);
         UpdateSkillUI();
     }
