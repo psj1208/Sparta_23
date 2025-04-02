@@ -34,7 +34,6 @@ public static class ResourceObjectUtil
         return validAssets.GetRange(0, count);
     }
 
-
     private static void Shuffle<T>(List<T> list)
     {
         for (int i = 0; i < list.Count; i++)

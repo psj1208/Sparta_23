@@ -11,5 +11,6 @@ public class SkillSO : ScriptableObject
     [SerializeField] public Sprite sprite;
 
     [SerializeField] public GameObject skillPrefab;
-    
+
+    [SerializeField] public int BuyPrice;
 }
