@@ -13,6 +13,7 @@ public class TurnManager : Singleton<TurnManager>
     public event Action OnTurnChanged; // 턴 변경 이벤트
 
     private ETurnState currentState;
+    public Player player;
     public List<Enemy> currentEnemies;
     
     private void OnEnable()
@@ -41,9 +42,20 @@ public class TurnManager : Singleton<TurnManager>
 
     void Start()
     {
+        player = FindObjectOfType<Player>();
         StartClawMachine();
+        ApplySkills();
     }
-    
+
+    private void ApplySkills()
+    {
+        foreach (var skill in  ItemInventoryManager.Instance.skills)
+        {
+            skill.UseSkill(player);
+        }
+       
+    }
+
     private void GetEnemyListFromStageManager()
     {
         currentEnemies = StageManager.Instance.battleStageController.spawnedEnemies;

@@ -3137,10 +3137,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 1
+  skills:
+  - {fileID: 3179674936935085655, guid: 057c3f336c83a3d499dd2464f8704a7d, type: 3}
+  itemSpawner: {fileID: 0}
   startingItems:
   - {fileID: 11400000, guid: abe40298768e3954ab84994a2d8f0bbe, type: 2}
   - {fileID: 11400000, guid: 72ea01ff4ac7d144887c21f855581998, type: 2}
   - {fileID: 11400000, guid: de497175eedef074181120f6240b4845, type: 2}
+  startingSkills:
+  - {fileID: 3179674936935085655, guid: 057c3f336c83a3d499dd2464f8704a7d, type: 3}
   uiMain: {fileID: 0}
 --- !u!4 &1928744655
 Transform:

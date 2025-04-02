@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UIReward : UIBase
+public class UIShop : UIBase
 {
     [SerializeField]
     private Transform cardList;
 
     [SerializeField]
-    private GameObject card;
+    private Card card;
 
     public override void HideDirect()
     {
@@ -27,7 +27,7 @@ public class UIReward : UIBase
         {
             foreach (ItemSO item in itemList)
             {
-                Card rewardCard = Instantiate(card, cardList).GetComponentInChildren<Card>();
+                Card rewardCard = Instantiate(card, cardList);
                 rewardCard.SetItem(item);
             }
         }

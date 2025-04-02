@@ -40,9 +40,27 @@ public class UIMain : UIBase
         }
     }
 
-    public void ClearSlots()
+    public void AddSkillSlot(ScriptableObject obj)
+    {
+        GameObject go = null;
+        if (obj.GetType() == typeof(SkillSO))
+        {
+            go = Instantiate(slotPrefab, skillSlotList);
+            ItemSlot slot = go.GetComponent<ItemSlot>();
+            slot.SetIcon(obj);
+        }
+    }
+
+    public void ClearItemSlots()
     {
         foreach (Transform child in itemSlotList)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+    public void ClearSKillSlot()
+    {
+        foreach (Transform child in skillSlotList)
         {
             Destroy(child.gameObject);
         }
