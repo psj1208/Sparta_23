@@ -13,16 +13,19 @@ public class AudioManager : Singleton<AudioManager>
     protected override void Awake()
     {
         base.Awake();
+        BGMSource.volume = 0.2f;
+        PlayRandomBGM();
     }
 
     public void PlayOnce(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
     }
-    public void PlayBGM(EBGMType bgm)
+    public void PlayRandomBGM()
     {
-        if (BGMSource.clip == BGMClips[(int)bgm]) return; // 이미 재생중이면 무시
-        BGMSource.clip = BGMClips[(int)bgm];
+        int rBgm = Random.Range(0, BGMClips.Count);
+        if (BGMSource.clip == BGMClips[rBgm]) return; // 이미 재생중이면 무시
+        BGMSource.clip = BGMClips[rBgm];
         BGMSource.loop = true;
         BGMSource.Play();
     }
@@ -44,12 +47,6 @@ public class AudioManager : Singleton<AudioManager>
         SFXSource.PlayOneShot(SFXClips[typeNum]);
     }
 }
-
-public enum EBGMType
-{
-
-}
-
 public enum ESFXType
 {
     Attack, 
