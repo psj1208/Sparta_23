@@ -36,6 +36,7 @@ public class NotificationManager : MonoBehaviour
         }
         else
         {
+            text.color = Color.red;
             text.text = amount.ToString();
         }
 
