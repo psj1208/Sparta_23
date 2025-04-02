@@ -86,6 +86,11 @@ public class StageManager : Singleton<StageManager>
 
     void ActivateCurrentStage()
     {
+        if (GameManager.Instance.isGameOver)
+        {
+            return;
+        }
+
         E_StageType currentStageType = selectedStages[currentStageIndex];
 
         if (currentStageType == E_StageType.Battle)

@@ -15,6 +15,11 @@ public class ItemSpawner : MonoBehaviour
 
     public void SpawnInventoryItems()
     {
+        if (GameManager.Instance.isGameOver)
+        {
+            return;
+        }
+
         Dictionary<ItemSO, int> inventoryItems = ItemInventoryManager.Instance.GetInventoryItems();
         int spawnIndex = 0;
 

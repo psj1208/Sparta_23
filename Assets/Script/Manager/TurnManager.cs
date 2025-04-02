@@ -58,6 +58,11 @@ public class TurnManager : Singleton<TurnManager>
 
     private void GetEnemyListFromStageManager()
     {
+        if (GameManager.Instance.isGameOver)
+        {
+            return;
+        }
+
         currentEnemies = StageManager.Instance.battleStageController.spawnedEnemies;
     }
     
