@@ -100,6 +100,7 @@ public class Player : Character
         if (other.TryGetComponent<IItem>(out IItem item))
         {
             this.CurItem = item;
+            AudioManager.Instance.PlaySFX(ESFXType.GoodEffect);
         }
     }
 
@@ -120,6 +121,7 @@ public class Player : Character
     IEnumerator DamageAnimation()
     {
         yield return new WaitForSeconds(0.5f);
+        AudioManager.Instance.PlaySFX(ESFXType.Damaged);
         PlayerStateMachine.StartAnimation(PlayerStateMachine.DamageAnimHash);
         yield return null;
         PlayerStateMachine.StopAnimation(PlayerStateMachine.DamageAnimHash);

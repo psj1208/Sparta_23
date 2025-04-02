@@ -14,6 +14,7 @@ public class Item_Sword : MonoBehaviour, IItem
         {
             if(enemy != null)
             {
+                AudioManager.Instance.PlaySFX(ESFXType.Attack);
                 player.PlayerStateMachine.StartAnimation(player.PlayerStateMachine.AttackAnimHash);
                 enemy?.ResourceController.ChangeHealth(-(player.PlayerStateMachine.Player.StatHandler.GetTotalAttack() + baseDamage));
             }

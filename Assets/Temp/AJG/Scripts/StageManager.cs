@@ -113,6 +113,7 @@ public class StageManager : Singleton<StageManager>
             selectedStages.Add(selectedStage);
         }
         currentStageIndex = -1;
+        UIManager.Show<UIStageShow>(selectedStages);
     }
 
     private E_StageType GetWeightedRandomStage(List<E_StageType> stages)
@@ -123,13 +124,14 @@ public class StageManager : Singleton<StageManager>
             totalWeight += stagePoints.ContainsKey(stage) ? stagePoints[stage] : 0f;
         }
         
-        
+        Debug.Log(totalWeight);
         float randomValue = Random.Range(0f, totalWeight);
         float cumulativeWeight = 0f;
 
         foreach (var stage in stages)
         {
             cumulativeWeight += stagePoints.ContainsKey(stage) ? stagePoints[stage] : 0f;
+            Debug.Log(stagePoints[stage]);
             if (randomValue < cumulativeWeight)
             {
                 return stage;
