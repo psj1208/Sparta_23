@@ -52,6 +52,10 @@ public enum EBGMType
 
 public enum ESFXType
 {
-
+    Attack, 
+    Damaged,
+    GoodEffect,
+    UIClick,
+    Clear1,
 }
 
