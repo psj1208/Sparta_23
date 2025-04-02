@@ -146,9 +146,9 @@ GameObject:
   - component: {fileID: 8787732679829120274}
   - component: {fileID: 679106337791638991}
   - component: {fileID: 3201428376568842067}
-  - component: {fileID: -2214542313564444699}
+  - component: {fileID: 3419578321653637727}
   m_Layer: 5
-  m_Name: Card
+  m_Name: StageCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,8 +259,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -2214542313564444699}
-        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RewardCard, Assembly-CSharp
         m_MethodName: OnClickCardItem
         m_Mode: 1
         m_Arguments:
@@ -271,7 +271,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-2214542313564444699
+--- !u!114 &3419578321653637727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,14 +280,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2068011292431869827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1b26659582b0e42a13b8bfa99ade7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 89db52e56b5796043b0231f8ea8056b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 6665555294211746440}
   itemName: {fileID: 8097238168340293971}
   itemDescription: {fileID: 8930644094776151217}
   prefab: {fileID: 0}
-  goldArea: {fileID: 1001379953564379549}
+  stageDataList:
+  - {fileID: 11400000, guid: c36e9dcb08da69e478f7c196e5fccf24, type: 2}
+  - {fileID: 11400000, guid: 9e396a3f1fceb4743b27cd2a957dae7e, type: 2}
 --- !u!1 &4152669347513428528
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 688c98088e5d3984097953efe04ed83f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goldText: {fileID: 3102977713194507947}
+  goldText: {fileID: 0}
 --- !u!1 &8843162074178055125
 GameObject:
   m_ObjectHideFlags: 0

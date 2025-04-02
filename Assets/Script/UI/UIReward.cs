@@ -23,12 +23,20 @@ public class UIReward : UIBase
             Destroy(child.gameObject);
         }
 
-        if (param[0] != null && param[0] is List<ItemSO> itemList)
+        if (param[0] != null && param[0] is List<ScriptableObject> objectList)
         {
-            foreach (ItemSO item in itemList)
+            foreach (ScriptableObject obj in objectList)
             {
                 Card rewardCard = Instantiate(card, cardList).GetComponentInChildren<Card>();
-                rewardCard.SetItem(item);
+
+                if (obj is ItemSO item)
+                {
+                    rewardCard.SetItem(item); 
+                }
+                else if (obj is SkillSO skill)
+                {
+                    rewardCard.SetSkill(skill); 
+                }
             }
         }
     }
