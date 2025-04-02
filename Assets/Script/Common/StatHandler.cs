@@ -105,12 +105,14 @@ public class StatHandler : MonoBehaviour
             if (TurnLimitStats[type][i].RemainValue >= value)
             {
                 TurnLimitStats[type][i].RemainValue -= value;
+                ModifyStat(type, -value);
                 value = 0;
                 break;
             }
             else
             {
                 value = value - TurnLimitStats[type][i].RemainValue;
+                ModifyStat(type, -TurnLimitStats[type][i].RemainValue);
                 TurnLimitStats[type][i].RemainValue = 0;
             }
 

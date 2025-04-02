@@ -28,27 +28,15 @@ public class ResourceController : MonoBehaviour
 
     public void ChangeHealth(float amount)
     {
+        NotificationManager.Instance.ShowDamageIndicator(amount, this.transform);
         if (amount < 0)
         {
-            float originDefense = character.StatHandler.GetStat(EStatType.Defense);
-            float remainDefence = originDefense - character.StatHandler.ReduceStatFIFO(EStatType.Defense, -amount);
-            if(remainDefence >= 0)
-            {
-                character.StatHandler.ModifyStat(EStatType.Defense, amount);
-                amount = 0;
-            }
-            else
-            {
-                character.StatHandler.ModifyStat(EStatType.Defense, -originDefense);
-                amount = remainDefence;
-            }
+            amount = -character.StatHandler.ReduceStatFIFO(EStatType.Defense, -amount);
 
-            amount = amount > 0 ? 0 : amount;
             OnDamageAction?.Invoke();
         }
 
         CurrentHealth += amount;
-        NotificationManager.Instance.ShowDamageIndicator(amount, this.transform);
         onChangeHealth?.Invoke(CurrentHealth, MaxHealth);
         if (CurrentHealth > MaxHealth)
         {
